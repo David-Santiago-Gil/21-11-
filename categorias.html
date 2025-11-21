@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Utopia - Categorías por Género</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="top-bar">
+            <div class="logo">
+                <a href="index.html"><img src="https://via.placeholder.com/50x50/8a2be2/ffffff?text=LOGO" alt="Gaming Utopia Logo"></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="tienda.html">Tienda</a></li>
+                    <li><a href="informacion.html">Información</a></li>
+                    <li><a href="nosotros.html">Nosotros</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <button id="loginBtn" class="login-button">LOGIN</button>
+                <div class="profile-icon">
+                    <img src="https://via.placeholder.com/30x30/8a2be2/ffffff?text=👤" alt="Profile Icon" id="profileIcon">
+                </div>
+            </div>
+        </div>
+        <div class="secondary-nav">
+            <div class="dropdown">
+                <a href="#" class="dropbtn">Categorías ▼</a>
+                <div class="dropdown-content">
+                    <a href="categorias.html#accion">Acción</a>
+                    <a href="categorias.html#aventura">Aventura</a>
+                    <a href="categorias.html#rpg">RPG</a>
+                    <a href="categorias.html#deportes">Deportes</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#" class="dropbtn">Juegos ▼</a>
+                <div class="dropdown-content">
+                    <a href="juegos.html#populares">Populares</a>
+                    <a href="juegos.html#nuevos">Nuevos Lanzamientos</a>
+                    <a href="juegos.html#proximos">Próximos</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#" class="dropbtn">Colección ▼</a>
+                <div class="dropdown-content">
+                    <a href="catalogo.html#ofertas">Ofertas</a>
+                    <a href="catalogo.html#free-to-play">Free to Play</a>
+                    <a href="catalogo.html#exclusivos">Exclusivos</a>
+                </div>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Buscar">
+                <button id="searchBtn">Buscar</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <img src="https://via.placeholder.com/1200x400/8a2be2/ffffff?text=BANNER+CATEGORIAS" alt="Banner de Categorías" class="hero-image">
+        </section>
+
+        <section class="game-listings">
+            <h2>Explora Nuestros Juegos por Género</h2>
+
+            <h3 id="accion">Juegos de Acción</h3>
+            <p>Juegos rápidos, emocionantes y llenos de adrenalina, donde la velocidad y los reflejos son clave.</p>
+            <div class="game-grid">
+                <div class="game-card">
+                    <img src="https://via.placeholder.com/300x150/4b0082/ffffff?text=FPS+Accion" alt="FPS Genérico">
+                    <h3>Shooter Táctico XYZ</h3>
+                    <p>Acción - Guerra moderna</p>
+                    <p class="rating">4.5 (9 K)</p>
+                </div>
+                <div class="game-card">
+                    <img src="https://via.placeholder.com/300x150/4b0082/ffffff?text=Lucha+Accion" alt="Lucha Genérico">
+                    <h3>Combate Extremo II</h3>
+                    <p>Lucha - Jugador vs Jugador</p>
+                    <p class="rating">4.7 (12 K)</p>
+                </div>
+            </div>
+
+            <h3 id="aventura">Juegos de Aventura</h3>
+            <p>Explora mundos vastos, resuelve misterios y sigue narrativas épicas llenas de personajes memorables.</p>
+            <div class="game-grid">
+                <div class="game-card">
+                    <img src="https://via.placeholder.com/300x150/4b0082/ffffff?text=Aventura+Exploracion" alt="Aventura Genérico">
+                    <h3>Templo Perdido de Zoltar</h3>
+                    <p>Aventura - Exploración</p>
+                    <p class="rating">4.9 (20 K)</p>
+                </div>
+                <div class="game-card">
+                    <img src="https://via.placeholder.com/300x150/4b0082/ffffff?text=Indie+Aventura" alt="Indie Aventura Genérico">
+                    <h3>Crónicas del Bosque</h3>
+                    <p>Aventura - Puzzle</p>
+                    <p class="rating">4.2 (3 K)</p>
+                </div>
+            </div>
+
+            <h3 id="rpg">Juegos de Rol (RPG)</h3>
+            <p>Construye tu personaje, mejora tus habilidades y decide el destino de reinos enteros.</p>
+            <div class="game-grid">
+                <div class="game-card">
+                    <img src="https://via.placeholder.com/300x150/4b0082/ffffff?text=Fantasia+RPG" alt="RPG Genérico">
+                    <h3>La Saga de Etherea</h3>
+                    <p>RPG - Fantasía Épica</p>
+                    <p class="rating">4.8 (30 K)</p>
+                </div>
+            </div>
+
+            <h3 id="deportes">Juegos de Deportes</h3>
+            <p>Compite en tus deportes favoritos, ya sea en solitario o con amigos en línea.</p>
+            <div class="game-grid">
+                <div class="game-card">
+                    <img src="https://via.placeholder.com/300x150/4b0082/ffffff?text=Futbol+Deportes" alt="Deportes Genérico">
+                    <h3>Fútbol Total 2025</h3>
+                    <p>Deportes - Simulación</p>
+                    <p class="rating">4.0 (18 K)</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="juegos.html">JUEGOS</a>
+            <a href="soporte.html">SOPORTE</a>
+            <a href="compañia.html">COMPAÑÍA</a>
+        </div>
+        <div class="social-media">
+            <a href="#"><img src="https://via.placeholder.com/24x24/ffffff/8a2be2?text=F" alt="Facebook"></a>
+            <a href="#"><img src="https://via.placeholder.com/24x24/ffffff/8a2be2?text=T" alt="Twitter"></a>
+            <a href="#"><img src="https://via.placeholder.com/24x24/ffffff/8a2be2?text=I" alt="Instagram"></a>
+            <a href="#"><img src="https://via.placeholder.com/24x24/ffffff/8a2be2?text=Y" alt="YouTube"></a>
+        </div>
+    </footer>
+
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div class="auth-tabs">
+                <button id="loginTab" class="auth-tab active">Iniciar Sesión</button>
+                <button id="registerTab" class="auth-tab">Registrarse</button>
+            </div>
+            <div id="loginForm" class="auth-form active">
+                <label for="loginUserEmail">Usuario o Correo</label>
+                <input type="text" id="loginUserEmail" name="loginUserEmail">
+                <label for="loginPassword">Contraseña</label>
+                <input type="password" id="loginPassword" name="loginPassword">
+                <button id="submitLogin">Iniciar Sesión</button>
+            </div>
+            <div id="registerForm" class="auth-form">
+                <label for="registerUser">Usuario</label>
+                <input type="text" id="registerUser" name="registerUser">
+                <label for="registerEmail">Correo</label>
+                <input type="email" id="registerEmail" name="registerEmail">
+                <label for="registerPassword">Contraseña</label>
+                <input type="password" id="registerPassword" name="registerPassword">
+                <label for="registerPhone">Teléfono (Opcional)</label>
+                <input type="tel" id="registerPhone" name="registerPhone">
+                <button id="submitRegister">Registrarse</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Perfil de Usuario</h2>
+            <p>Bienvenido, <span id="profileUsername">Invitado</span>!</p>
+            <button id="logoutBtn">Cerrar Sesión</button>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

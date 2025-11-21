@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Utopia - Inicio</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="top-bar">
+            <div class="logo">
+                <a href="index.html"><img src="img/logo.png" alt="Gaming Utopia Logo"></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="tienda.html">Tienda</a></li>
+                    <li><a href="informacion.html">Información</a></li>
+                    <li><a href="nosotros.html">Nosotros</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <button id="loginBtn" class="login-button">LOGIN</button>
+                <div class="profile-icon">
+                    <img src="https://via.placeholder.com/30x30/8a2be2/ffffff?text=👤" alt="Profile Icon" id="profileIcon">
+                </div>
+            </div>
+        </div>
+        <div class="secondary-nav">
+            <div class="dropdown">
+                <a href="#" class="dropbtn">Categorías ▼</a>
+                <div class="dropdown-content">
+                    <a href="categorias.html#accion">Acción</a>
+                    <a href="categorias.html#aventura">Aventura</a>
+                    <a href="categorias.html#rpg">RPG</a>
+                    <a href="categorias.html#deportes">Deportes</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#" class="dropbtn">Juegos ▼</a>
+                <div class="dropdown-content">
+                    <a href="juegos.html#populares">Populares</a>
+                    <a href="juegos.html#nuevos">Nuevos Lanzamientos</a>
+                    <a href="juegos.html#proximos">Próximos</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#" class="dropbtn">Colección ▼</a>
+                <div class="dropdown-content">
+                    <a href="catalogo.html#ofertas">Ofertas</a>
+                    <a href="catalogo.html#free-to-play">Free to Play</a>
+                    <a href="catalogo.html#exclusivos">Exclusivos</a>
+                </div>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Buscar">
+                <button id="searchBtn">Buscar</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <img src="img/3840-x-1080-gaming-8txykfn2xdj4214w.jpg" alt="El futuro del gaming llega pronto" class="hero-image">
+        </section>
+
+        <section class="carousel-section">
+            <button class="carousel-arrow" id="prevBtn">❮</button>
+            <div class="carousel-container">
+                <div class="carousel-content" id="imageCarousel">
+                    <img src="img/4k-ultra-hd-gaming-ylyipyznm00tq5og.jpg" alt="Slide 1: Cyborg">
+                    <img src="img/high-resolution-gaming-i59azpzf73j6wqgk.jpg" alt="Slide 2: I Love Game">
+                    <img src="img/1920-x-1080-hd-gaming-1920-x-1080-ud0vb01ovt0eg2r0.jpg" alt="Slide 3: Ofertas de la semana">
+                </div>
+            </div>
+            <button class="carousel-arrow" id="nextBtn">❯</button>
+        </section>
+
+        <section class="info-content text-center">
+            <h2>¡EL MOMENTO ES AHORA! TU PRÓXIMA AVENTURA ÉPICA ESTÁ ESPERANDO.</h2>
+            <p>
+                Explora miles de títulos, desde los éxitos de taquilla más grandes hasta joyas indie que definirán tu experiencia.
+                Accede a tu biblioteca instantáneamente y únete a la comunidad global de jugadores.
+            </p>
+            <button class="submit-button" onclick="window.location.href='tienda.html'" style="max-width: 300px; margin: 20px auto;">Tienda</button>
+        </section>
+
+        <section class="game-listings">
+            <h2>Destacados de la Semana</h2>
+            <div class="game-grid">
+                <div class="game-card">
+                    <img src="https://via.placeholder.com/300x150/4b0082/ffffff?text=Juego+1" alt="Juego 1">
+                    <h3>Call of Duty Modern Warfare</h3>
+                    <p>COP 45,000</p>
+                    <p class="rating">4.4 (6 K)</p>
+                </div>
+                <div class="game-card">
+                    <img src="https://via.placeholder.com/300x150/4b0082/ffffff?text=Gratis" alt="Juego Gratis">
+                    <h3>Valorant</h3>
+                    <p>Juegos D Colombia y más</p>
+                    <p class="rating">Gratis</p>
+                </div>
+                <div class="game-card">
+                    <img src="https://via.placeholder.com/300x150/4b0082/ffffff?text=Juego+3" alt="Juego 3">
+                    <h3>Mortal Kombat 11</h3>
+                    <p>COP 19,999</p>
+                    <p class="rating">4.8 (3.1 K)</p>
+                </div>
+                <div class="game-card">
+                    <img src="https://via.placeholder.com/300x150/4b0082/ffffff?text=Juego+4" alt="Juego 4">
+                    <h3>Far Cry 3</h3>
+                    <p>COP 43,738</p>
+                    <p class="rating">4.7 (2.1 K)</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="juegos.html">JUEGOS</a>
+            <a href="soporte.html">SOPORTE</a>
+            <a href="compañia.html">COMPAÑÍA</a>
+        </div>
+        <div class="social-media">
+            <a href="#"><img src="https://via.placeholder.com/24x24/ffffff/8a2be2?text=F" alt="Facebook"></a>
+            <a href="#"><img src="https://via.placeholder.com/24x24/ffffff/8a2be2?text=T" alt="Twitter"></a>
+            <a href="#"><img src="https://via.placeholder.com/24x24/ffffff/8a2be2?text=I" alt="Instagram"></a>
+            <a href="#"><img src="https://via.placeholder.com/24x24/ffffff/8a2be2?text=Y" alt="YouTube"></a>
+        </div>
+    </footer>
+
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div class="auth-tabs">
+                <button id="loginTab" class="auth-tab active">Iniciar Sesión</button>
+                <button id="registerTab" class="auth-tab">Registrarse</button>
+            </div>
+            <div id="loginForm" class="auth-form active">
+                <label for="loginUserEmail">Usuario o Correo</label>
+                <input type="text" id="loginUserEmail" name="loginUserEmail">
+                <label for="loginPassword">Contraseña</label>
+                <input type="password" id="loginPassword" name="loginPassword">
+                <button id="submitLogin">Iniciar Sesión</button>
+            </div>
+            <div id="registerForm" class="auth-form">
+                <label for="registerUser">Usuario</label>
+                <input type="text" id="registerUser" name="registerUser">
+                <label for="registerEmail">Correo</label>
+                <input type="email" id="registerEmail" name="registerEmail">
+                <label for="registerPassword">Contraseña</label>
+                <input type="password" id="registerPassword" name="registerPassword">
+                <label for="registerPhone">Teléfono (Opcional)</label>
+                <input type="tel" id="registerPhone" name="registerPhone">
+                <button id="submitRegister">Registrarse</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Perfil de Usuario</h2>
+            <p>Bienvenido, <span id="profileUsername">Invitado</span>!</p>
+            <button id="logoutBtn">Cerrar Sesión</button>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
