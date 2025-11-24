@@ -346,7 +346,7 @@ main {
 }
 
 /* ----------------------------------- */
-/* FOOTER                              */
+/* FOOTER                                */
 /* ----------------------------------- */
 footer {
     background-color: #000000;
@@ -372,15 +372,15 @@ footer {
 }
 
 .social-media img {
+    /* ✨ EDITA AQUÍ: Cambia el tamaño de los logos ✨ */
+    width: 35px; /* Por ejemplo, 35 píxeles de ancho */
+    height: 35px; /* Por ejemplo, 35 píxeles de alto */
+    /* ---------------------------------------------------- */
+    
     margin: 0 8px;
     border-radius: 50%;
     transition: transform 0.3s;
 }
-
-.social-media img:hover {
-    transform: scale(1.1);
-}
-
 /* ----------------------------------- */
 /* MODALES                             */
 /* ----------------------------------- */
