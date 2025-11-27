@@ -7,12 +7,21 @@
  * Texto: #ffffff (Blanco) y #cccccc (Gris claro)
  */
 
+/* ----------------------------------- */
+/* 1. CONFIGURACIÓN GLOBAL Y STICKY FOOTER */
+/* ----------------------------------- */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #121212;
     color: #ffffff;
+    
+    /* STICKY FOOTER LOGIC START */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* STICKY FOOTER LOGIC END */
 }
 
 a {
@@ -27,7 +36,7 @@ a:hover {
 }
 
 /* ----------------------------------- */
-/* HEADER Y NAVEGACIÓN                 */
+/* HEADER Y NAVEGACIÓN                 */
 /* ----------------------------------- */
 header {
     background-color: #000000;
@@ -40,6 +49,7 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 10px 5%;
+    position: relative; /* Necesario para posicionar el contador del carrito */
 }
 
 .logo img {
@@ -168,10 +178,11 @@ nav ul li a {
 }
 
 /* ----------------------------------- */
-/* CONTENIDO PRINCIPAL                 */
+/* CONTENIDO PRINCIPAL                 */
 /* ----------------------------------- */
 main {
     padding: 20px 5%;
+    flex-grow: 1; /* STICKY FOOTER LOGIC: Ocupa el espacio restante */
 }
 
 .hero-section {
@@ -208,6 +219,7 @@ main {
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
     transition: transform 0.3s;
+    cursor: pointer; /* Agregado para indicar que es clickeable */
 }
 
 .game-card:hover {
@@ -215,10 +227,11 @@ main {
     box-shadow: 0 8px 16px rgba(138, 43, 226, 0.5);
 }
 
-.game-card img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
+.game-card img { 
+    width: 100%; 
+    height: 150px; 
+    object-fit: cover; 
+    border-radius: 8px 8px 0 0;
 }
 
 .game-card h3 {
@@ -269,14 +282,14 @@ main {
 }
 
 .error-message {
-    color: #ff4d4d; /* Rojo para errores */
+    color: #ff4d4d;
     font-size: 0.8em;
     display: block;
     margin-top: 5px;
 }
 
 .success-message {
-    color: #4CAF50; /* Verde para éxito */
+    color: #4CAF50;
     font-size: 1em;
     margin-top: 15px;
     font-weight: bold;
@@ -292,7 +305,6 @@ main {
     border-radius: 4px;
     font-weight: bold;
     transition: background-color 0.3s;
-    /* Se aplica al botón de Tienda en index.html */
 }
 
 .submit-button:hover {
@@ -300,7 +312,6 @@ main {
 }
 
 /* --- Carrusel Específico de index.html --- */
-
 .carousel-section {
     display: flex;
     align-items: center;
@@ -346,7 +357,7 @@ main {
 }
 
 /* ----------------------------------- */
-/* FOOTER                                */
+/* FOOTER                                */
 /* ----------------------------------- */
 footer {
     background-color: #000000;
@@ -354,7 +365,7 @@ footer {
     text-align: center;
     padding: 20px 5%;
     border-top: 2px solid #4b0082;
-    margin-top: 40px;
+    margin-top: 40px; /* Mantenemos el margen por defecto, el sticky footer ya funciona */
 }
 
 .footer-links a {
@@ -372,17 +383,15 @@ footer {
 }
 
 .social-media img {
-    /* ✨ EDITA AQUÍ: Cambia el tamaño de los logos ✨ */
-    width: 35px; /* Por ejemplo, 35 píxeles de ancho */
-    height: 35px; /* Por ejemplo, 35 píxeles de alto */
-    /* ---------------------------------------------------- */
-    
+    width: 35px; 
+    height: 35px; 
     margin: 0 8px;
     border-radius: 50%;
     transition: transform 0.3s;
 }
+
 /* ----------------------------------- */
-/* MODALES                             */
+/* MODALES                             */
 /* ----------------------------------- */
 .modal {
     display: none;
@@ -397,7 +406,7 @@ footer {
 }
 
 .modal-content {
-    background-color: #1a1a1a;
+    background-color: #1a1a1a; /* Fondo oscuro por defecto (Login/Perfil) */
     margin: 10% auto;
     padding: 20px;
     border: 1px solid #8a2be2;
@@ -407,6 +416,25 @@ footer {
     box-shadow: 0 5px 15px rgba(138, 43, 226, 0.5);
     position: relative;
 }
+
+/* ESTILO DEL MODAL DE CARRITO (NUEVO) */
+#addToCartModal .modal-content {
+    background-color: #ffffff; /* Fondo BLANCO para la confirmación de juego */
+    color: #1e1e1e; /* Color de texto oscuro para el contenido */
+    border: 1px solid #4b0082;
+    box-shadow: 0 5px 15px rgba(75, 0, 130, 0.5);
+}
+
+#addToCartModal .modal-content h2 {
+    color: #8a2be2;
+    border-bottom: none;
+}
+
+/* Botones dentro del modal blanco */
+#addToCartModal .login-button {
+    color: #ffffff; /* Asegura texto blanco en los botones de acción */
+}
+
 
 .close-button {
     color: #cccccc;
@@ -420,7 +448,7 @@ footer {
     color: #8a2be2;
     cursor: pointer;
 }
-
+/* ... (El resto de estilos de modales de autenticación son los mismos) ... */
 /* Pestañas de Login/Registro */
 .auth-tabs {
     display: flex;
@@ -502,4 +530,135 @@ footer {
 }
 #profileModal #logoutBtn:hover {
     background-color: #ff3333;
+}
+/* ----------------------------------- */
+/* ESTILOS ESPECÍFICOS DE CARRITO.HTML */
+/* ----------------------------------- */
+.cart-item {
+    background-color: #1a1a1a;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+
+/* ----------------------------------- */
+/* ESTILOS ESPECÍFICOS DE NOSOTROS.HTML */
+/* ----------------------------------- */
+
+.perfil-img {
+    width: 150px !important; 
+    height: 150px !important;
+    border-radius: 50% !important; 
+    object-fit: cover;
+    display: block;
+    margin: 10px auto; 
+    border: 3px solid #8a2be2;
+}
+
+/* ----------------------------------- */
+/* NUEVOS ESTILOS PARA INFORMACION.HTML */
+/* ----------------------------------- */
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.feature-card {
+    background-color: #1a1a1a;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid #4b0082;
+}
+
+.feature-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(138, 43, 226, 0.6);
+}
+
+.feature-card h3 {
+    color: #8a2be2;
+    margin-top: 0;
+    font-size: 1.5em;
+    border-bottom: 1px dashed #4b0082;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.feature-card p {
+    color: #cccccc;
+    line-height: 1.6;
+}
+
+.steps-list {
+    list-style: none;
+    padding: 0;
+}
+
+.steps-list li {
+    background-color: #1a1a1a;
+    margin-bottom: 10px;
+    padding: 15px;
+    border-left: 5px solid #8a2be2;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.steps-list li strong {
+    color: #ffffff;
+}
+
+/* ----------------------------------- */
+/* MEDIA QUERIES (RESPONSIVIDAD/BOOSTER) */
+/* ----------------------------------- */
+
+/* --- Estilos para Tablet (máximo 900px) --- */
+@media (max-width: 900px) {
+    nav {
+        display: none;
+    }
+
+    .top-bar {
+        justify-content: space-around;
+        padding: 10px 2%;
+    }
+
+    .secondary-nav {
+        padding: 10px 2%;
+        justify-content: space-between;
+    }
+
+    .search-bar input {
+        width: 150px;
+    }
+}
+
+/* --- Estilos para Móvil (máximo 600px) --- */
+@media (max-width: 600px) {
+    .secondary-nav {
+        display: none;
+    }
+    
+    .game-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 10px;
+    }
+    
+    .game-card h3 {
+        font-size: 1em;
+    }
+    
+    /* Ajuste para imágenes de juego en móvil */
+    .game-card img {
+        height: 120px;
+    }
+
+    main {
+        padding: 10px 3%;
+    }
 }

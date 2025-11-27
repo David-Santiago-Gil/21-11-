@@ -4,8 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gaming Utopia - Tienda</title>
+    <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+        crossorigin="anonymous"
+    >
     <link rel="stylesheet" href="css/style.css">
-</head>
+    </head>
 <body>
     <header>
         <div class="top-bar">
@@ -16,11 +22,17 @@
                 <ul>
                     <li><a href="index.html">Inicio</a></li>
                     <li><a href="tienda.html">Tienda</a></li>
-                    <li><a href="informacion.html">Información</a></li>
+                    <li><a href="informacion.html">Informacion</a></li>
                     <li><a href="nosotros.html">Nosotros</a></li>
                 </ul>
             </nav>
             <div class="auth-buttons">
+                <div class="cart-icon" id="cartIcon">
+                    <a href="carrito.html">
+                        <span style="font-size: 30px; line-height: 1;">🛒</span>
+                        <span id="cartCount" style="position: absolute; top: 10px; right: 80px; background-color: #8a2be2; color: white; border-radius: 50%; padding: 0 6px; font-size: 0.8em; display: none;">0</span>
+                    </a>
+                </div>
                 <button id="loginBtn" class="login-button">LOGIN</button>
                 <div class="profile-icon">
                     <img src="https://via.placeholder.com/30x30/8a2be2/ffffff?text=👤" alt="Profile Icon" id="profileIcon">
@@ -65,84 +77,86 @@
             <img src="img/3840-x-1080-gaming-84v6fr3b1oz7771t.jpg" alt="Chica con arma" class="hero-image">
         </section>
 
-        <section class="game-listings">
-            <h2>Destacados de la Semana</h2>
-            <div class="game-grid">
-                <div class="game-card">
-                    <img src="img/Store_GamesPDP_Hero01.png" alt="Juego 1">
-                    <h3>Call of Duty Modern Warfare</h3>
-                    <p>COP 45,000</p>
-                    <p class="rating">4.4 (6 K)</p>
+        <div class="container">
+            <section class="game-listings">
+                <h2>Destacados de la Semana</h2>
+                <div class="game-grid">
+                    <div class="game-card" data-id="cod_mw" data-name="Call of Duty Modern Warfare" data-price="45000">
+                        <img src="img/Store_GamesPDP_Hero01.png" alt="Juego 1">
+                        <h3>Call of Duty Modern Warfare</h3>
+                        <p>COP 45,000</p>
+                        <p class="rating">4.4 (6 K)</p>
+                    </div>
+                    <div class="game-card" data-id="valorant" data-name="Valorant" data-price="0">
+                        <img src="img/ps-f2p-val-console-launch-16x9.jpg" alt="Juego Gratis">
+                        <h3>Valorant</h3>
+                        <p>Gratis</p>
+                        <p class="rating">4.8 (9.1 K)</p>
+                    </div>
+                    <div class="game-card" data-id="mk11" data-name="Mortal Kombat 11" data-price="19999">
+                        <img src="img/mortal-kombat-x-1920-x-1080-wallpaper-ui3p8y221sohg42z.jpg" alt="Juego 3">
+                        <h3>Mortal Kombat 11</h3>
+                        <p>COP 19,999</p>
+                        <p class="rating">4.8 (3.1 K)</p>
+                    </div>
+                    <div class="game-card" data-id="fc3" data-name="Far Cry 3" data-price="43738">
+                        <img src="img/far-cry-3-background-h18r9jqm76voyl4t.jpg" alt="Juego 4">
+                        <h3>Far Cry 3</h3>
+                        <p>COP 43,738</p>
+                        <p class="rating">4.7 (2.1 K)</p>
+                    </div>
+                    <div class="game-card" data-id="hollow_knight" data-name="Hollow Knight" data-price="65623">
+                        <img src="img/Holow.jpg" alt="Juego 5">
+                        <h3>Hollow Knight</h3>
+                        <p>COP 65,623</p>
+                        <p class="rating">4.8(2 K)</p>
+                    </div>
+                    <div class="game-card" data-id="fc26" data-name="Ea Sports Fc 26" data-price="280608">
+                        <img src="img/fc.jpeg" alt="Juego Gratis">
+                        <h3>Ea Sports Fc 26</h3>
+                        <p>COP 280,608</p>
+                        <p class="rating">4.9(89)</p>
+                    </div>
+                    <div class="game-card" data-id="gta5" data-name="Juego Grand Theft Auto V Gta 5" data-price="138204">
+                        <img src="img/gta5.jpeg" alt="Juego 3">
+                        <h3>Juego Grand Theft Auto V Gta 5</h3>
+                        <p>COP 138,204</p>
+                        <p class="rating">4.6(16 k)</p>
+                    </div>
+                    <div class="game-card" data-id="cuphead" data-name="Cuphead" data-price="75224">
+                        <img src="img/cap.jpg" alt="Juego 4">
+                        <h3>Cuphead</h3>
+                        <p>COP 75,224</p>
+                        <p class="rating">4.8(1.9 K)</p>
+                    </div>
+                    <div class="game-card" data-id="cs2" data-name="Counter-Strike 2" data-price="0">
+                        <img src="img/conter.jpg" alt="Juego 1">
+                        <h3>Counter-Strike 2</h3>
+                        <p>Gratis</p>
+                        <p class="rating">4.4 (6 K)</p>
+                    </div>
+                    <div class="game-card" data-id="fortnite" data-name="Fortnite" data-price="0">
+                        <img src="img/fornite.jpeg" alt="Juego Gratis">
+                        <h3>Fortnite</h3>
+                        <p>Gratis</p>
+                        <p class="rating">4.4(1.7 K)</p>
+                    </div>
+                    <div class="game-card" data-id="nfs" data-name="Need For Speed" data-price="219990">
+                        <img src="img/nfs.png" alt="Juego 3">
+                        <h3>Need For Speed</h3>
+                        <p>COP 219,990</p>
+                        <p class="rating">4.4(1.9 K)</p>
+                    </div>
+                    <div class="game-card" data-id="lol" data-name="League Of Legends" data-price="0">
+                        <img src="img/lol.jpeg" alt="Juego 4">
+                        <h3 data-id="lol">League Of Legends</h3>
+                        <p>Gratis</p>
+                        <p class="rating">4.8(4)</p>
+                    </div>
                 </div>
-                <div class="game-card">
-                    <img src="img/ps-f2p-val-console-launch-16x9.jpg" alt="Juego Gratis">
-                    <h3>Valorant</h3>
-                    <p>Gratis</p>
-                    <p class="rating">4.8 (9.1 K)</p>
-                </div>
-                <div class="game-card">
-                    <img src="img/mortal-kombat-x-1920-x-1080-wallpaper-ui3p8y221sohg42z.jpg" alt="Juego 3">
-                    <h3>Mortal Kombat 11</h3>
-                    <p>COP 19,999</p>
-                    <p class="rating">4.8 (3.1 K)</p>
-                </div>
-                <div class="game-card">
-                    <img src="img/far-cry-3-background-h18r9jqm76voyl4t.jpg" alt="Juego 4">
-                    <h3>Far Cry 3</h3>
-                    <p>COP 43,738</p>
-                    <p class="rating">4.7 (2.1 K)</p>
-                </div>
-                <div class="game-card">
-                    <img src="img/Holow.jpg" alt="Juego 5">
-                    <h3>Hollow Knight</h3>
-                    <p>COP 65,623</p>
-                    <p class="rating">4.8(2 K)</p>
-                </div>
-                <div class="game-card">
-                    <img src="img/fc.jpeg" alt="Juego Gratis">
-                    <h3>Ea Sports Fc 26</h3>
-                    <p>COP 280,608</p>
-                    <p class="rating">4.9(89)</p>
-                </div>
-                <div class="game-card">
-                    <img src="img/gta5.jpeg" alt="Juego 3">
-                    <h3>Juego Grand Theft Auto V Gta 5</h3>
-                    <p>COP 138,204</p>
-                    <p class="rating">4.6(16 k)</p>
-                </div>
-                <div class="game-card">
-                    <img src="img/cap.jpg" alt="Juego 4">
-                    <h3>Cuphead</h3>
-                    <p>COP 75,224</p>
-                    <p class="rating">4.8(1.9 K)</p>
-                </div>
-                <div class="game-card">
-                    <img src="img/conter.jpg" alt="Juego 1">
-                    <h3>Counter-Strike 2</h3>
-                    <p>Gratis</p>
-                    <p class="rating">4.4 (6 K)</p>
-                </div>
-                <div class="game-card">
-                    <img src="img/fornite.jpeg" alt="Juego Gratis">
-                    <h3>Fortnite</h3>
-                    <p>Gratis</p>
-                    <p class="rating">4.4(1.7 K)</p>
-                </div>
-                <div class="game-card">
-                    <img src="img/nfs.png" alt="Juego 3">
-                    <h3>Need For Speed</h3>
-                    <p>COP 219,990</p>
-                    <p class="rating">4.4(1.9 K)</p>
-                </div>
-                <div class="game-card">
-                    <img src="img/lol.jpeg" alt="Juego 4">
-                    <h3>League Of Legends</h3>
-                    <p>Gratisp>
-                    <p class="rating">4.8(4)</p>
-                </div>
-            </div>
-        </section>
-    </main>
+            </section>
+        </div>
+        </main>
 
     <footer>
         <div class="footer-links">
@@ -158,6 +172,19 @@
         </div>
     </footer>
 
+    <div id="addToCartModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Agregar al Carrito 🛒</h2>
+            <p>¿Quieres agregar <strong id="modalGameName"></strong> a tu carrito?</p>
+            <p>Precio: <span id="modalGamePrice"></span></p>
+            <div style="display: flex; justify-content: space-around; margin-top: 20px;">
+                <button id="confirmAddToCartBtn" class="login-button" style="background-color: #28a745;">Sí, Agregar</button>
+                <button id="cancelAddToCartBtn" class="login-button" style="background-color: #dc3545;">Cancelar</button>
+            </div>
+        </div>
+    </div>
+    
     <div id="authModal" class="modal">
         <div class="modal-content">
             <span class="close-button">&times;</span>
@@ -181,7 +208,7 @@
                 <input type="password" id="registerPassword" name="registerPassword">
                 <label for="registerPhone">Teléfono (Opcional)</label>
                 <input type="tel" id="registerPhone" name="registerPhone">
-                <button id="submitRegister">Registrarse</label>
+                <button id="submitRegister">Registrarse</button>
             </div>
         </div>
     </div>
@@ -195,6 +222,11 @@
         </div>
     </div>
 
+    <script 
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" 
+        crossorigin="anonymous">
+    </script>
     <script src="js/script.js"></script>
 </body>
 </html>

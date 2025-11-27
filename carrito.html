@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gaming Utopia - Inicio</title>
+    <title>Gaming Utopia - Carrito de Compras</title>
     <link 
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
         rel="stylesheet"
@@ -27,6 +27,12 @@
                 </ul>
             </nav>
             <div class="auth-buttons">
+                <div class="cart-icon" id="cartIcon">
+                    <a href="carrito.html">
+                        <span style="font-size: 30px; line-height: 1;">🛒</span>
+                        <span id="cartCount" style="position: absolute; top: 10px; right: 80px; background-color: #8a2be2; color: yellow; border-radius: 50%; padding: 0 6px; font-size: 0.8em; display: none;">0</span>
+                    </a>
+                </div>
                 <button id="loginBtn" class="login-button">LOGIN</button>
                 <div class="profile-icon">
                     <img src="https://via.placeholder.com/30x30/8a2be2/ffffff?text=👤" alt="Profile Icon" id="profileIcon">
@@ -67,56 +73,19 @@
     </header>
 
     <main>
-        <section class="hero-section">
-            <img src="img/3840-x-1080-gaming-8txykfn2xdj4214w.jpg" alt="El futuro del gaming llega pronto" class="hero-image">
-        </section>
-
-        <section class="carousel-section">
-            <button class="carousel-arrow" id="prevBtn">❮</button>
-            <div class="carousel-container">
-                <div class="carousel-content" id="imageCarousel">
-                    <img src="img/4k-ultra-hd-gaming-ylyipyznm00tq5og.jpg" alt="Slide 1: Cyborg">
-                    <img src="img/high-resolution-gaming-i59azpzf73j6wqgk.jpg" alt="Slide 2: I Love Game">
-                    <img src="img/1920-x-1080-hd-gaming-1920-x-1080-ud0vb01ovt0eg2r0.jpg" alt="Slide 3: Ofertas de la semana">
-                </div>
-            </div>
-            <button class="carousel-arrow" id="nextBtn">❯</button>
-        </section>
-        
         <div class="container">
-            
-            <section class="game-listings">
-                <h2>Juegos Populares</h2>
-                <div class="game-grid">
-                    <div class="game-card">
-                        <img src="img/Store_GamesPDP_Hero01.png" alt="Juego 1">
-                        <h3>Call of Duty Modern Warfare</h3>
-                        <p>COP 45,000</p>
-                        <p class="rating">4.4 (6 K)</p>
+            <section id="cartSection" style="padding: 40px 0;">
+                <h1 style="color: #8a2be2; border-bottom: 2px solid #333; padding-bottom: 10px;">Tu Carrito de Compras</h1>
+                <div id="cartItemsContainer" style="margin-top: 30px;">
                     </div>
-                    <div class="game-card">
-                        <img src="img/ps-f2p-val-console-launch-16x9.jpg" alt="Juego Gratis">
-                        <h3>Valorant</h3>
-                        <p>Gratis</p>
-                        <p class="rating">4.8 (9.1 K)</p>
-                    </div>
-                    <div class="game-card">
-                        <img src="img/mortal-kombat-x-1920-x-1080-wallpaper-ui3p8y221sohg42z.jpg" alt="Juego 3">
-                        <h3>Mortal Kombat 11</h3>
-                        <p>COP 19,999</p>
-                        <p class="rating">4.8 (3.1 K)</p>
-                    </div>
-                    <div class="game-card">
-                        <img src="img/far-cry-3-background-h18r9jqm76voyl4t.jpg" alt="Juego 4">
-                        <h3>Far Cry 3</h3>
-                        <p>COP 43,738</p>
-                        <p class="rating">4.7 (2.1 K)</p>
-                    </div>
+
+                <div id="cartSummary" style="margin-top: 40px; border-top: 2px solid #333; padding-top: 20px;">
+                    <h3 style="color: white;">Total: <span id="cartTotal">COP 0</span></h3>
+                    <button id="checkoutBtn" class="login-button" style="background-color: #8a2be2; padding: 10px 30px; margin-top: 15px;">Proceder al Pago</button>
                 </div>
             </section>
-        
         </div>
-        </main>
+    </main>
 
     <footer>
         <div class="footer-links">
@@ -168,7 +137,7 @@
             <button id="logoutBtn">Cerrar Sesión</button>
         </div>
     </div>
-
+    
     <script 
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" 
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" 
