@@ -6,9 +6,11 @@ const SUPPORT_FORM_ID = 'supportForm';
 
 // --- ELEMENTOS DEL DOM ---
 const authModal = document.getElementById('authModal');
-const profileModal = document.getElementById('profileModal');
+// ✅ CORRECCIÓN CLAVE: Referencia manual al modal de perfil
+const profileModal = document.getElementById('profileModal'); 
+
+const addToCartModal = document.getElementById('addToCartModal'); 
 const loginBtn = document.getElementById('loginBtn');
-const profileIcon = document.getElementById('profileIcon');
 const profileUsernameSpan = document.getElementById('profileUsername');
 
 const loginTab = document.getElementById('loginTab');
@@ -20,6 +22,11 @@ const submitLoginBtn = document.getElementById('submitLogin');
 const submitRegisterBtn = document.getElementById('submitRegister');
 const logoutBtn = document.getElementById('logoutBtn');
 
+// 💡 NUEVOS ELEMENTOS para el Modal de Perfil
+const modalProfileImage = document.getElementById('modalProfileImage');
+const imageUpload = document.getElementById('imageUpload');
+const changeImageBtn = document.getElementById('changeImageBtn');
+
 // Campos de Autenticación
 const loginUserEmailInput = document.getElementById('loginUserEmail');
 const loginPasswordInput = document.getElementById('loginPassword');
@@ -30,7 +37,6 @@ const registerPhoneInput = document.getElementById('registerPhone');
 
 // Elementos del carrito
 const cartCountSpan = document.getElementById('cartCount');
-const addToCartModal = document.getElementById('addToCartModal');
 const modalGameName = document.getElementById('modalGameName');
 const modalGamePrice = document.getElementById('modalGamePrice');
 const confirmAddToCartBtn = document.getElementById('confirmAddToCartBtn');
@@ -39,11 +45,6 @@ let currentProduct = null;
 
 // Campos de Soporte
 const supportForm = document.getElementById(SUPPORT_FORM_ID);
-const nameInput = document.getElementById('supportName');
-const emailInput = document.getElementById('supportEmail');
-const subjectInput = document.getElementById('supportSubject');
-const messageInput = document.getElementById('supportMessage');
-// Botón de Limpiar del formulario de soporte (NUEVO)
 const resetSupportBtn = document.getElementById('resetSupportBtn');
 
 
@@ -92,18 +93,35 @@ function setCurrentUser(user) {
 
 function updateAuthUI() {
     const user = getCurrentUser();
+    // Usamos el contenedor principal de .profile-icon de tu HTML
+    const profileIconContainer = document.querySelector('.profile-icon');
+    const profileImg = document.querySelector('.profile-icon img'); 
+
     if (user) {
         if (loginBtn) loginBtn.style.display = 'none';
-        if (profileIcon) profileIcon.style.display = 'block';
+        
+        // ✅ CORRECCIÓN CLAVE: Asegura que el contenedor del ícono se muestre
+        if (profileIconContainer) profileIconContainer.style.display = 'block'; 
+
         if (profileUsernameSpan) profileUsernameSpan.textContent = user.username || user.email;
+
+        // Cargar imagen de perfil del usuario
+        const imagePath = user.profileImage || 'img/perfil.jpg';
+        if (profileImg) {
+            profileImg.src = imagePath; 
+        }
+        if (modalProfileImage) {
+            modalProfileImage.src = imagePath;
+        }
+
     } else {
         if (loginBtn) loginBtn.style.display = 'block';
-        if (profileIcon) profileIcon.style.display = 'none';
+        if (profileIconContainer) profileIconContainer.style.display = 'none';
     }
 }
 
 
-// --- 2. LÓGICA DE MODALES Y PESTAÑAS (Autenticación) ---
+// --- 2. LÓGICA DE MODALES Y PESTAÑAS (Interacción) ---
 
 if (loginBtn) {
     loginBtn.onclick = () => {
@@ -112,27 +130,39 @@ if (loginBtn) {
     };
 }
 
-if (profileIcon) {
-    profileIcon.onclick = () => {
+// Evento click para el contenedor del icono de perfil
+const profileIconContainer = document.querySelector('.profile-icon');
+if (profileIconContainer) {
+    profileIconContainer.onclick = () => {
+        // ✅ CORRECCIÓN CLAVE: Usamos display: block para el modal de perfil manual
         if (profileModal) profileModal.style.display = 'block';
     };
 }
 
+// LÓGICA DE CIERRE DE MODAL CON EL BOTÓN &times; 
 document.querySelectorAll('.close-button').forEach(button => {
     button.onclick = function() {
-        this.closest('.modal').style.display = 'none';
+        const modalElement = this.closest('.modal');
+        if (modalElement) {
+            // Cierra el modal de forma manual
+            modalElement.style.display = 'none';
+        }
     };
 });
 
+// LÓGICA DE CIERRE DE MODAL AL CLICKEAR FUERA 
 window.onclick = function(event) {
+    // Si el objetivo del clic es el fondo del modal (el modal en sí), lo cierra
     if (event.target == authModal) {
         authModal.style.display = 'none';
     }
+    // ✅ Incluimos el modal de perfil en el cierre al hacer clic fuera
     if (event.target == profileModal) {
         profileModal.style.display = 'none';
     }
     if (event.target == addToCartModal) { 
         addToCartModal.style.display = 'none';
+        currentProduct = null;
     }
 };
 
@@ -210,7 +240,8 @@ if (submitRegisterBtn && registerUserInput && registerEmailInput && registerPass
                 username: registerUserInput.value,
                 email: registerEmailInput.value,
                 password: registerPasswordInput.value, 
-                phone: registerPhoneInput ? registerPhoneInput.value : null
+                phone: registerPhoneInput ? registerPhoneInput.value : null,
+                profileImage: 'img/perfil.jpg' // Imagen por defecto
             };
 
             const users = loadUsers();
@@ -259,12 +290,58 @@ if (submitLoginBtn) {
 if (logoutBtn) {
     logoutBtn.onclick = () => {
         setCurrentUser(null);
+        // ✅ Cierra el modal de forma manual
         if (profileModal) profileModal.style.display = 'none';
         alert('Sesión cerrada.');
     };
 }
 
-// --- 4. LÓGICA DE SOPORTE Y VALIDACIÓN (Para soporte.html) ---
+// --- 4. LÓGICA DE CAMBIO DE IMAGEN DE PERFIL (SOLO SI LOS ELEMENTOS EXISTEN) ---
+
+if (changeImageBtn && imageUpload && modalProfileImage) {
+    // 1. Al hacer clic en el botón, abre el selector de archivos
+    changeImageBtn.onclick = () => {
+        imageUpload.click();
+    };
+
+    // 2. Al seleccionar un archivo
+    imageUpload.onchange = function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const base64Image = e.target.result;
+                
+                // Actualiza la imagen en el modal y la imagen en el header
+                modalProfileImage.src = base64Image;
+                const profileHeaderImg = document.querySelector('.profile-icon img');
+                if (profileHeaderImg) {
+                    profileHeaderImg.src = base64Image;
+                }
+
+                // Guarda la imagen en localStorage del usuario actual
+                let user = getCurrentUser();
+                let users = loadUsers();
+
+                if (user) {
+                    user.profileImage = base64Image;
+                    setCurrentUser(user); // Actualiza la sesión actual
+
+                    // Actualiza en el array de todos los usuarios
+                    const userIndex = users.findIndex(u => u.email === user.email);
+                    if (userIndex !== -1) {
+                        users[userIndex].profileImage = base64Image;
+                        saveUsers(users);
+                    }
+                    alert('Imagen de perfil actualizada.');
+                }
+            };
+            reader.readAsDataURL(file); // Convierte la imagen a Base64 para guardarla
+        }
+    };
+}
+
+// --- 5. LÓGICA DE SOPORTE Y VALIDACIÓN (Para soporte.html) ---
 
 function validateSupportForm(form) {
     let isValid = true;
@@ -329,12 +406,11 @@ if (resetSupportBtn) {
         // Limpiar el mensaje de estado (éxito/error)
         const formStatus = document.getElementById('formStatus');
         if (formStatus) formStatus.textContent = '';
-        // Nota: Los campos de input/textarea son limpiados automáticamente por el atributo type="reset".
     });
 }
 
 
-// --- 5. LÓGICA DE BÚSQUEDA ---
+// --- 6. LÓGICA DE BÚSQUEDA ---
 const searchInput = document.getElementById('searchInput');
 const searchBtn = document.getElementById('searchBtn');
 
@@ -381,7 +457,7 @@ function handleSearch() {
 }
 
 
-// --- 6. LÓGICA DEL CARRUSEL (Para index.html) ---
+// --- 7. LÓGICA DEL CARRUSEL (Para index.html) ---
 const carousel = document.getElementById('imageCarousel');
 const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
@@ -392,7 +468,7 @@ if (carousel && prevBtn && nextBtn) {
     const totalImages = images.length;
     
     function updateCarousel() {
-        const offset = -currentIndex * 100;
+        const offset = -currentIndex * 100 / totalImages;
         carousel.style.transform = `translateX(${offset}%)`;
     }
 
@@ -406,6 +482,7 @@ if (carousel && prevBtn && nextBtn) {
         updateCarousel();
     };
 
+    // Carrusel automático
     setInterval(() => {
         currentIndex = (currentIndex + 1) % totalImages;
         updateCarousel();
@@ -414,7 +491,7 @@ if (carousel && prevBtn && nextBtn) {
 
 
 // ----------------------------------------------
-// --- 7. LÓGICA DEL CARRITO DE COMPRAS ---
+// --- 8. LÓGICA DEL CARRITO DE COMPRAS ---
 // ----------------------------------------------
 
 function loadCart() {
@@ -443,7 +520,7 @@ function updateCartCount() {
     const cartCountIndicator = document.getElementById('cartCount');
     if (cartCountIndicator) {
         cartCountIndicator.textContent = count;
-        cartCountIndicator.style.display = count > 0 ? 'block' : 'none';
+        cartCountIndicator.style.display = count > 0 ? 'inline-block' : 'none'; 
     }
 }
 
@@ -466,23 +543,39 @@ function addGameToCart(game) {
 
 
 // ----------------------------------------------
-// --- 8. MANEJO DE EVENTOS DE TIENDA Y MODAL ---
+// --- 9. MANEJO DE EVENTOS DE TIENDA Y MODAL (CON VERIFICACIÓN DE SESIÓN) ---
 // ----------------------------------------------
 
+function formatPrice(price) {
+    const value = parseFloat(price);
+    if (value === 0) {
+        return 'Gratis';
+    }
+    return `COP ${value.toLocaleString('es-CO')}`;
+}
+
+// Detección de clicks en las tarjetas de juego (game-card)
 if (document.querySelector('.game-listings')) {
     document.querySelector('.game-listings').addEventListener('click', (e) => {
         const card = e.target.closest('.game-card');
 
         if (card && addToCartModal) {
+            // **PASO 1: VERIFICACIÓN DE SESIÓN**
+            if (!getCurrentUser()) {
+                alert('🚨 Debes iniciar sesión para agregar productos al carrito.');
+                if (authModal) authModal.style.display = 'block'; 
+                return;
+            }
+
             const id = card.getAttribute('data-id');
             const name = card.getAttribute('data-name');
             const priceAttr = card.getAttribute('data-price');
-            const price = parseFloat(priceAttr);
+            const price = parseFloat(priceAttr); 
             
             currentProduct = { id, name, price };
 
             if (modalGameName) modalGameName.textContent = name;
-            if (modalGamePrice) modalGamePrice.textContent = price === 0 ? 'Gratis' : `COP ${price.toLocaleString('es-CO')}`;
+            if (modalGamePrice) modalGamePrice.textContent = formatPrice(price);
             
             addToCartModal.style.display = 'block';
         }
@@ -510,43 +603,45 @@ if (cancelAddToCartBtn) {
 
 
 // ----------------------------------------------
-// --- 9. RENDERIZADO DEL CARRITO (Para carrito.html) ---
+// --- 10. RENDERIZADO DEL CARRITO (Para carrito.html) ---
 // ----------------------------------------------
 
 function renderCartItems() {
     const container = document.getElementById('cartItemsContainer');
     const totalSpan = document.getElementById('cartTotal');
 
-    if (!container) return;
+    if (!container) return; 
 
     const cart = loadCart();
     container.innerHTML = '';
     let total = 0;
 
     if (cart.length === 0) {
-        container.innerHTML = '<p style="color: #ccc;">Tu carrito está vacío. ¡Explora la <a href="tienda.html" style="color: #8a2be2;">tienda</a>!</p>';
+        container.innerHTML = '<p style="color: #ccc;">Tu carrito está vacío. ¡Explora la <a href="tienda.html" style="color: #8a2be2; text-decoration: underline;">tienda</a>!</p>';
     } else {
         cart.forEach(item => {
-            const itemTotal = item.price * (item.quantity || 1);
+            const itemPrice = parseFloat(item.price) || 0;
+            const itemQuantity = parseInt(item.quantity) || 1;
+            
+            const itemTotal = itemPrice * itemQuantity;
             total += itemTotal;
-            const priceDisplay = item.price === 0 ? 'Gratis' : `COP ${item.price.toLocaleString('es-CO')}`;
+            const priceDisplay = itemPrice === 0 ? 'Gratis' : `COP ${itemPrice.toLocaleString('es-CO')}`;
 
             const itemDiv = document.createElement('div');
             itemDiv.classList.add('cart-item');
-            itemDiv.style.cssText = 'display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; padding: 15px 0;';
             
             itemDiv.innerHTML = `
                 <div style="flex: 3;">
-                    <h4 style="margin: 0; color: white;">${item.name}</h4>
-                    <span style="color: #8a2be2;">${priceDisplay}</span>
+                    <h4 style="margin: 0;">${item.name}</h4>
+                    <span>${priceDisplay}</span>
                 </div>
                 <div style="flex: 1; text-align: center;">
-                    Cantidad: <strong>${item.quantity}</strong>
+                    Cantidad: <strong>${itemQuantity}</strong>
                 </div>
                 <div style="flex: 1; text-align: right;">
                     <strong>COP ${(itemTotal).toLocaleString('es-CO')}</strong>
                 </div>
-                <button data-id="${item.id}" class="remove-item-btn" style="background: none; border: none; color: #dc3545; margin-left: 20px; cursor: pointer;">&times;</button>
+                <button data-id="${item.id}" class="remove-item-btn" title="Eliminar">&times;</button>
             `;
             container.appendChild(itemDiv);
         });
@@ -562,56 +657,54 @@ function renderCartItems() {
 }
 
 function removeItemFromCart(e) {
-    const itemId = e.target.getAttribute('data-id');
+    const itemId = e.target.getAttribute('data-id'); 
     let cart = loadCart();
     
-    cart = cart.filter(item => item.id !== itemId);
+    cart = cart.filter(item => item.id !== itemId); 
     
     saveCart(cart);
-    renderCartItems();
+    renderCartItems(); 
 }
 
 
-// 10. INICIALIZACIÓN
+// 11. INICIALIZACIÓN
 window.onload = function() {
     updateAuthUI();
     updateCartCount();
 
-    /**
-     * Función auxiliar para limpiar completamente el formulario de soporte
-     * (campos, mensajes de error y estado).
-     */
     function resetSupportForm() {
         const formStatus = document.getElementById('formStatus');
         if (supportForm) {
              supportForm.reset();
         }
-        // Limpiar todos los mensajes de error
         document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
         if (formStatus) {
             formStatus.textContent = '';
         }
     }
     
-    // Si la página actual es soporte.html, limpiamos el formulario al cargar.
     if (window.location.pathname.endsWith('soporte.html')) {
         resetSupportForm();
     }
 
-    // Si la página actual es carrito.html, renderiza los items
     if (window.location.pathname.endsWith('carrito.html')) {
         renderCartItems();
     }
 
-    // Manejador para el botón de pago (simulado)
     const checkoutBtn = document.getElementById('checkoutBtn');
     if (checkoutBtn) {
         checkoutBtn.onclick = () => {
+            if (!getCurrentUser()) {
+                alert('🚨 Debes iniciar sesión para finalizar la compra.');
+                if (authModal) authModal.style.display = 'block';
+                return;
+            }
+
             const total = loadCart().reduce((sum, item) => sum + item.price * (item.quantity || 1), 0);
             if (total > 0) {
                 alert(`Procesando pago de COP ${total.toLocaleString('es-CO')}. ¡Gracias por tu compra!`);
-                saveCart([]);
-                renderCartItems();
+                saveCart([]); 
+                renderCartItems(); 
             } else {
                 alert('El carrito está vacío. ¡Agrega algunos juegos primero!');
             }
