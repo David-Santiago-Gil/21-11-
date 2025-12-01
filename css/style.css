@@ -1,4 +1,5 @@
 /*
+ * Gaming Utopia - Unified Styles
  * Colores:
  * Primario (Acento): #8a2be2 (Azul Violeta)
  * Secundario (Oscuro): #4b0082 (Índigo)
@@ -7,21 +8,22 @@
  * Texto: #ffffff (Blanco) y #cccccc (Gris claro)
  */
 
-/* ----------------------------------- */
+/* ========================================= */
 /* 1. CONFIGURACIÓN GLOBAL Y STICKY FOOTER */
-/* ----------------------------------- */
+/* ========================================= */
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #121212;
     color: #ffffff;
-    
-    /* STICKY FOOTER LOGIC START */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    /* STICKY FOOTER LOGIC END */
 }
 
 a {
@@ -35,9 +37,9 @@ a:hover {
     text-decoration: underline;
 }
 
-/* ----------------------------------- */
-/* HEADER Y NAVEGACIÓN                 */
-/* ----------------------------------- */
+/* ========================================= */
+/* 2. HEADER Y NAVEGACIÓN                   */
+/* ========================================= */
 header {
     background-color: #000000;
     border-bottom: 2px solid #4b0082;
@@ -74,23 +76,31 @@ nav ul li a {
     padding: 5px 0;
 }
 
-/* 💡 Contador de Carrito */
-.cart-icon-container {
+/* Contenedor del ícono del carrito */
+.cart-icon {
     position: relative;
-    margin-left: 20px;
+    margin-right: 15px;
+    display: inline-block;
 }
 
+.cart-icon a {
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+}
+
+/* Contador del carrito */
 #cartCount {
     position: absolute;
     top: -5px;
     right: -10px;
-    background-color: #cc0000;
+    background-color: #8a2be2;
     color: white;
     border-radius: 50%;
     padding: 2px 6px;
     font-size: 0.7em;
     font-weight: bold;
-    display: none; 
+    display: none;
 }
 
 /* Botones de Autenticación */
@@ -115,22 +125,27 @@ nav ul li a {
     background-color: #a049ff;
 }
 
-/* ✅ CORRECCIÓN: Estilo del contenedor del icono de perfil */
+/* Contenedor del ícono de perfil */
 .profile-icon {
-    display: none; /* Controlado por JS: Se muestra al hacer login */
+    display: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    margin-left: 10px;
 }
 
 .profile-icon img {
-    height: 40px;
-    width: 40px;
+    width: 100%; 
+    height: 100%;
+    object-fit: cover;
     cursor: pointer;
     border-radius: 50%;
     border: 2px solid #8a2be2;
-    object-fit: cover;
 }
 
-
-/* Navegación Secundaria (Dropdowns y Búsqueda) */
+/* Navegación Secundaria */
 .secondary-nav {
     display: flex;
     justify-content: flex-start;
@@ -204,9 +219,9 @@ nav ul li a {
     margin-left: -5px;
 }
 
-/* ----------------------------------- */
-/* CONTENIDO PRINCIPAL                 */
-/* ----------------------------------- */
+/* ========================================= */
+/* 3. CONTENIDO PRINCIPAL                   */
+/* ========================================= */
 main {
     padding: 20px 5%;
     flex-grow: 1; 
@@ -225,7 +240,10 @@ main {
     box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
 }
 
-.game-listings h2, .game-listings h3, .info-content h2, .contact-form-container h2 {
+.game-listings h2, 
+.game-listings h3, 
+.info-content h2, 
+.contact-form-container h2 {
     color: #8a2be2;
     border-bottom: 2px solid #4b0082;
     padding-bottom: 5px;
@@ -279,7 +297,52 @@ main {
     margin-bottom: 10px;
 }
 
-/* Sección de Contacto (Soporte) */
+/* Carrusel (específico de index.html) */
+.carousel-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 40px 0;
+    overflow: hidden; 
+}
+
+.carousel-container {
+    width: 80%; 
+    max-width: 1200px;
+    overflow: hidden; 
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
+}
+
+.carousel-content {
+    display: flex;
+    transition: transform 0.5s ease-in-out; 
+}
+
+.carousel-content img {
+    min-width: 100%; 
+    height: auto;
+    object-fit: cover;
+}
+
+.carousel-arrow {
+    background: #8a2be2;
+    color: white;
+    border: none;
+    padding: 15px 10px;
+    cursor: pointer;
+    font-size: 30px;
+    z-index: 10;
+    transition: background 0.3s;
+    margin: 0 10px;
+    border-radius: 4px;
+}
+
+.carousel-arrow:hover {
+    background: #a049ff;
+}
+
+/* Formulario de Contacto/Soporte */
 .contact-form-container {
     max-width: 700px;
     margin: 0 auto;
@@ -298,7 +361,8 @@ main {
     font-weight: bold;
 }
 
-.form-group input, .form-group textarea {
+.form-group input, 
+.form-group textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #4b0082;
@@ -338,67 +402,9 @@ main {
     background-color: #a049ff;
 }
 
-/* --- Carrusel Específico de index.html (CORREGIDO) --- */
-.carousel-section {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 40px 0;
-    overflow: hidden; 
-}
-
-.carousel-container {
-    width: 80%; 
-    max-width: 1200px;
-    overflow: hidden; 
-    border-radius: 8px;
-    box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
-    position: relative; 
-}
-
-.carousel-content {
-    display: flex; 
-    transition: transform 0.5s ease-in-out; 
-    width: 300%; /* Si tienes 3 imágenes */
-}
-
-.carousel-content img {
-    min-width: 33.333%; 
-    height: auto;
-    object-fit: cover;
-}
-
-.carousel-arrow {
-    position: absolute; 
-    top: 50%;
-    transform: translateY(-50%);
-    background: #8a2be2;
-    color: white;
-    border: none;
-    padding: 15px 10px;
-    cursor: pointer;
-    font-size: 30px;
-    z-index: 10;
-    transition: background 0.3s;
-    margin: 0 10px;
-    border-radius: 4px;
-}
-
-.carousel-arrow:hover {
-    background: #a049ff;
-}
-
-/* Ajuste de posición para las flechas */
-#prevBtn {
-    left: 0;
-}
-#nextBtn {
-    right: 0;
-}
-
-/* ----------------------------------- */
-/* FOOTER                                */
-/* ----------------------------------- */
+/* ========================================= */
+/* 4. FOOTER                                 */
+/* ========================================= */
 footer {
     background-color: #000000;
     color: #cccccc;
@@ -430,15 +436,13 @@ footer {
     transition: transform 0.3s;
 }
 
-/* ----------------------------------- */
-/* MODALES PERSONALIZADOS (LOGIN/PERFIL/CARRITO) - CRÍTICO Z-INDEX */
-/* ----------------------------------- */
-
-.modal { /* Clase usada por authModal, profileModal, addToCartModal */
+/* ========================================= */
+/* 5. MODALES - ESTILO BASE                 */
+/* ========================================= */
+.modal {
     display: none;
     position: fixed;
-    /* ✅ CRÍTICO: Z-INDEX MUY ALTO para superar el backdrop de Bootstrap */
-    z-index: 1060 !important; 
+    z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
@@ -447,7 +451,7 @@ footer {
     background-color: rgba(0,0,0,0.85);
 }
 
-.modal-content { 
+.modal-content {
     background-color: #1a1a1a; 
     margin: 10% auto;
     padding: 20px;
@@ -457,111 +461,24 @@ footer {
     border-radius: 8px;
     box-shadow: 0 5px 15px rgba(138, 43, 226, 0.5);
     position: relative;
-    /* Asegurar que el contenido del modal esté por encima del fondo del modal */
-    z-index: 1061; 
 }
-
-/* ----------------------------------- */
-/* ESTILOS DEL MODAL DE PERFIL (Para que se vea bien en modo manual) */
-/* ----------------------------------- */
-#profileModal .modal-content {
-    text-align: center;
-    max-width: 500px;
-}
-
-.profile-avatar-container {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    overflow: hidden;
-    position: relative;
-    border: 3px solid #8a2be2;
-    margin: 20px auto 10px; /* Centrar y espaciar */
-}
-
-.profile-avatar {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* ✅ Estilo para el botón de Cambiar Imagen */
-#changeImageBtn {
-    background-color: #4b0082; 
-    color: white;
-    border: 1px solid #8a2be2;
-    padding: 5px 10px;
-    border-radius: 4px;
-    margin-top: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-#changeImageBtn:hover {
-    background-color: #5d00a3;
-}
-
-
-/* ESTILO DEL MODAL DE CARRITO (CONFIRMACIÓN DE JUEGO) */
-#addToCartModal .modal-content { 
-    background-color: #222; 
-    color: #ffffff; 
-    border: 1px solid #4b0082;
-    box-shadow: 0 5px 15px rgba(75, 0, 130, 0.5);
-    text-align: center;
-}
-
-#addToCartModal .modal-content h2 { 
-    color: #8a2be2;
-    border-bottom: 1px dashed #4b0082;
-    padding-bottom: 10px;
-    margin-bottom: 15px;
-}
-
-/* Botones dentro del modal */
-#addToCartModal button {
-    margin: 10px 5px;
-    padding: 10px 20px;
-    border-radius: 4px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-#confirmAddToCartBtn {
-    background-color: #8a2be2;
-    color: white;
-    border: none;
-}
-#confirmAddToCartBtn:hover {
-    background-color: #a049ff;
-}
-
-#cancelAddToCartBtn {
-    background-color: #444;
-    color: #ccc;
-    border: 1px solid #666;
-}
-#cancelAddToCartBtn:hover {
-    background-color: #555;
-    color: white;
-}
-
 
 .close-button {
     color: #cccccc;
     float: right;
     font-size: 28px;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .close-button:hover,
 .close-button:focus {
     color: #8a2be2;
-    cursor: pointer;
 }
 
-/* Pestañas de Login/Registro */
+/* ========================================= */
+/* 6. MODAL DE AUTENTICACIÓN (Login/Registro) */
+/* ========================================= */
 .auth-tabs {
     display: flex;
     justify-content: space-around;
@@ -625,9 +542,116 @@ footer {
     background-color: #a049ff;
 }
 
-/* ----------------------------------- */
-/* ESTILOS ESPECÍFICOS DE CARRITO.HTML */
-/* ----------------------------------- */
+/* ========================================= */
+/* 7. MODAL DE PERFIL (Bootstrap)           */
+/* ========================================= */
+.bg-dark-secondary {
+    background-color: #1a1a1a !important;
+    border: 1px solid #4b0082;
+}
+
+.border-bottom-indigo {
+    border-bottom: 2px solid #4b0082 !important;
+}
+
+.border-top-indigo {
+    border-top: 1px solid #4b0082 !important;
+}
+
+.text-white {
+    color: #ffffff !important;
+}
+
+.text-secondary-light {
+    color: #cccccc !important;
+}
+
+.btn-close-white {
+    filter: invert(1);
+}
+
+.btn-secondary-dark {
+    background-color: #4b0082 !important;
+    color: white !important;
+    border: none;
+}
+
+.btn-outline-light-accent {
+    background-color: #8a2be2 !important;
+    color: white !important;
+    border: none;
+}
+
+.btn-outline-light-accent:hover {
+    background-color: #a049ff !important;
+}
+
+.profile-avatar-container {
+    display: block;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.profile-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #8a2be2;
+}
+
+/* ========================================= */
+/* 8. MODAL DE AGREGAR AL CARRITO - UNIFICADO */
+/* ========================================= */
+.cart-modal-style {
+    background-color: #222 !important;
+    color: #ffffff;
+    border: 1px solid #4b0082 !important;
+    box-shadow: 0 5px 15px rgba(75, 0, 130, 0.5) !important;
+    text-align: center;
+}
+
+.cart-modal-style h2 {
+    color: #8a2be2 !important;
+    border-bottom: 1px dashed #4b0082;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+#addToCartModal button {
+    margin: 10px 5px;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border: none;
+}
+
+#confirmAddToCartBtn {
+    background-color: #8a2be2;
+    color: white;
+}
+
+#confirmAddToCartBtn:hover {
+    background-color: #a049ff;
+}
+
+#cancelAddToCartBtn {
+    background-color: #4b0082;
+    color: #ccc;
+}
+
+#cancelAddToCartBtn:hover {
+    background-color: #6d11b3;
+    color: white;
+}
+
+/* ========================================= */
+/* 9. ESTILOS ESPECÍFICOS DE CARRITO.HTML   */
+/* ========================================= */
 .cart-summary {
     background-color: #1a1a1a;
     padding: 20px;
@@ -691,17 +715,16 @@ footer {
     margin-top: 30px;
     padding: 15px;
     font-size: 1.2em;
-    background-color: #4CAF50; 
+    background-color: #4CAF50;
 }
 
 #checkoutBtn:hover {
     background-color: #6dff71;
 }
 
-/* ----------------------------------- */
-/* ESTILOS ESPECÍFICOS DE NOSOTROS.HTML */
-/* ----------------------------------- */
-
+/* ========================================= */
+/* 10. ESTILOS ESPECIALES (Nosotros, Info)  */
+/* ========================================= */
 .perfil-img {
     width: 150px !important; 
     height: 150px !important;
@@ -711,10 +734,6 @@ footer {
     margin: 10px auto; 
     border: 3px solid #8a2be2;
 }
-
-/* ----------------------------------- */
-/* NUEVOS ESTILOS PARA INFORMACION.HTML */
-/* ----------------------------------- */
 
 .info-grid {
     display: grid;
@@ -751,29 +770,9 @@ footer {
     line-height: 1.6;
 }
 
-.steps-list {
-    list-style: none;
-    padding: 0;
-}
-
-.steps-list li {
-    background-color: #1a1a1a;
-    margin-bottom: 10px;
-    padding: 15px;
-    border-left: 5px solid #8a2be2;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.steps-list li strong {
-    color: #ffffff;
-}
-
-/* ----------------------------------- */
-/* MEDIA QUERIES (RESPONSIVIDAD/BOOSTER) */
-/* ----------------------------------- */
-
-/* --- Estilos para Tablet (máximo 900px) --- */
+/* ========================================= */
+/* 11. MEDIA QUERIES (RESPONSIVIDAD)        */
+/* ========================================= */
 @media (max-width: 900px) {
     nav {
         display: none;
@@ -794,7 +793,6 @@ footer {
     }
 }
 
-/* --- Estilos para Móvil (máximo 600px) --- */
 @media (max-width: 600px) {
     .secondary-nav {
         display: none;
@@ -809,7 +807,6 @@ footer {
         font-size: 1em;
     }
     
-    /* Ajuste para imágenes de juego en móvil */
     .game-card img {
         height: 120px;
     }
@@ -818,9 +815,8 @@ footer {
         padding: 10px 3%;
     }
 
-    /* Ajuste para carrito en móvil */
     .cart-item > div {
-        flex: 1 1 0; 
+        flex: 1 1 0;
         text-align: left !important;
     }
 

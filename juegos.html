@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gaming Utopia - Juegos</title>
+    <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+        crossorigin="anonymous"
+    >
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -21,9 +28,16 @@
                 </ul>
             </nav>
             <div class="auth-buttons">
+                <div class="cart-icon" id="cartIcon">
+                    <a href="carrito.html">
+                        <span style="font-size: 30px; line-height: 1;">🛒</span>
+                        <span id="cartCount">0</span> 
+                    </a>
+                </div>
+                
                 <button id="loginBtn" class="login-button">LOGIN</button>
                 <div class="profile-icon">
-                    <img src="https://via.placeholder.com/30x30/8a2be2/ffffff?text=👤" alt="Profile Icon" id="profileIcon">
+                    <img src="img/perfil.jpg" alt="Profile Icon" id="profileIcon">
                 </div>
             </div>
         </div>
@@ -70,118 +84,118 @@
 
             <h3 id="populares">Juegos Populares</h3>
             <div class="game-grid">
-                <div class="game-card">
+                <div class="game-card" data-id="cs2_juegos" data-name="Counter-Strike 2" data-price="0">
                     <img src="img/conter.jpg" alt="Counter-Strike 2">
                     <h3>Counter-Strike 2</h3>
                     <p>Gratis</p>
                     <p class="rating">4.4 (6 K)</p>
                 </div>
-                <div class="game-card">
+                <div class="game-card" data-id="dota2" data-name="Dota 2" data-price="119000">
                     <img src="img/dota.jpg" alt="Dota 2">
                     <h3>Dota 2</h3>
                     <p>COP 119,000</p>
                     <p class="rating">4.9 (20 K)</p>
                 </div>
-                <div class="game-card">
+                <div class="game-card" data-id="pubg" data-name="Pubg: battlegrounds" data-price="0">
                     <img src="img/pubg-battlegrounds-16v1j.jpg" alt="Pubg: battlegrounds">
                     <h3>Pubg: battlegrounds</h3>
                     <p>Gratis</p>
                     <p class="rating">4.5 (6 K)</p>
                 </div>
-                <div class="game-card">
+                <div class="game-card" data-id="arc_raiders" data-name="Arc raiders" data-price="138045">
                     <img src="img/celeste-arc-raiders-1920x1080-19847.jpg" alt="Arc raiders">
                     <h3>Arc raiders</h3>
                     <p>COP 138,045</p>
                     <p class="rating">4.9 (10 K)</p>
                 </div>
-                <div class="game-card">
+                <div class="game-card" data-id="where_winds" data-name="Where winds meet" data-price="0">
                     <img src="img/where-winds-meet-yxixg.jpg" alt="Where winds meet">
                     <h3>Where winds meet</h3>
                     <p>Gratis</p>
                     <p class="rating">4.6(1.4 K)</p>
                 </div>
-                <div class="game-card">
+                <div class="game-card" data-id="battlefield6" data-name="Battlefield 6" data-price="241157">
                     <img src="img/battlefield-6-key-2880x1800-23275.jpg" alt="Battlefield 6">
                     <h3>Battlefield 6</h3>
                     <p>COP 241,157</p>
                     <p class="rating">4.4 (6 K)</p>
                 </div>
-                <div class="game-card">
+                <div class="game-card" data-id="rust" data-name="Rust" data-price="46290">
                     <img src="img/rust-game-fvem7wo2c4nc4rf.jpg" alt="Rust">
                     <h3>Rust</h3>
-                    <p>COP 46,29</p>
+                    <p>COP 46,290</p>
                     <p class="rating">4.6 (6 K)</p>
                 </div>
-                <div class="game-card">
+                <div class="game-card" data-id="delta_force" data-name="Delta force" data-price="0">
                     <img src="img/delta-force-2025-7m.jpg" alt="Delta force">
                     <h3>Delta force</h3>
                     <p>Gratis</p>
                     <p class="rating">4.6 (12 K)</p>
                 </div>
-                </div>
+            </div>
 
             <h3 id="nuevos">Nuevos Lanzamientos</h3>
             <div class="game-grid">
-                <div class="game-card">
+                <div class="game-card" data-id="arc_raiders" data-name="Arc raiders" data-price="138045">
                     <img src="img/celeste-arc-raiders-1920x1080-19847.jpg" alt="Arc raiders">
                     <h3>Arc raiders</h3>
                     <p>COP 138,045</p>
                     <p class="rating">4.9 (10 K)</p>
                 </div>
-                <div class="game-card">
+                <div class="game-card" data-id="battlefield6" data-name="Battlefield 6" data-price="241157">
                     <img src="img/battlefield-6-key-2880x1800-23275.jpg" alt="Battlefield 6">
                     <h3>Battlefield 6</h3>
                     <p>COP 241,157</p>
                     <p class="rating">4.4 (6 K)</p>
                 </div>
-                <div class="game-card">
+                <div class="game-card" data-id="rematch" data-name="REMATCH" data-price="70000">
                     <img src="img/thumb-1920-1396986.jpg" alt="REMATCH">
                     <h3>REMATCH</h3>
                     <p>COP 70,000</p>
                     <p class="rating">4.3 (6 K)</p>
                 </div>
-                <div class="game-card">
+                <div class="game-card" data-id="dying_light_beast" data-name="Dying Light: The Beast" data-price="199900">
                     <img src="img/dying-light-the-3840x2160-18186.jpg" alt="Dying Light: The Beast">
                     <h3>Dying Light: The Beast</h3>
                     <p>COP 199,900</p>
                     <p class="rating">4.4 (6 K)</p>
                 </div>
-                <div class="game-card">
+                <div class="game-card" data-id="fc26" data-name="Ea Sports Fc 26" data-price="280608">
                     <img src="img/fc.jpeg" alt="Ea Sports Fc 26">
                     <h3>Ea Sports Fc 26</h3>
                     <p>COP 280,608</p>
                     <p class="rating">4.9 (86 K)</p>
                 </div>
-                </div>
+            </div>
 
             <h3 id="proximos">Próximos Lanzamientos</h3>
             <div class="game-grid">
-                <div class="game-card">
+                <div class="game-card" data-status="upcoming">
                     <img src="img/grand-theft-auto-vi-1920x1200-22311.jpg" alt="GTA VI">
                     <h3>Grand Theft Auto VI</h3>
                     <p>¡Próximamente!</p>
                     <p class="rating">5.0 (50 K)</p>
                 </div>
-                <div class="game-card">
+                <div class="game-card" data-status="upcoming">
                     <img src="img/NAT-Games-The-Adventures-Of-Elliot-The-Millenium-Tales-Titel.jpg" alt="The Adventures of Elliot: The Millennium Tales">
                     <h3>The Adventures of Elliot: The Millennium Tales</h3>
                     <p>¡Próximamente!</p>
                     <p class="rating">5.0 (50 K)</p>
                 </div>
-                <div class="game-card">
+                <div class="game-card" data-status="upcoming">
                     <img src="img/TLG-Launch-Trailer-Web2-1920x600-1.jpg" alt="Aphelion">
                     <h3>Aphelion</h3>
                     <p>¡Próximamente!</p>
                     <p class="rating">5.0 (50 K)</p>
                 </div>
-                <div class="game-card">
+                <div class="game-card" data-status="upcoming">
                     <img src="img/dinner-2np91.jpg" alt="Batman: el Legado del Caballero Oscuro">
                     <h3>Batman: el Legado del Caballero Oscuro</h3>
                     <p>¡Próximamente!</p>
                     <p class="rating">5.0 (50 K)</p>
                 </div>
-                </div>
-        </section>
+            </div>
+            </section>
     </main>
 
     <footer>
@@ -221,20 +235,75 @@
                 <input type="password" id="registerPassword" name="registerPassword">
                 <label for="registerPhone">Teléfono (Opcional)</label>
                 <input type="tel" id="registerPhone" name="registerPhone">
-                <button id="submitRegister">Registrarse</label>
+                <button id="submitRegister">Registrarse</button>
             </div>
         </div>
     </div>
 
-    <div id="profileModal" class="modal">
+    <div id="profileModal" class="modal"> 
         <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <h2>Perfil de Usuario</h2>
-            <p>Bienvenido, <span id="profileUsername">Invitado</span>!</p>
-            <button id="logoutBtn">Cerrar Sesión</button>
+            <span class="close-button" style="top: 15px; right: 15px;">&times;</span>
+            <h2 style="color: #8a2be2; text-align: center; border-bottom: 2px solid #4b0082; padding-bottom: 10px;">
+                <i class="bi bi-person-circle me-2"></i> PERFIL DE USUARIO
+            </h2>
+
+            <div style="text-align: center; margin: 20px 0;">
+                <div class="profile-avatar-container" style="margin-bottom: 15px;">
+                    <img id="modalProfileImage" src="img/perfil.jpg" alt="Avatar" class="profile-avatar" style="border-radius: 50%; width: 100px; height: 100px; object-fit: cover;">
+                </div>
+                
+                <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+                
+                <button id="changeImageBtn" class="login-button" style="width: 80%; margin: 10px auto; display: block; background-color: #4b0082;">
+                    <i class="bi bi-upload"></i> Cambiar Imagen
+                </button>
+
+                <h4 id="modalUsername" style="text-align: center; margin-top: 20px;">Bienvenido, <span id="profileUsername">Invitado</span>!</h4>
+                <p style="text-align: center; color: #cccccc; margin-bottom: 10px;">Gestiona tu imagen de perfil.</p>
+            </div>
+
+            <div style="border-top: 1px solid #4b0082; padding-top: 15px; display: flex; justify-content: space-between;">
+                <button 
+                    type="button" 
+                    class="login-button" 
+                    style="background-color: #1a1a1a; color: #cccccc; flex-grow: 1; margin-right: 5px;" 
+                    onclick="document.getElementById('profileModal').style.display='none'">
+                    Cerrar
+                </button>
+                <button 
+                    type="button" 
+                    class="login-button" 
+                    id="logoutBtn" 
+                    style="background-color: #dc3545; flex-grow: 1; margin-left: 5px;">
+                    Cerrar Sesión
+                </button>
+            </div>
         </div>
     </div>
 
+    <div id="addToCartModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 style="color: #8a2be2;">Agregar al Carrito</h2>
+            <p>¿Deseas agregar el siguiente juego a tu carrito de compras?</p>
+            
+            <div style="background-color: #1a1a1a; padding: 15px; border-radius: 5px; margin-bottom: 20px; text-align: center;">
+                <h4 id="modalGameName" style="color: #ffffff; margin-bottom: 5px;">[Nombre del Juego]</h4>
+                <p style="color: #cccccc;">Precio: <strong id="modalGamePrice" style="color: #8a2be2;">[Precio]</strong></p>
+            </div>
+
+            <div style="display: flex; justify-content: space-around;">
+                <button id="cancelAddToCartBtn" class="login-button" style="background-color: #4b0082; width: 45%;">Cancelar</button>
+                <button id="confirmAddToCartBtn" class="login-button" style="background-color: #8a2be2; width: 45%;">Confirmar</button>
+            </div>
+        </div>
+    </div>
+    
+    <script 
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" 
+        crossorigin="anonymous">
+    </script>
     <script src="js/script.js"></script>
 </body>
 </html>
