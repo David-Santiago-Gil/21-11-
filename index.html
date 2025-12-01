@@ -28,6 +28,12 @@
                 </ul>
             </nav>
             <div class="auth-buttons">
+                <div class="cart-icon" id="cartIcon">
+                    <a href="carrito.html">
+                        <span style="font-size: 30px; line-height: 1;">🛒</span>
+                        <span id="cartCount" style="position: absolute; top: 10px; right: 80px; background-color: #8a2be2; color: white; border-radius: 50%; padding: 0 6px; font-size: 0.8em; display: none;">0</span>
+                    </a>
+                </div>
                 <button id="loginBtn" class="login-button">LOGIN</button>
                 <div class="profile-icon">
                     <img src="img/perfil.jpg" alt="Profile Icon" id="profileIcon">
@@ -85,7 +91,6 @@
         </section>
         
         <div class="container">
-            
             <section class="game-listings">
                 <h2>Juegos Populares</h2>
                 <div class="game-grid">
@@ -118,9 +123,8 @@
                     </div>
                 </div>
             </section>
-        
         </div>
-        </main>
+    </main>
 
     <footer>
         <div class="footer-links">
@@ -136,6 +140,7 @@
         </div>
     </footer>
 
+    <!-- Modal de Autenticación -->
     <div id="authModal" class="modal">
         <div class="modal-content">
             <span class="close-button">&times;</span>
@@ -164,47 +169,39 @@
         </div>
     </div>
 
-    <div id="profileModal" class="modal"> 
-        <div class="modal-content">
-            <span class="close-button" style="top: 15px; right: 15px;">&times;</span>
-            <h2 style="color: #8a2be2; text-align: center; border-bottom: 2px solid #4b0082; padding-bottom: 10px;">
-                <i class="bi bi-person-circle me-2"></i> PERFIL DE USUARIO
-            </h2>
-
-            <div style="text-align: center; margin: 20px 0;">
-                <div class="profile-avatar-container" style="margin-bottom: 15px;">
-                    <img id="modalProfileImage" src="img/perfil.jpg" alt="Avatar" class="profile-avatar" style="border-radius: 50%; width: 100px; height: 100px; object-fit: cover;">
+    <!-- Modal de Perfil (Bootstrap) -->
+    <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark-secondary">
+                <div class="modal-header border-bottom-indigo">
+                    <h5 class="modal-title text-white" id="profileModalLabel">
+                        <i class="bi bi-person-circle me-2"></i> PERFIL DE USUARIO
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter: invert(1);"></button>
                 </div>
-                
-                <input type="file" id="imageUpload" accept="image/*" style="display: none;">
-                
-                <button id="changeImageBtn" class="login-button" style="width: 80%; margin: 10px auto; display: block; background-color: #4b0082;">
-                    <i class="bi bi-upload"></i> Cambiar Imagen
-                </button>
-
-                <h4 id="modalUsername" style="text-align: center; margin-top: 20px;">Bienvenido, <span id="profileUsername">Invitado</span>!</h4>
-                <p style="text-align: center; color: #cccccc; margin-bottom: 10px;">Gestiona tu imagen de perfil.</p>
-            </div>
-
-            <div style="border-top: 1px solid #4b0082; padding-top: 15px; display: flex; justify-content: space-between;">
-                <button 
-                    type="button" 
-                    class="login-button" 
-                    style="background-color: #1a1a1a; color: #cccccc; flex-grow: 1; margin-right: 5px;" 
-                    onclick="document.getElementById('profileModal').style.display='none'">
-                    Cerrar
-                </button>
-                <button 
-                    type="button" 
-                    class="login-button" 
-                    id="logoutBtn" 
-                    style="background-color: #dc3545; flex-grow: 1; margin-left: 5px;">
-                    Cerrar Sesión
-                </button>
+                <div class="modal-body text-center">
+                    <div class="profile-avatar-container mx-auto mb-3">
+                        <img id="modalProfileImage" src="img/perfil.jpg" alt="Avatar" class="profile-avatar mb-2" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+                        
+                        <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+                        
+                        <button class="btn btn-sm btn-outline-light-accent w-100" id="changeImageBtn" style="margin-top: 10px; background-color: #8a2be2; color: white;">
+                            <i class="bi bi-upload"></i> Cambiar Imagen
+                        </button>
+                    </div>
+                    
+                    <h4 id="modalUsername" class="text-white">Bienvenido, <span id="profileUsername">Invitado</span>!</h4>
+                    <p class="text-secondary-light">Gestiona tu imagen de perfil.</p>
+                </div>
+                <div class="modal-footer border-top-indigo">
+                    <button type="button" class="btn btn-secondary-dark" data-bs-dismiss="modal" style="background-color: #4b0082; color: white;">Cerrar</button>
+                    <button type="button" class="btn btn-danger" id="logoutBtn">Cerrar Sesión</button>
+                </div>
             </div>
         </div>
     </div>
     
+    <!-- Modal de Agregar al Carrito (MORADO) -->
     <div id="addToCartModal" class="modal">
         <div class="modal-content">
             <span class="close-button">&times;</span>

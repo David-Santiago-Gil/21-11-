@@ -6,9 +6,8 @@ const SUPPORT_FORM_ID = 'supportForm';
 
 // --- ELEMENTOS DEL DOM ---
 const authModal = document.getElementById('authModal');
-// 💡 CAMBIO CLAVE: Inicializar el modal de perfil usando la clase Bootstrap
+// 💡 MODAL DE PERFIL: Solo Bootstrap, sin lógica personalizada
 const profileModalElement = document.getElementById('profileModal');
-const profileModal = profileModalElement ? new bootstrap.Modal(profileModalElement) : null; 
 
 const loginBtn = document.getElementById('loginBtn');
 const profileUsernameSpan = document.getElementById('profileUsername');
@@ -22,7 +21,7 @@ const submitLoginBtn = document.getElementById('submitLogin');
 const submitRegisterBtn = document.getElementById('submitRegister');
 const logoutBtn = document.getElementById('logoutBtn');
 
-// 💡 NUEVOS ELEMENTOS para el Modal de Perfil mejorado
+// Elementos del modal de perfil
 const modalProfileImage = document.getElementById('modalProfileImage');
 const imageUpload = document.getElementById('imageUpload');
 const changeImageBtn = document.getElementById('changeImageBtn');
@@ -45,11 +44,6 @@ let currentProduct = null;
 
 // Campos de Soporte
 const supportForm = document.getElementById(SUPPORT_FORM_ID);
-const nameInput = document.getElementById('supportName');
-const emailInput = document.getElementById('supportEmail');
-const subjectInput = document.getElementById('supportSubject');
-const messageInput = document.getElementById('supportMessage');
-const resetSupportBtn = document.getElementById('resetSupportBtn');
 
 
 // --- 1. GESTIÓN DE LOCAL STORAGE Y UI (Autenticación) ---
@@ -95,10 +89,6 @@ function setCurrentUser(user) {
     }
 }
 
-/**
- * Función clave para mostrar/ocultar el ícono de perfil y el botón de login.
- * Ahora también carga la imagen de perfil guardada.
- */
 function updateAuthUI() {
     const user = getCurrentUser();
     const profileIconContainer = document.querySelector('.profile-icon'); 
@@ -110,8 +100,6 @@ function updateAuthUI() {
         if (profileIconContainer) profileIconContainer.style.display = 'block'; 
         if (profileUsernameSpan) profileUsernameSpan.textContent = user.username || user.email;
 
-        // 💡 Lógica para cargar la imagen de perfil:
-        // Si hay una imagen guardada, úsala; si no, usa la imagen por defecto.
         const userImage = user.profileImage || 'img/perfil.jpg';
         if (profileIconImg) profileIconImg.src = userImage;
         if (modalProfileImage) modalProfileImage.src = userImage;
@@ -124,8 +112,9 @@ function updateAuthUI() {
 }
 
 
-// --- 2. LÓGICA DE MODALES Y PESTAÑAS (Autenticación) ---
+// --- 2. LÓGICA DE MODALES ---
 
+// Modal de Login/Registro (PERSONALIZADO)
 if (loginBtn) {
     loginBtn.onclick = () => {
         if (authModal) authModal.style.display = 'block';
@@ -133,32 +122,39 @@ if (loginBtn) {
     };
 }
 
-// Evento click para el contenedor del icono de perfil (¡La foto!)
+// 🔧 MODAL DE PERFIL: SOLO BOOTSTRAP - Sin lógica personalizada
 const profileIconContainer = document.querySelector('.profile-icon');
-if (profileIconContainer) {
+if (profileIconContainer && profileModalElement) {
     profileIconContainer.onclick = () => {
-        // 💡 Usamos el método show() de la clase Bootstrap Modal
-        if (profileModal) profileModal.show();
+        // Usar Bootstrap Modal directamente
+        const modal = new bootstrap.Modal(profileModalElement);
+        modal.show();
     };
 }
 
+// Cerrar modal de autenticación personalizado
 document.querySelectorAll('.close-button').forEach(button => {
     button.onclick = function() {
-        this.closest('.modal').style.display = 'none';
+        const modalParent = this.closest('.modal');
+        // Solo cerrar modales personalizados, NO el de Bootstrap
+        if (modalParent && !modalParent.classList.contains('fade')) {
+            modalParent.style.display = 'none';
+        }
     };
 });
 
+// Cerrar modal al hacer clic fuera (solo modales personalizados)
 window.onclick = function(event) {
     if (event.target == authModal) {
         authModal.style.display = 'none';
     }
-    // 💡 Bootstrap maneja el cierre del modal de perfil automáticamente
     if (event.target == addToCartModal) { 
         addToCartModal.style.display = 'none';
         currentProduct = null;
     }
 };
 
+// Pestañas de Login/Registro
 if (loginTab && registerTab) {
     loginTab.onclick = () => {
         loginTab.classList.add('active');
@@ -179,16 +175,13 @@ if (loginTab && registerTab) {
 // --- LÓGICA DE CAMBIO DE IMAGEN DE PERFIL ---
 // ----------------------------------------------
 
-// 1. Función para guardar la URL de la imagen en localStorage
 function saveNewProfileImage(imageUrl) {
     const currentUser = getCurrentUser();
     if (currentUser) {
         currentUser.profileImage = imageUrl;
-        setCurrentUser(currentUser); // Esto actualiza el usuario actual en localStorage
+        setCurrentUser(currentUser);
 
-        // También actualizamos el array principal de usuarios
         const users = loadUsers();
-        // Usamos el email para encontrar el usuario, que debe ser único.
         const userIndex = users.findIndex(u => u.email === currentUser.email);
 
         if (userIndex !== -1) {
@@ -198,20 +191,17 @@ function saveNewProfileImage(imageUrl) {
     }
 }
 
-// 2. Manejador de clic en el botón "Cambiar Imagen"
 if (changeImageBtn && imageUpload) {
     changeImageBtn.onclick = () => {
-        imageUpload.click(); // Simula el clic en el input de tipo file
+        imageUpload.click();
     };
 }
 
-// 3. Manejador del cambio de archivo
 if (imageUpload) {
     imageUpload.onchange = (e) => {
         const file = e.target.files[0];
         if (file) {
-            // Se recomienda un límite de tamaño para evitar errores en localStorage
-            if (file.size > 5 * 1024 * 1024) { // 5MB limit
+            if (file.size > 5 * 1024 * 1024) {
                 alert("El archivo es demasiado grande. Por favor, selecciona una imagen menor a 5MB.");
                 return;
             }
@@ -221,16 +211,13 @@ if (imageUpload) {
             reader.onload = function(event) {
                 const newImageUrl = event.target.result;
 
-                // Actualizar la UI inmediatamente
                 if (modalProfileImage) modalProfileImage.src = newImageUrl;
                 const profileIconImg = document.querySelector('.profile-icon img');
                 if (profileIconImg) profileIconImg.src = newImageUrl;
 
-                // Guardar la nueva URL de la imagen en el usuario logueado
                 saveNewProfileImage(newImageUrl);
             };
 
-            // Lee el archivo como una URL de datos (string largo) para guardarlo en localStorage
             reader.readAsDataURL(file); 
         }
     };
@@ -246,23 +233,17 @@ function isValidEmail(email) {
     return re.test(String(email).toLowerCase());
 }
 
-/**
- * Función que valida el registro y muestra los mensajes de error en los <span> del HTML.
- */
 function validateRegistration() {
     let isValid = true;
     const users = loadUsers();
     
-    // Función para mostrar el mensaje de error en el span correcto
     function showRegisterError(id, message) {
         const errorElement = document.getElementById(id);
         if(errorElement) errorElement.textContent = message;
     }
     
-    // Limpiar todos los mensajes de error al inicio
     document.querySelectorAll('#registerForm .error-message').forEach(el => el.textContent = '');
 
-    // 1. Validación de Usuario
     if (!registerUserInput || registerUserInput.value.trim().length < 4) {
         showRegisterError('errorRegisterUser', 'El usuario debe tener al menos 4 caracteres.');
         isValid = false;
@@ -271,7 +252,6 @@ function validateRegistration() {
         isValid = false;
     }
 
-    // 2. Validación de Correo
     if (!registerEmailInput || !isValidEmail(registerEmailInput.value)) {
         showRegisterError('errorRegisterEmail', 'Formato de correo inválido.');
         isValid = false;
@@ -280,13 +260,11 @@ function validateRegistration() {
         isValid = false;
     }
 
-    // 3. Validación de Contraseña
     if (!registerPasswordInput || registerPasswordInput.value.length < 6) {
         showRegisterError('errorRegisterPassword', 'La contraseña debe tener al menos 6 caracteres.');
         isValid = false;
     }
 
-    // 4. Validación de Teléfono (Opcional)
     if (registerPhoneInput && registerPhoneInput.value.trim() !== '' && !/^\d{7,15}$/.test(registerPhoneInput.value.trim())) {
         showRegisterError('errorRegisterPhone', 'El formato del teléfono es inválido.');
         isValid = false;
@@ -295,7 +273,6 @@ function validateRegistration() {
     return isValid;
 }
 
-// Lógica de REGISTRO (lleva a la pestaña de login al finalizar)
 if (submitRegisterBtn && registerUserInput && registerEmailInput && registerPasswordInput) {
     submitRegisterBtn.onclick = (e) => {
         e.preventDefault();
@@ -306,7 +283,7 @@ if (submitRegisterBtn && registerUserInput && registerEmailInput && registerPass
                 email: registerEmailInput.value,
                 password: registerPasswordInput.value, 
                 phone: registerPhoneInput ? registerPhoneInput.value : null,
-                profileImage: null // 💡 Inicializar el campo de imagen de perfil
+                profileImage: null
             };
 
             const users = loadUsers();
@@ -318,7 +295,6 @@ if (submitRegisterBtn && registerUserInput && registerEmailInput && registerPass
             if (authModal) authModal.style.display = 'block'; 
             alert('✅ Registro exitoso. Por favor, inicia sesión con tu nueva cuenta.');
             
-            // Lógica para cambiar a la pestaña de Login automáticamente
             if (loginTab) loginTab.click();
 
         } else {
@@ -327,8 +303,6 @@ if (submitRegisterBtn && registerUserInput && registerEmailInput && registerPass
     };
 }
 
-
-// LOGIN
 if (submitLoginBtn) {
     submitLoginBtn.onclick = (e) => {
         e.preventDefault();
@@ -353,19 +327,20 @@ if (submitLoginBtn) {
     };
 }
 
-// LOGOUT
 if (logoutBtn) {
     logoutBtn.onclick = () => {
         setCurrentUser(null);
-        // 💡 Usamos el método hide() de la clase Bootstrap Modal
-        if (profileModal) profileModal.hide(); 
+        // Cerrar el modal de Bootstrap correctamente
+        const modalInstance = bootstrap.Modal.getInstance(profileModalElement);
+        if (modalInstance) {
+            modalInstance.hide();
+        }
         alert('Sesión cerrada.');
-        // Recargar la página o redirigir al inicio después de cerrar sesión
         window.location.reload(); 
     };
 }
 
-// --- 4. LÓGICA DE SOPORTE Y VALIDACIÓN (Para soporte.html) ---
+// --- 4. LÓGICA DE SOPORTE Y VALIDACIÓN ---
 
 function validateSupportForm(form) {
     let isValid = true;
@@ -376,28 +351,24 @@ function validateSupportForm(form) {
     const subjectInput = document.getElementById('supportSubject');
     const messageInput = document.getElementById('supportMessage');
     
-    // Validación de Nombre (mínimo 3 caracteres)
     if (!nameInput || nameInput.value.trim().length < 3) {
         const errorName = document.getElementById('errorName');
         if (errorName) errorName.textContent = 'El nombre es obligatorio y debe tener al menos 3 caracteres.';
         isValid = false;
     }
     
-    // Validación de Email (Formato)
     if (!emailInput || !isValidEmail(emailInput.value)) {
         const errorEmail = document.getElementById('errorEmail');
         if (errorEmail) errorEmail.textContent = 'Formato de correo inválido.';
         isValid = false;
     }
     
-    // Validación de Asunto (mínimo 5 caracteres)
     if (!subjectInput || subjectInput.value.trim().length < 5) {
         const errorSubject = document.getElementById('errorSubject');
         if (errorSubject) errorSubject.textContent = 'El asunto es obligatorio y debe tener al menos 5 caracteres.';
         isValid = false;
     }
     
-    // Validación de Mensaje (mínimo 10 caracteres)
     if (!messageInput || messageInput.value.trim().length < 10) {
         const errorMessage = document.getElementById('errorMessage');
         if (errorMessage) errorMessage.textContent = 'El mensaje es obligatorio y debe tener al menos 10 caracteres.';
@@ -415,16 +386,15 @@ if (supportForm) {
         if (formStatus) formStatus.textContent = ''; 
 
         if (validateSupportForm(this)) {
-            // ÉXITO: Limpiar campos y mostrar mensaje
             if (formStatus) formStatus.textContent = '✅ Su solicitud ha sido enviada con éxito. Le responderemos pronto.';
             this.reset();
         } else {
-            // ERROR: Mostrar mensaje, mantener campos llenos para corrección
             if (formStatus) formStatus.textContent = '❌ Por favor, corrija los errores en el formulario.';
         }
     });
 }
 
+const resetSupportBtn = document.getElementById('resetSupportBtn');
 if (resetSupportBtn) {
     resetSupportBtn.addEventListener('click', function() {
         document.querySelectorAll('#supportForm .error-message').forEach(el => el.textContent = '');
@@ -482,7 +452,7 @@ function handleSearch() {
 }
 
 
-// --- 6. LÓGICA DEL CARRUSEL (Para index.html) ---
+// --- 6. LÓGICA DEL CARRUSEL ---
 const carousel = document.getElementById('imageCarousel');
 const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
@@ -514,9 +484,7 @@ if (carousel && prevBtn && nextBtn) {
 }
 
 
-// ----------------------------------------------
-// --- 7. LÓGICA DEL CARRITO DE COMPRAS ---
-// ----------------------------------------------
+// --- 7. LÓGICA DEL CARRITO ---
 
 function loadCart() {
     try {
@@ -539,19 +507,16 @@ function saveCart(cart) {
 
 function updateCartCount() {
     const cart = loadCart();
-    // Sumamos las cantidades de cada item. Si la cantidad no existe, asumimos 1.
     const count = cart.reduce((total, item) => total + (item.quantity || 1), 0);
     
     const cartCountIndicator = document.getElementById('cartCount');
     if (cartCountIndicator) {
         cartCountIndicator.textContent = count;
-        // Mostrar u ocultar el círculo del contador
         cartCountIndicator.style.display = count > 0 ? 'inline-block' : 'none'; 
     }
 }
 
 function addGameToCart(game) {
-    // VERIFICACIÓN DE SEGURIDAD: Previene añadir items si no hay sesión.
     if (!getCurrentUser()) {
         console.error("Error de lógica: Intento de agregar al carrito sin sesión.");
         alert('🚨 Error: No tienes permiso para comprar. Debes iniciar sesión.');
@@ -575,34 +540,27 @@ function addGameToCart(game) {
 }
 
 
-// ----------------------------------------------
 // --- 8. MANEJO DE EVENTOS DE TIENDA Y MODAL ---
-// ----------------------------------------------
 
 function formatPrice(price) {
     const value = parseFloat(price);
     if (value === 0) {
         return 'Gratis';
     }
-    // Asegura el formato de moneda Colombiana
     return `COP ${value.toLocaleString('es-CO')}`;
 }
 
-// Detección de clicks en las tarjetas de juego (game-card)
 if (document.querySelector('.game-listings')) {
     document.querySelector('.game-listings').addEventListener('click', (e) => {
         const card = e.target.closest('.game-card');
 
         if (card && addToCartModal) {
             
-            // 🆕 LÓGICA AÑADIDA: Bloquear la compra para Próximos Lanzamientos
             if (card.getAttribute('data-status') === 'upcoming') {
                 alert('🚧 Este juego es un Próximo Lanzamiento y actualmente no está disponible para compra. ¡Vuelve pronto!');
-                return; // Detiene la ejecución para esta tarjeta
+                return;
             }
-            // 🆕 FIN DE LÓGICA AÑADIDA
 
-            // VERIFICACIÓN DE SESIÓN (Detiene la apertura del modal)
             if (!getCurrentUser()) {
                 alert('🚨 Debes iniciar sesión para agregar productos al carrito.');
                 if (authModal) {
@@ -627,7 +585,6 @@ if (document.querySelector('.game-listings')) {
     });
 }
 
-// Evento de confirmación del modal
 if (confirmAddToCartBtn) {
     confirmAddToCartBtn.onclick = () => {
         if (currentProduct) {
@@ -638,7 +595,6 @@ if (confirmAddToCartBtn) {
     };
 }
 
-// Evento de cancelación del modal
 if (cancelAddToCartBtn) {
     cancelAddToCartBtn.onclick = () => {
         addToCartModal.style.display = 'none';
@@ -647,16 +603,9 @@ if (cancelAddToCartBtn) {
 }
 
 
-// ----------------------------------------------
-// --- 9. RENDERIZADO DEL CARRITO (Para carrito.html) ---
-// ----------------------------------------------
+// --- 9. RENDERIZADO DEL CARRITO ---
 
-/**
- * Función clave para mostrar el contenido del carrito en carrito.html
- * Si esta función no se ejecuta o no encuentra los elementos HTML, el carrito aparecerá vacío.
- */
 function renderCartItems() {
-    // Elementos HTML que DEBEN existir en carrito.html
     const container = document.getElementById('cartItemsContainer');
     const totalSpan = document.getElementById('cartTotal');
 
@@ -720,12 +669,9 @@ function removeItemFromCart(e) {
 }
 
 
-// 10. INICIALIZACIÓN (Se ejecuta al cargar cualquier página)
+// --- 10. INICIALIZACIÓN ---
 window.onload = function() {
-    // 1. Actualiza la UI de Login/Perfil en todas las páginas.
     updateAuthUI();
-    
-    // 2. Actualiza el contador del carrito en todas las páginas.
     updateCartCount();
 
     function resetSupportForm() {
@@ -739,21 +685,17 @@ window.onload = function() {
         }
     }
     
-    // Si la página actual es soporte.html
     if (window.location.pathname.endsWith('soporte.html')) {
         resetSupportForm();
     }
 
-    // Si la página actual es carrito.html, renderiza los items (SOLUCIÓN AL CARRITO)
     if (window.location.pathname.endsWith('carrito.html')) {
         renderCartItems();
     }
 
-    // Manejador para el botón de pago (simulado)
     const checkoutBtn = document.getElementById('checkoutBtn');
     if (checkoutBtn) {
         checkoutBtn.onclick = () => {
-             // Verificar la sesión también en el checkout
             if (!getCurrentUser()) {
                 alert('🚨 Debes iniciar sesión para finalizar la compra.');
                 if (authModal) authModal.style.display = 'block';
@@ -763,8 +705,8 @@ window.onload = function() {
             const total = loadCart().reduce((sum, item) => sum + item.price * (item.quantity || 1), 0);
             if (total > 0) {
                 alert(`Procesando pago de COP ${total.toLocaleString('es-CO')}. ¡Gracias por tu compra!`);
-                saveCart([]); // Vacía el carrito
-                renderCartItems(); // Actualiza la vista
+                saveCart([]);
+                renderCartItems();
             } else {
                 alert('El carrito está vacío. ¡Agrega algunos juegos primero!');
             }

@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gaming Utopia - Soporte (Contacto)</title>
+    <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+        crossorigin="anonymous"
+    >
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -21,9 +28,15 @@
                 </ul>
             </nav>
             <div class="auth-buttons">
+                <div class="cart-icon" id="cartIcon">
+                    <a href="carrito.html">
+                        <span style="font-size: 30px; line-height: 1;">🛒</span>
+                        <span id="cartCount" style="position: absolute; top: 10px; right: 80px; background-color: #8a2be2; color: white; border-radius: 50%; padding: 0 6px; font-size: 0.8em; display: none;">0</span>
+                    </a>
+                </div>
                 <button id="loginBtn" class="login-button">LOGIN</button>
                 <div class="profile-icon">
-                    <img src="https://via.placeholder.com/30x30/8a2be2/ffffff?text=👤" alt="Profile Icon" id="profileIcon">
+                    <img src="img/perfil.jpg" alt="Profile Icon" id="profileIcon">
                 </div>
             </div>
         </div>
@@ -112,6 +125,7 @@
         </div>
     </footer>
 
+    <!-- Modal de Autenticación -->
     <div id="authModal" class="modal">
         <div class="modal-content">
             <span class="close-button">&times;</span>
@@ -140,27 +154,43 @@
         </div>
     </div>
 
-    <div id="profileModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <h2>Perfil de Usuario</h2>
-            <p>Bienvenido, <span id="profileUsername">Invitado</span>!</p>
-            <button id="logoutBtn">Cerrar Sesión</button>
-        </div>
-    </div>
-
-    <div id="addToCartModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <h3>Añadir al carrito</h3>
-            <p>¿Quieres añadir **<span id="modalGameName"></span>** por **<span id="modalGamePrice"></span>** a tu carrito?</p>
-            <div style="display: flex; justify-content: space-around; margin-top: 20px;">
-                <button id="confirmAddToCartBtn" class="submit-button">Confirmar</button>
-                <button id="cancelAddToCartBtn" class="login-button" style="background-color: #555;">Cancelar</button>
+    <!-- Modal de Perfil (Bootstrap) -->
+    <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark-secondary">
+                <div class="modal-header border-bottom-indigo">
+                    <h5 class="modal-title text-white" id="profileModalLabel">
+                        <i class="bi bi-person-circle me-2"></i> PERFIL DE USUARIO
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter: invert(1);"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="profile-avatar-container mx-auto mb-3">
+                        <img id="modalProfileImage" src="img/perfil.jpg" alt="Avatar" class="profile-avatar mb-2" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+                        
+                        <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+                        
+                        <button class="btn btn-sm btn-outline-light-accent w-100" id="changeImageBtn" style="margin-top: 10px; background-color: #8a2be2; color: white;">
+                            <i class="bi bi-upload"></i> Cambiar Imagen
+                        </button>
+                    </div>
+                    
+                    <h4 id="modalUsername" class="text-white">Bienvenido, <span id="profileUsername">Invitado</span>!</h4>
+                    <p class="text-secondary-light">Gestiona tu imagen de perfil.</p>
+                </div>
+                <div class="modal-footer border-top-indigo">
+                    <button type="button" class="btn btn-secondary-dark" data-bs-dismiss="modal" style="background-color: #4b0082; color: white;">Cerrar</button>
+                    <button type="button" class="btn btn-danger" id="logoutBtn">Cerrar Sesión</button>
+                </div>
             </div>
         </div>
     </div>
 
+    <script 
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" 
+        crossorigin="anonymous">
+    </script>
     <script src="js/script.js"></script>
 </body>
 </html>

@@ -1,180 +1,192 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gaming Utopia - Catálogo y Colecciones</title>
-    <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Utopia - Catálogo y Colecciones</title>
     <link 
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
         rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
         crossorigin="anonymous"
     >
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <div class="top-bar">
-            <div class="logo">
-                <a href="index.html"><img src="img/logo.png" alt="Gaming Utopia Logo"></a>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Inicio</a></li>
-                    <li><a href="tienda.html">Tienda</a></li>
-                    <li><a href="informacion.html">Información</a></li>
-                    <li><a href="nosotros.html">Nosotros</a></li>
-                </ul>
-            </nav>
-            <div class="auth-buttons">
-                <button id="loginBtn" class="login-button">LOGIN</button>
-                <div class="profile-icon" style="display: none;"> 
-                    <img src="img/perfil.jpg" alt="Profile Icon"> 
-                </div>
-            </div>
-        </div>
-        <div class="secondary-nav">
-            <div class="dropdown">
-                <a href="#" class="dropbtn">Categorías ▼</a>
-                <div class="dropdown-content">
-                    <a href="categorias.html#accion">Acción</a>
-                    <a href="categorias.html#aventura">Aventura</a>
-                    <a href="categorias.html#rpg">RPG</a>
-                    <a href="categorias.html#deportes">Deportes</a>
-                </div>
-            </div>
-            <div class="dropdown">
-                <a href="#" class="dropbtn">Juegos ▼</a>
-                <div class="dropdown-content">
-                    <a href="juegos.html#populares">Populares</a>
-                    <a href="juegos.html#nuevos">Nuevos Lanzamientos</a>
-                    <a href="juegos.html#proximos">Próximos</a>
-                </div>
-            </div>
-            <div class="dropdown">
-                <a href="#" class="dropbtn">Colección ▼</a>
-                <div class="dropdown-content">
-                    <a href="catalogo.html#ofertas">Ofertas</a>
-                    <a href="catalogo.html#free-to-play">Free to Play</a>
-                    <a href="catalogo.html#exclusivos">Exclusivos</a>
-                </div>
-            </div>
-            <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="Buscar">
-                <button id="searchBtn">Buscar</button>
-            </div>
-        </div>
-    </header>
+    <header>
+        <div class="top-bar">
+            <div class="logo">
+                <a href="index.html"><img src="img/logo.png" alt="Gaming Utopia Logo"></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="tienda.html">Tienda</a></li>
+                    <li><a href="informacion.html">Información</a></li>
+                    <li><a href="nosotros.html">Nosotros</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <div class="cart-icon" id="cartIcon">
+                    <a href="carrito.html">
+                        <span style="font-size: 30px; line-height: 1;">🛒</span>
+                        <span id="cartCount" style="position: absolute; top: 10px; right: 80px; background-color: #8a2be2; color: white; border-radius: 50%; padding: 0 6px; font-size: 0.8em; display: none;">0</span>
+                    </a>
+                </div>
+                <button id="loginBtn" class="login-button">LOGIN</button>
+                <div class="profile-icon">
+                    <img src="img/perfil.jpg" alt="Profile Icon" id="profileIcon">
+                </div>
+            </div>
+        </div>
+        <div class="secondary-nav">
+            <div class="dropdown">
+                <a href="#" class="dropbtn">Categorías ▼</a>
+                <div class="dropdown-content">
+                    <a href="categorias.html#accion">Acción</a>
+                    <a href="categorias.html#aventura">Aventura</a>
+                    <a href="categorias.html#rpg">RPG</a>
+                    <a href="categorias.html#deportes">Deportes</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#" class="dropbtn">Juegos ▼</a>
+                <div class="dropdown-content">
+                    <a href="juegos.html#populares">Populares</a>
+                    <a href="juegos.html#nuevos">Nuevos Lanzamientos</a>
+                    <a href="juegos.html#proximos">Próximos</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#" class="dropbtn">Colección ▼</a>
+                <div class="dropdown-content">
+                    <a href="catalogo.html#ofertas">Ofertas</a>
+                    <a href="catalogo.html#free-to-play">Free to Play</a>
+                    <a href="catalogo.html#exclusivos">Exclusivos</a>
+                </div>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Buscar">
+                <button id="searchBtn">Buscar</button>
+            </div>
+        </div>
+    </header>
 
-    <main>
-        <section class="hero-section">
-            <img src="img/cat.jpg" alt="Banner de Catálogo" class="hero-image">
-        </section>
+    <main>
+        <section class="hero-section">
+            <img src="img/cat.jpg" alt="Banner de Catálogo" class="hero-image">
+        </section>
 
-        <section class="game-listings">
-            <h2>Colecciones Especiales y Ofertas</h2>
+        <section class="game-listings">
+            <h2>Colecciones Especiales y Ofertas</h2>
 
-            <h3 id="ofertas">Ofertas Irresistibles de la Semana</h3>
-            <p>Los mejores juegos con descuentos que no puedes dejar pasar. ¡Ahorra hasta un 75%!</p>
-            
+            <h3 id="ofertas">Ofertas Irresistibles de la Semana</h3>
+            <p>Los mejores juegos con descuentos que no puedes dejar pasar. ¡Ahorra hasta un 75%!</p>
+            
             <div id="ofertaDinamicaGrid" style="width: 100%; display: flex; justify-content: center; margin-top: 20px;">
-                <p style="text-align: center; padding: 20px; color: #ccc;">Cargando la oferta del día...</p>
-            </div>
-                        <h3 id="free-to-play">Juegos Gratuitos (Free to Play)</h3>
-            <p>Sumérgete en la acción o estrategia sin costo inicial. ¡Descarga y juega!</p>
-            <div class="game-grid">
-                                <div class="game-card" data-id="f2p-leyendas" data-name="Leyendas de la Arena Online" data-price="0">
-                    <img src="img/ps-f2p-val-console-launch-16x9.jpg" alt="F2P 1">
-                    <h3>Leyendas de la Arena Online</h3>
-                    <p>Acceso completo y gratuito.</p>
-                    <p class="rating">Jugar Ahora</p>
-                </div>
-                                <div class="game-card" data-id="f2p-estrategia" data-name="Estrategia Galáctica" data-price="0">
-                    <img src="img/fornite.jpeg" alt="F2P 2">
-                    <h3>Estrategia Galáctica</h3>
-                    <p>Acceso completo y gratuito.</p>
-                    <p class="rating">Jugar Ahora</p>
-                </div>
-                                <div class="game-card" data-id="f2p-lol" data-name="League Of Legends" data-price="0">
-                    <img src="img/lol.jpeg" alt="F2P 3">
-                    <h3>League Of Legends</h3>
-                    <p>Acceso completo y gratuito.</p>
-                    <p class="rating">Jugar Ahora</p>
-                </div>
-                                <div class="game-card" data-id="f2p-cs2" data-name="Counter-Strike 2" data-price="0">
-                    <img src="img/conter.jpg" alt="F2P 4">
-                    <h3>Counter-Strike 2</h3>
-                    <p>Acceso completo y gratuito.</p>
-                    <p class="rating">Jugar Ahora</p>
-                </div>
-            </div>
+                <p style="text-align: center; padding: 20px; color: #ccc;">Cargando la oferta del día...</p>
+            </div>
 
-            <h3 id="exclusivos">Exclusivos de la Plataforma</h3>
-            <p>Títulos que solo encontrarás en Gaming Utopia, desarrollados por nuestros estudios.</p>
-            <div class="game-grid">
-                                <div class="game-card" data-id="ex-aether" data-name="Aether Shapers: The Chrono-Fracture" data-price="180000">
-                    <img src="img/Aether Shapers The Chrono-Fracture.png" alt="Exclusivo 1">
-                    <h3>Aether Shapers: The Chrono-Fracture</h3>
-                    <p>Exclusivo - RPG de Acción</p>
-                    <p class="rating">COP 180,000</p>
-                </div>
-                                <div class="game-card" data-id="ex-lumenfall" data-name="Lumenfall Echoes of the Deep" data-price="80000">
-                    <img src="img/Lumenfall Echoes of the Deep.png" alt="Exclusivo 1">
-                    <h3>Lumenfall Echoes of the Deep</h3>
-                    <p>Exclusivo - RPG de Acción</p>
-                    <p class="rating">COP 80,000</p>
-                </div>
-            </div>
-        </section>
-    </main>
+            <h3 id="free-to-play">Juegos Gratuitos (Free to Play)</h3>
+            <p>Sumérgete en la acción o estrategia sin costo inicial. ¡Descarga y juega!</p>
+            <div class="game-grid">
+                <div class="game-card" data-id="f2p-leyendas" data-name="Leyendas de la Arena Online" data-price="0">
+                    <img src="img/ps-f2p-val-console-launch-16x9.jpg" alt="F2P 1">
+                    <h3>Leyendas de la Arena Online</h3>
+                    <p>Acceso completo y gratuito.</p>
+                    <p class="rating">Jugar Ahora</p>
+                </div>
+                <div class="game-card" data-id="f2p-estrategia" data-name="Estrategia Galáctica" data-price="0">
+                    <img src="img/fornite.jpeg" alt="F2P 2">
+                    <h3>Estrategia Galáctica</h3>
+                    <p>Acceso completo y gratuito.</p>
+                    <p class="rating">Jugar Ahora</p>
+                </div>
+                <div class="game-card" data-id="f2p-lol" data-name="League Of Legends" data-price="0">
+                    <img src="img/lol.jpeg" alt="F2P 3">
+                    <h3>League Of Legends</h3>
+                    <p>Acceso completo y gratuito.</p>
+                    <p class="rating">Jugar Ahora</p>
+                </div>
+                <div class="game-card" data-id="f2p-cs2" data-name="Counter-Strike 2" data-price="0">
+                    <img src="img/conter.jpg" alt="F2P 4">
+                    <h3>Counter-Strike 2</h3>
+                    <p>Acceso completo y gratuito.</p>
+                    <p class="rating">Jugar Ahora</p>
+                </div>
+            </div>
 
-    <footer>
-        <div class="footer-links">
-            <a href="juegos.html">JUEGOS</a>
-            <a href="soporte.html">SOPORTE</a>
-            <a href="compañia.html">COMPAÑÍA</a>
-        </div>
-        <div class="social-media">
-            <a href="https://www.facebook.com/profile.php?id=61583972560512" target="_blank"><img src="img/facebook.png" alt="Facebook"></a>
-            <a href="https://x.com/Gamer_Nexus_inf" target="_blank"><img src="img/twitter.png" alt="Twitter"></a>
-            <a href="https://www.instagram.com/gamernexus7/" target="_blank"><img src="img/instagram.png" alt="Instagram"></a>
-            <a href="https://www.youtube.com/channel/UClqxaJ3XkmHXd8nk8LJYFag" target="_blank"><img src="img/youtube.png" alt="YouTube"></a>
-        </div>
-    </footer>
+            <h3 id="exclusivos">Exclusivos de la Plataforma</h3>
+            <p>Títulos que solo encontrarás en Gaming Utopia, desarrollados por nuestros estudios.</p>
+            <div class="game-grid">
+                <div class="game-card" data-id="ex-aether" data-name="Aether Shapers: The Chrono-Fracture" data-price="180000">
+                    <img src="img/Aether Shapers The Chrono-Fracture.png" alt="Exclusivo 1">
+                    <h3>Aether Shapers: The Chrono-Fracture</h3>
+                    <p>Exclusivo - RPG de Acción</p>
+                    <p class="rating">COP 180,000</p>
+                </div>
+                <div class="game-card" data-id="ex-lumenfall" data-name="Lumenfall Echoes of the Deep" data-price="80000">
+                    <img src="img/Lumenfall Echoes of the Deep.png" alt="Exclusivo 2">
+                    <h3>Lumenfall Echoes of the Deep</h3>
+                    <p>Exclusivo - RPG de Acción</p>
+                    <p class="rating">COP 80,000</p>
+                </div>
+            </div>
+        </section>
+    </main>
 
-        <div id="authModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <div class="auth-tabs">
-                <button id="loginTab" class="auth-tab active">Iniciar Sesión</button>
-                <button id="registerTab" class="auth-tab">Registrarse</button>
-            </div>
-            <div id="loginForm" class="auth-form active">
-                <label for="loginUserEmail">Usuario o Correo</label>
-                <input type="text" id="loginUserEmail" name="loginUserEmail">
-                <label for="loginPassword">Contraseña</label>
-                <input type="password" id="loginPassword" name="loginPassword">
-                <button id="submitLogin">Iniciar Sesión</button>
-            </div>
-            <div id="registerForm" class="auth-form">
-                <label for="registerUser">Usuario</label>
-                <input type="text" id="registerUser" name="registerUser">
-                <label for="registerEmail">Correo</label>
-                <input type="email" id="registerEmail" name="registerEmail">
-                <label for="registerPassword">Contraseña</label>
-                <input type="password" id="registerPassword" name="registerPassword">
-                <label for="registerPhone">Teléfono (Opcional)</label>
-                <input type="tel" id="registerPhone" name="registerPhone">
-                <button id="submitRegister">Registrarse</button>
-            </div>
-        </div>
-    </div>
+    <footer>
+        <div class="footer-links">
+            <a href="juegos.html">JUEGOS</a>
+            <a href="soporte.html">SOPORTE</a>
+            <a href="compañia.html">COMPAÑÍA</a>
+        </div>
+        <div class="social-media">
+            <a href="https://www.facebook.com/profile.php?id=61583972560512" target="_blank"><img src="img/facebook.png" alt="Facebook"></a>
+            <a href="https://x.com/Gamer_Nexus_inf" target="_blank"><img src="img/twitter.png" alt="Twitter"></a>
+            <a href="https://www.instagram.com/gamernexus7/" target="_blank"><img src="img/instagram.png" alt="Instagram"></a>
+            <a href="https://www.youtube.com/channel/UClqxaJ3XkmHXd8nk8LJYFag" target="_blank"><img src="img/youtube.png" alt="YouTube"></a>
+        </div>
+    </footer>
 
-        <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+    <!-- Modal de Autenticación -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div class="auth-tabs">
+                <button id="loginTab" class="auth-tab active">Iniciar Sesión</button>
+                <button id="registerTab" class="auth-tab">Registrarse</button>
+            </div>
+            <div id="loginForm" class="auth-form active">
+                <label for="loginUserEmail">Usuario o Correo</label>
+                <input type="text" id="loginUserEmail" name="loginUserEmail">
+                <label for="loginPassword">Contraseña</label>
+                <input type="password" id="loginPassword" name="loginPassword">
+                <button id="submitLogin">Iniciar Sesión</button>
+            </div>
+            <div id="registerForm" class="auth-form">
+                <label for="registerUser">Usuario</label>
+                <input type="text" id="registerUser" name="registerUser">
+                <label for="registerEmail">Correo</label>
+                <input type="email" id="registerEmail" name="registerEmail">
+                <label for="registerPassword">Contraseña</label>
+                <input type="password" id="registerPassword" name="registerPassword">
+                <label for="registerPhone">Teléfono (Opcional)</label>
+                <input type="tel" id="registerPhone" name="registerPhone">
+                <button id="submitRegister">Registrarse</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Perfil (Bootstrap) -->
+    <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content bg-dark-secondary">
                 <div class="modal-header border-bottom-indigo">
-                    <h5 class="modal-title text-white" id="profileModalLabel">Perfil de Usuario</h5>
+                    <h5 class="modal-title text-white" id="profileModalLabel">
+                        <i class="bi bi-person-circle me-2"></i> PERFIL DE USUARIO
+                    </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter: invert(1);"></button>
                 </div>
                 <div class="modal-body text-center">
@@ -184,7 +196,7 @@
                         <input type="file" id="imageUpload" accept="image/*" style="display: none;">
                         
                         <button class="btn btn-sm btn-outline-light-accent w-100" id="changeImageBtn" style="margin-top: 10px; background-color: #8a2be2; color: white;">
-                            Cambiar Imagen
+                            <i class="bi bi-upload"></i> Cambiar Imagen
                         </button>
                     </div>
                     
@@ -199,14 +211,21 @@
         </div>
     </div>
     
+    <!-- Modal de Agregar al Carrito (MORADO) -->
     <div id="addToCartModal" class="modal">
         <div class="modal-content">
             <span class="close-button">&times;</span>
-            <h2>Confirmar Compra</h2>
-            <p>¿Deseas agregar el juego **<span id="modalGameName"></span>** por **<span id="modalGamePrice"></span>** a tu carrito?</p>
-            <div class="d-flex justify-content-end">
-                <button id="cancelAddToCartBtn" class="btn btn-secondary me-2">Cancelar</button>
-                <button id="confirmAddToCartBtn" class="btn btn-primary">Agregar al Carrito</button>
+            <h2 style="color: #8a2be2;">Agregar al Carrito</h2>
+            <p>¿Deseas agregar el siguiente juego a tu carrito de compras?</p>
+            
+            <div style="background-color: #1a1a1a; padding: 15px; border-radius: 5px; margin-bottom: 20px; text-align: center;">
+                <h4 id="modalGameName" style="color: #ffffff; margin-bottom: 5px;">[Nombre del Juego]</h4>
+                <p style="color: #cccccc;">Precio: <strong id="modalGamePrice" style="color: #8a2be2;">[Precio]</strong></p>
+            </div>
+
+            <div style="display: flex; justify-content: space-around;">
+                <button id="cancelAddToCartBtn" class="login-button" style="background-color: #4b0082; width: 45%;">Cancelar</button>
+                <button id="confirmAddToCartBtn" class="login-button" style="background-color: #8a2be2; width: 45%;">Confirmar</button>
             </div>
         </div>
     </div>
@@ -216,6 +235,6 @@
         integrity="sha384-C6P7n0/n2e4Z7n32i1nF9h8/2j3wWlB5f2Vq0uYd3i4q5n6l9a0t0e38VfV5t4t"
         crossorigin="anonymous">
     </script>
-    <script src="js/script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
