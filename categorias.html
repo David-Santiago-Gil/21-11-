@@ -4,7 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gaming Utopia - Categorías por Género</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        @keyframes glow {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -21,9 +31,15 @@
                 </ul>
             </nav>
             <div class="auth-buttons">
+                <div class="cart-icon" id="cartIcon">
+                    <a href="carrito.html">
+                        <span style="font-size: 30px; line-height: 1;">🛒</span>
+                        <span id="cartCount">0</span>
+                    </a>
+                </div>
                 <button id="loginBtn" class="login-button">LOGIN</button>
                 <div class="profile-icon">
-                    <img src="https://via.placeholder.com/30x30/8a2be2/ffffff?text=👤" alt="Profile Icon" id="profileIcon">
+                    <img src="img/perfil.jpg" alt="Profile Icon" id="profileIcon">
                 </div>
             </div>
         </div>
@@ -66,121 +82,121 @@
         </section>
 
         <section class="game-listings">
-            <h2>Explora Nuestros Juegos por Género</h2>
+            <h2>🎯 Explora Nuestros Juegos por Género</h2>
 
-            <h3 id="accion">Juegos de Acción</h3>
+            <h3 id="accion">⚔️ Juegos de Acción</h3>
             <p>Juegos rápidos, emocionantes y llenos de adrenalina, donde la velocidad y los reflejos son clave.</p>
             <div class="game-grid">
-                <div class="game-card">
-                    <img src="img/Store_GamesPDP_Hero01.png" alt="FPS Genérico">
+                <div class="game-card" data-id="cod_cat" data-name="Call of Duty Modern Warfare" data-price="45000">
+                    <img src="img/Store_GamesPDP_Hero01.png" alt="COD MW">
                     <h3>Call of Duty Modern Warfare</h3>
                     <p>Acción - Guerra moderna</p>
-                    <p class="rating">4.4 (6 K)</p>
+                    <p class="rating">⭐ COP 45,000</p>
                 </div>
-                <div class="game-card">
-                    <img src="img/thumb-1920-1260011.jpg" alt="Lucha Genérico">
+                <div class="game-card" data-id="insurgency_cat" data-name="Insurgency: Sandstorm" data-price="110000">
+                    <img src="img/thumb-1920-1260011.jpg" alt="Insurgency">
                     <h3>Insurgency: Sandstorm</h3>
-                    <p>Lucha - Jugador vs Jugador</p>
-                    <p class="rating">4.7 (12 K)</p>
+                    <p>Acción táctica multijugador</p>
+                    <p class="rating">⭐ COP 110,000</p>
                 </div>
-                <div class="game-card">
-                    <img src="img/nfs.png" alt="Need For Speed">
+                <div class="game-card" data-id="nfs_cat" data-name="Need For Speed" data-price="219990">
+                    <img src="img/nfs.png" alt="NFS">
                     <h3>Need For Speed</h3>
-                    <p>juego de carreras</p>
-                    <p class="rating">4.4 (1,9 K)</p>
+                    <p>Acción - Carreras callejeras</p>
+                    <p class="rating">⭐ COP 219,990</p>
                 </div>
-                <div class="game-card">
-                    <img src="img/mortal-kombat-x-1920-x-1080-wallpaper-ui3p8y221sohg42z.jpg" alt="Lucha Genérico">
+                <div class="game-card" data-id="mk11_cat" data-name="Mortal Kombat 11" data-price="19999">
+                    <img src="img/mortal-kombat-x-1920-x-1080-wallpaper-ui3p8y221sohg42z.jpg" alt="MK11">
                     <h3>Mortal Kombat 11</h3>
-                    <p>Lucha - Jugador vs Jugador</p>
-                    <p class="rating">4.8 (12 K)</p>
+                    <p>Acción - Lucha brutal</p>
+                    <p class="rating">⭐ COP 19,999</p>
                 </div>
             </div>
 
-            <h3 id="aventura">Juegos de Aventura</h3>
+            <h3 id="aventura">🗺️ Juegos de Aventura</h3>
             <p>Explora mundos vastos, resuelve misterios y sigue narrativas épicas llenas de personajes memorables.</p>
             <div class="game-grid">
-                <div class="game-card">
-                    <img src="img/god-of-war-ragnarok-kratos-atreus-2022-games-playstation-4-3840x2160-8636.jpg" alt="Aventura Genérico">
-                    <h3>god of war ragnarok </h3>
-                    <p>Aventura - Exploración - Guerra</p>
-                    <p class="rating">4.9 (20 K)</p>
+                <div class="game-card" data-id="gow_cat" data-name="God of War Ragnarok" data-price="220000">
+                    <img src="img/god-of-war-ragnarok-kratos-atreus-2022-games-playstation-4-3840x2160-8636.jpg" alt="GoW">
+                    <h3>God of War Ragnarok</h3>
+                    <p>Aventura épica nórdica</p>
+                    <p class="rating">⭐ COP 220,000</p>
                 </div>
-                <div class="game-card">
-                    <img src="img/holds.jpg" alt="Indie Aventura Genérico">
+                <div class="game-card" data-id="hk_silksong_cat" data-name="Hollow Knight: Silksong" data-price="100000">
+                    <img src="img/holds.jpg" alt="HK Silksong">
                     <h3>Hollow Knight: Silksong</h3>
-                    <p>Aventura - Puzzle - aguilidad</p>
-                    <p class="rating">4.2 (3 K)</p>
+                    <p>Aventura - Metroidvania</p>
+                    <p class="rating">⭐ COP 100,000</p>
                 </div>
-                <div class="game-card">
-                    <img src="img/half-life-alyx.jpg" alt="Indie Aventura Genérico">
+                <div class="game-card" data-id="hl_alyx_cat" data-name="Half-Life: Alyx" data-price="190000">
+                    <img src="img/half-life-alyx.jpg" alt="HL Alyx">
                     <h3>Half-Life: Alyx</h3>
-                    <p>Aventura - Puzzle - aguilidad</p>
-                    <p class="rating">4.2 (3 K)</p>
+                    <p>Aventura VR inmersiva</p>
+                    <p class="rating">⭐ COP 190,000</p>
                 </div>
-                <div class="game-card">
-                    <img src="img/RE4_1A.jpg" alt="Indie Aventura Genérico">
+                <div class="game-card" data-id="re4_cat" data-name="Resident Evil 4 Remake" data-price="205000">
+                    <img src="img/RE4_1A.jpg" alt="RE4">
                     <h3>Resident Evil 4 Remake</h3>
-                    <p>Aventura - Puzzle - aguilidad</p>
-                    <p class="rating">4.2 (3 K)</p>
+                    <p>Aventura - Terror de supervivencia</p>
+                    <p class="rating">⭐ COP 205,000</p>
                 </div>
             </div>
 
-            <h3 id="rpg">Juegos de Rol (RPG)</h3>
+            <h3 id="rpg">🐉 Juegos de Rol (RPG)</h3>
             <p>Construye tu personaje, mejora tus habilidades y decide el destino de reinos enteros.</p>
             <div class="game-grid">
-                <div class="game-card">
-                    <img src="img/kingdom-come-deliverance-2-11f6u.jpg" alt="RPG Genérico">
+                <div class="game-card" data-id="kcd2_cat" data-name="Kingdom Come: Deliverance 2" data-price="230000">
+                    <img src="img/kingdom-come-deliverance-2-11f6u.jpg" alt="KCD2">
                     <h3>Kingdom Come: Deliverance 2</h3>
-                    <p>RPG - Fantasía Épica</p>
-                    <p class="rating">4.8 (30 K)</p>
+                    <p>RPG medieval realista</p>
+                    <p class="rating">⭐ COP 230,000</p>
                 </div>
-                <div class="game-card">
-                    <img src="img/clair-obscur-2560x1080-20843.jpg" alt="RPG Genérico">
+                <div class="game-card" data-id="clair_cat" data-name="Clair Obscur: Expedition 33" data-price="145000">
+                    <img src="img/clair-obscur-2560x1080-20843.jpg" alt="Clair">
                     <h3>Clair Obscur: Expedition 33</h3>
-                    <p>RPG - Fantasía Épica</p>
-                    <p class="rating">4.8 (30 K)</p>
+                    <p>RPG de fantasía oscura</p>
+                    <p class="rating">⭐ COP 145,000</p>
                 </div>
-                <div class="game-card">
-                    <img src="img/maxresdefault.jpg" alt="RPG Genérico">
+                <div class="game-card" data-id="trails_cat" data-name="Trails in the Sky 1st Chapter" data-price="85000">
+                    <img src="img/maxresdefault.jpg" alt="Trails">
                     <h3>Trails in the Sky 1st Chapter</h3>
-                    <p>RPG - Fantasía Épica</p>
-                    <p class="rating">4.8 (30 K)</p>
+                    <p>RPG JRPG clásico</p>
+                    <p class="rating">⭐ COP 85,000</p>
                 </div>
-                <div class="game-card">
-                    <img src="img/final-fantasy-v-i-i-rebirth-promotional-artwork-6wv58kt23nfsmwsl.jpg" alt="RPG Genérico">
+                <div class="game-card" data-id="ff7_cat" data-name="Final Fantasy VII Rebirth" data-price="280000">
+                    <img src="img/final-fantasy-v-i-i-rebirth-promotional-artwork-6wv58kt23nfsmwsl.jpg" alt="FF7">
                     <h3>Final Fantasy VII Rebirth</h3>
-                    <p>RPG - Fantasía Épica</p>
-                    <p class="rating">4.8 (30 K)</p>
+                    <p>RPG épico japonés</p>
+                    <p class="rating">⭐ COP 280,000</p>
                 </div>
             </div>
 
-            <h3 id="deportes">Juegos de Deportes</h3>
+            <h3 id="deportes">⚽ Juegos de Deportes</h3>
             <p>Compite en tus deportes favoritos, ya sea en solitario o con amigos en línea.</p>
             <div class="game-grid">
-                <div class="game-card">
-                    <img src="img/fot.jpg" alt="Deportes Genérico">
+                <div class="game-card" data-id="futbol2025_cat" data-name="Fútbol Total 2025" data-price="165000">
+                    <img src="img/fot.jpg" alt="Fútbol">
                     <h3>Fútbol Total 2025</h3>
-                    <p>Deportes - Simulación</p>
-                    <p class="rating">4.0 (18 K)</p>
+                    <p>Deportes - Simulación realista</p>
+                    <p class="rating">⭐ COP 165,000</p>
                 </div>
-                <div class="game-card">
-                    <img src="img/thumb-1920-1332400.jpeg" alt="Deportes Genérico">
-                    <h3>fifa 24</h3>
-                    <p>Deportes - Simulación</p>
-                    <p class="rating">4.0 (18 K)</p>
+                <div class="game-card" data-id="fifa24_cat" data-name="FIFA 24" data-price="250000">
+                    <img src="img/thumb-1920-1332400.jpeg" alt="FIFA">
+                    <h3>FIFA 24</h3>
+                    <p>Deportes - Fútbol mundial</p>
+                    <p class="rating">⭐ COP 250,000</p>
                 </div>
-                <div class="game-card">
-                    <img src="img/forza.jpg" alt="Deportes Genérico">
-                    <h3>forza </h3>
-                    <p>Deportes - Simulación</p>
-                    <p class="rating">4.0 (18 K)</p>
+                <div class="game-card" data-id="forza_cat" data-name="Forza" data-price="180000">
+                    <img src="img/forza.jpg" alt="Forza">
+                    <h3>Forza</h3>
+                    <p>Deportes - Carreras de autos</p>
+                    <p class="rating">⭐ COP 180,000</p>
                 </div>
-                <div class="game-card">
-                    <img src="img/fc.jpeg" alt="Deportes Genérico">
-                    <h3>Ea Sports Fc 26</h3>
-                    <p>Deportes - Simulación</p>
-                    <p class="rating">4.0 (18 K)</p>
+                <div class="game-card" data-id="fc26_cat" data-name="EA Sports FC 26" data-price="280608">
+                    <img src="img/fc.jpeg" alt="FC26">
+                    <h3>EA Sports FC 26</h3>
+                    <p>Deportes - Nueva generación</p>
+                    <p class="rating">⭐ COP 280,608</p>
                 </div>
             </div>
         </section>
@@ -193,10 +209,10 @@
             <a href="compañia.html">COMPAÑÍA</a>
         </div>
         <div class="social-media">
-            <a href="https://www.facebook.com/profile.php?id=61583972560512" target="_blank"><img src="img/facebook.png" alt="Facebook"></a>
-            <a href="https://x.com/Gamer_Nexus_inf" target="_blank"><img src="img/twitter.png" alt="Twitter"></a>
-            <a href="https://www.instagram.com/gamernexus7/" target="_blank"><img src="img/instagram.png" alt="Instagram"></a>
-            <a href="https://www.youtube.com/channel/UClqxaJ3XkmHXd8nk8LJYFag" target="_blank"><img src="img/youtube.png" alt="YouTube"></a>
+            <a href="https://www.facebook.com/profile.php?id=61583972560512" target="_blank"><img src="img/facebook.png" alt="Facebook" onerror="this.style.display='none'"></a>
+            <a href="https://x.com/Gamer_Nexus_inf" target="_blank"><img src="img/twitter.png" alt="Twitter" onerror="this.style.display='none'"></a>
+            <a href="https://www.instagram.com/gamernexus7/" target="_blank"><img src="img/instagram.png" alt="Instagram" onerror="this.style.display='none'"></a>
+            <a href="https://www.youtube.com/channel/UClqxaJ3XkmHXd8nk8LJYFag" target="_blank"><img src="img/youtube.png" alt="YouTube" onerror="this.style.display='none'"></a>
         </div>
     </footer>
 
@@ -217,26 +233,84 @@
             <div id="registerForm" class="auth-form">
                 <label for="registerUser">Usuario</label>
                 <input type="text" id="registerUser" name="registerUser">
+                <span id="errorRegisterUser" class="error-message"></span>
                 <label for="registerEmail">Correo</label>
                 <input type="email" id="registerEmail" name="registerEmail">
+                <span id="errorRegisterEmail" class="error-message"></span>
                 <label for="registerPassword">Contraseña</label>
                 <input type="password" id="registerPassword" name="registerPassword">
+                <span id="errorRegisterPassword" class="error-message"></span>
                 <label for="registerPhone">Teléfono (Opcional)</label>
                 <input type="tel" id="registerPhone" name="registerPhone">
+                <span id="errorRegisterPhone" class="error-message"></span>
                 <button id="submitRegister">Registrarse</button>
             </div>
         </div>
     </div>
 
-    <div id="profileModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <h2>Perfil de Usuario</h2>
-            <p>Bienvenido, <span id="profileUsername">Invitado</span>!</p>
-            <button id="logoutBtn">Cerrar Sesión</button>
+    <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d1a3d 100%); border: 2px solid #8a2be2; border-radius: 15px; box-shadow: 0 10px 40px rgba(138, 43, 226, 0.4);">
+                <div class="modal-header" style="border-bottom: 2px solid rgba(138, 43, 226, 0.3); padding: 20px;">
+                    <h5 class="modal-title text-white" id="profileModalLabel" style="font-size: 1.3em; font-weight: bold;">
+                        <i class="bi bi-person-circle me-2" style="color: #8a2be2;"></i> MI PERFIL
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+                <div class="modal-body text-center" style="padding: 30px 20px;">
+                    <div class="profile-avatar-container mx-auto mb-3" style="position: relative; width: 120px; height: 120px;">
+                        <div style="position: absolute; top: -5px; left: -5px; right: -5px; bottom: -5px; background: linear-gradient(45deg, #8a2be2, #4b0082, #8a2be2); border-radius: 50%; animation: glow 2s ease-in-out infinite;"></div>
+                        <img id="modalProfileImage" src="img/perfil.jpg" alt="Avatar" class="profile-avatar" style="position: relative; width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid #1a1a1a; z-index: 2;">
+                    </div>
+                    
+                    <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+                    
+                    <button class="btn w-75 mb-4" id="changeImageBtn" style="background: linear-gradient(90deg, #8a2be2, #a049ff); color: white; border: none; padding: 10px 20px; border-radius: 25px; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);">
+                        <i class="bi bi-upload me-2"></i> Cambiar Foto de Perfil
+                    </button>
+                    
+                    <div style="background-color: rgba(138, 43, 226, 0.1); padding: 20px; border-radius: 10px; margin-bottom: 10px;">
+                        <h4 class="text-white mb-2" style="font-size: 1.5em; font-weight: bold;">
+                            <span id="profileUsername" style="color: #8a2be2;">Invitado</span>
+                        </h4>
+                        <p class="text-secondary-light mb-0" style="color: #cccccc; font-size: 0.95em;">
+                            <i class="bi bi-shield-check me-1" style="color: #4CAF50;"></i> Cuenta Activa
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="modal-footer" style="border-top: 2px solid rgba(138, 43, 226, 0.3); padding: 20px; display: flex; justify-content: space-between;">
+                    <button type="button" class="btn" data-bs-dismiss="modal" style="background-color: #4b0082; color: white; padding: 10px 25px; border-radius: 8px; font-weight: 600; flex-grow: 1; margin-right: 10px; transition: all 0.3s;">
+                        <i class="bi bi-x-circle me-1"></i> Cerrar
+                    </button>
+                    <button type="button" class="btn" id="logoutBtn" style="background: linear-gradient(90deg, #dc3545, #c82333); color: white; border: none; padding: 10px 25px; border-radius: 8px; font-weight: 600; flex-grow: 1; transition: all 0.3s; box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);">
+                        <i class="bi bi-box-arrow-right me-1"></i> Cerrar Sesión
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
+    <div id="addToCartModal" class="modal">
+        <div class="modal-content cart-modal-style">
+            <span class="close-button">&times;</span>
+            <h2>Agregar al Carrito</h2>
+            <p>¿Deseas agregar el siguiente juego a tu carrito de compras?</p>
+            
+            <div style="background-color: #1a1a1a; padding: 15px; border-radius: 5px; margin-bottom: 20px; text-align: center;">
+                <h4 id="modalGameName" style="color: #ffffff; margin-bottom: 5px;">[Nombre del Juego]</h4>
+                <p style="color: #cccccc;">Precio: <strong id="modalGamePrice" style="color: #8a2be2;">[Precio]</strong></p>
+            </div>
+
+            <div style="display: flex; justify-content: space-around;">
+                <button id="cancelAddToCartBtn">Cancelar</button>
+                <button id="confirmAddToCartBtn">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>

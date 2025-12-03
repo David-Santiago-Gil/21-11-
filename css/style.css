@@ -832,3 +832,28 @@ footer {
         font-size: 1.2em;
     }
 }
+
+/* ... (Mantén todo tu código CSS anterior aquí) ... */
+
+/* ========================================= */
+/* 12. ESTILOS DE ANIMACIÓN Y PERFIL (NUEVO) */
+/* ========================================= */
+@keyframes glow {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
+}
+
+#changeImageBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(138, 43, 226, 0.5) !important;
+}
+
+#profileModal .modal-footer button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Ajuste para asegurar que el modal de Bootstrap se vea bien sobre el fondo oscuro */
+.modal-backdrop.show {
+    opacity: 0.8;
+}
