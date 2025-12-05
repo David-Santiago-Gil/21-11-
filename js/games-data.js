@@ -719,6 +719,46 @@ const GAMES_DATA = {
             graphics: 'NVIDIA RTX 3070 / AMD Radeon RX 6700 XT',
             storage: '130 GB'
         }
+    },
+    ex_aether: {
+        id: 'ex_aether',
+        name: 'Aether Shapers: The Chrono-Fracture',
+        price: 180000,
+        image: 'img/Aether Shapers The Chrono-Fracture.png',
+        rating: 4.9,
+        reviews: '4.5 K',
+        platforms: ['PC', 'PlayStation 5'],
+        description: 'Aether Shapers es una epopeya de ciencia ficción donde manipulas las fracturas cronológicas del universo. Realiza saltos temporales para cambiar el destino del multiverso, resolviendo acertijos complejos y enfrentándote a enemigos de diferentes épocas. Cada decisión altera la realidad. Una experiencia profunda con cinemáticas épicas y banda sonora orquestal de primer nivel.',
+        developer: 'Chronos Studios',
+        releaseDate: '2024',
+        genre: 'Aventura, RPG, Acción',
+        requirements: {
+            os: 'Windows 10/11 64-bit',
+            processor: 'Intel Core i7-10700 / AMD Ryzen 7 3700X',
+            ram: '16 GB',
+            graphics: 'NVIDIA RTX 2080 / AMD RX 5700 XT',
+            storage: '120 GB'
+        }
+    },
+    ex_lumenfall: {
+        id: 'ex_lumenfall',
+        name: 'Lumenfall Echoes of the Deep',
+        price: 80000,
+        image: 'img/Lumenfall Echoes of the Deep.png',
+        rating: 4.8,
+        reviews: '3.2 K',
+        platforms: ['PC', 'PlayStation 5', 'Xbox Series X|S'],
+        description: 'Lumenfall Echoes of the Deep te lleva a un reino subacuático bioluminiscente lleno de secretos antiguos. Como arqueólogo aventurero, explora ruinas sumergidas, recolecta artefactos mágicos y desbloquea poderes elementales. El mundo respira con vida y cada descubrimiento revela una nueva capa de la trama. Gráficos impresionantes con física de fluidos realista y un mundo vivo que cambia según tus acciones.',
+        developer: 'Deep Waters Games',
+        releaseDate: '2024',
+        genre: 'Aventura, RPG, Exploración',
+        requirements: {
+            os: 'Windows 10/11 64-bit',
+            processor: 'Intel Core i7-9700K / AMD Ryzen 5 3600',
+            ram: '12 GB',
+            graphics: 'NVIDIA RTX 1080 / AMD RX 5600 XT',
+            storage: '85 GB'
+        }
     }
 };
 

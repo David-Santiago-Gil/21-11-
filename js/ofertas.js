@@ -78,7 +78,7 @@
 
         const div = document.createElement('div');
         div.className = 'game-card';
-        div.setAttribute('data-id', `oferta_${juego.id}`);
+        div.setAttribute('data-id', juego.id);
         div.setAttribute('data-name', juego.name);
         div.setAttribute('data-price', precioConDescuento);
 
