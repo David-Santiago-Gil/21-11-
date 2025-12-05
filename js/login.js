@@ -277,12 +277,22 @@ if (submitRegisterBtn && registerUserInput && registerEmailInput && registerPass
             users.push(newUser);
             saveUsers(users);
             
-            document.getElementById('registerForm').reset();
+            // 🎯 LIMPIAR FORMULARIO DE REGISTRO
+            registerUserInput.value = '';
+            registerEmailInput.value = '';
+            registerPasswordInput.value = '';
+            if (registerPhoneInput) registerPhoneInput.value = '';
+            document.querySelectorAll('#registerForm .error-message').forEach(el => el.textContent = '');
             
-            if (authModal) authModal.style.display = 'block'; 
-            alert('✅ Registro exitoso. Por favor, inicia sesión con tu nueva cuenta.');
+            // 🎯 MOSTRAR ALERTA DE ÉXITO
+            alert('✅ ¡Ya estás registrado! Ahora debes iniciar sesión con tu nueva cuenta.');
             
+            // 🎯 CAMBIAR A PESTAÑA DE LOGIN
             if (loginTab) loginTab.click();
+            
+            // 🎯 LIMPIAR CAMPOS DE LOGIN TAMBIÉN
+            loginUserEmailInput.value = '';
+            loginPasswordInput.value = '';
 
         } else {
             alert('❌ Por favor, corrija los errores marcados en el formulario de registro.');
@@ -333,3 +343,123 @@ if (logoutBtn) {
 
 // Inicializar UI al cargar este script
 updateAuthUI();
+
+// --- Modal y funciones globales para verificación de edad ---
+// Inserta modal en el DOM si no existe
+function ensureAgeModalExists() {
+    if (document.getElementById('ageVerifyModal')) return;
+    const modal = document.createElement('div');
+    modal.id = 'ageVerifyModal';
+    modal.style.cssText = `position:fixed; left:0; top:0; right:0; bottom:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,0.6); z-index:9999;`;
+    modal.innerHTML = `
+        <div style="background:#0f0f14; padding:20px; border-radius:10px; width:320px; color:#fff; box-shadow:0 10px 30px rgba(0,0,0,0.6);">
+            <h3 style="margin-top:0; color:#8a2be2;">Verificación de edad</h3>
+            <p style="color:#ccc; font-size:0.95em;">Debes tener 18 años o más para comprar este juego. Introduce tu fecha de nacimiento:</p>
+            <input id="ageInput" type="date" style="width:100%; padding:8px; margin-top:8px; border-radius:6px; border:1px solid rgba(138,43,226,0.12); background:#111; color:#fff;">
+            <div style="display:flex; gap:8px; justify-content:flex-end; margin-top:12px;">
+                <button id="ageCancelBtn" style="background:transparent; color:#ccc; border:1px solid rgba(255,255,255,0.06); padding:8px 12px; border-radius:6px;">Cancelar</button>
+                <button id="ageConfirmBtn" style="background:#8a2be2; color:#fff; border:none; padding:8px 12px; border-radius:6px;">Confirmar</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+window.calculateAge = function(dob) {
+    const d = new Date(dob);
+    if (isNaN(d.getTime())) return 0;
+    const diff = Date.now() - d.getTime();
+    const ageDt = new Date(diff);
+    return Math.abs(ageDt.getUTCFullYear() - 1970);
+}
+
+window.checkAgeVerification = function(user) {
+    try {
+        if (!user) return false;
+        if (user.dob) {
+            return window.calculateAge(user.dob) >= 18;
+        }
+        // Fallback to legacy key
+        if (user.email) {
+            const key = `ageConfirmed_${user.email}`;
+            return localStorage.getItem(key) === 'true';
+        }
+        return false;
+    } catch (e) {
+        return false;
+    }
+}
+
+window.promptForAgeAndSave = function(user) {
+    return new Promise((resolve) => {
+        try {
+            if (!user) return resolve(false);
+            // Si ya tiene dob y es mayor, ok
+            if (user.dob && window.calculateAge(user.dob) >= 18) return resolve(true);
+
+            ensureAgeModalExists();
+            const modal = document.getElementById('ageVerifyModal');
+            const input = document.getElementById('ageInput');
+            const confirmBtn = document.getElementById('ageConfirmBtn');
+            const cancelBtn = document.getElementById('ageCancelBtn');
+
+            input.value = '';
+            modal.style.display = 'flex';
+
+            function cleanup() {
+                confirmBtn.removeEventListener('click', onConfirm);
+                cancelBtn.removeEventListener('click', onCancel);
+            }
+
+            function onCancel() {
+                cleanup();
+                modal.style.display = 'none';
+                resolve(false);
+            }
+
+            function onConfirm() {
+                const val = input.value;
+                if (!val) {
+                    alert('Por favor selecciona una fecha.');
+                    return;
+                }
+                const age = window.calculateAge(val);
+                if (age < 18) {
+                    alert('Lo siento, debes ser mayor de edad para comprar este juego.');
+                    cleanup();
+                    modal.style.display = 'none';
+                    return resolve(false);
+                }
+
+                // Guardar DOB en el perfil del usuario
+                try {
+                    const users = loadUsers();
+                    const idx = users.findIndex(u => u.email && user.email && u.email.toLowerCase() === user.email.toLowerCase());
+                    if (idx !== -1) {
+                        users[idx].dob = val;
+                        saveUsers(users);
+                        // actualizar usuario actual
+                        const updated = users[idx];
+                        setCurrentUser(updated);
+                    } else if (user.email) {
+                        // fallback: guardar llave legacy
+                        const key = `ageConfirmed_${user.email}`;
+                        localStorage.setItem(key, 'true');
+                    }
+                } catch (e) {
+                    console.error('Error guardando fecha de nacimiento:', e);
+                }
+
+                cleanup();
+                modal.style.display = 'none';
+                resolve(true);
+            }
+
+            confirmBtn.addEventListener('click', onConfirm);
+            cancelBtn.addEventListener('click', onCancel);
+        } catch (e) {
+            console.error(e);
+            resolve(false);
+        }
+    });
+}

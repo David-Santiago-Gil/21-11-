@@ -24,6 +24,12 @@
                 </ul>
             </nav>
             <div class="auth-buttons">
+                <div class="reserve-icon" id="reserveIcon" style="position: relative; cursor: pointer;">
+                    <a href="reservas.html" style="font-size: 30px; line-height: 1; text-decoration: none;">
+                        <i class="bi bi-calendar-check" style="font-size: 24px; color: #8a2be2;"></i>
+                        <span id="reserveCount" style="position: absolute; top: -5px; right: -10px; background: #8a2be2; color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 0.8em; font-weight: bold;">0</span>
+                    </a>
+                </div>
                 <div class="cart-icon" id="cartIcon">
                     <a href="carrito.html">
                         <span style="font-size: 30px; line-height: 1;">🛒</span>
@@ -384,8 +390,11 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/games-data.js"></script>
     <script src="js/login.js"></script>
+    <script src="js/tienda-cards.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/reservas.js"></script>
     <script src="js/security.js"></script>
 </body>
 </html>

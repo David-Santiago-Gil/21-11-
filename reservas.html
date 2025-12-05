@@ -3,11 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gaming Utopia - Inicio</title>
+    <title>Mis Reservas - Gaming Utopia</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        .reserves-container {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d1a3d 100%);
+            border-radius: 15px;
+            padding: 40px;
+            margin: 40px auto;
+            max-width: 900px;
+        }
+
+        .reserve-card {
+            background: rgba(138, 43, 226, 0.05);
+            border: 1px solid rgba(138, 43, 226, 0.15);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .reserve-card:hover {
+            background: rgba(138, 43, 226, 0.08);
+            border-color: rgba(138, 43, 226, 0.25);
+        }
+
+        .reserve-info {
+            flex: 1;
+        }
+
+        .reserve-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #8a2be2;
+            margin-bottom: 8px;
+        }
+
+        .reserve-date {
+            color: #ccc;
+            font-size: 0.9em;
+            margin-bottom: 6px;
+        }
+
+        .reserve-release {
+            color: #f0ad4e;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        .reserve-actions {
+            display: flex;
+            gap: 10px;
+            margin-left: 20px;
+        }
+
+        .reserve-actions button {
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-cancel-reserve {
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+        }
+
+        .btn-cancel-reserve:hover {
+            background: rgba(220, 53, 69, 0.2);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #ccc;
+        }
+
+        .empty-state i {
+            font-size: 3em;
+            color: #8a2be2;
+            margin-bottom: 20px;
+        }
+
+        .empty-state h3 {
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .empty-state a {
+            color: #8a2be2;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .empty-state a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -76,55 +177,19 @@
     </header>
 
     <main>
-        <section class="hero-section">
-            <img src="img/3840-x-1080-gaming-8txykfn2xdj4214w.jpg" alt="El futuro del gaming llega pronto" class="hero-image">
-        </section>
-
-        <section class="carousel-section">
-            <button class="carousel-arrow" id="prevBtn">❮</button>
-            <div class="carousel-container">
-                <div class="carousel-content" id="imageCarousel">
-                    <img src="img/4k-ultra-hd-gaming-ylyipyznm00tq5og.jpg" alt="Slide 1: Cyborg">
-                    <img src="img/high-resolution-gaming-i59azpzf73j6wqgk.jpg" alt="Slide 2: I Love Game">
-                    <img src="img/1920-x-1080-hd-gaming-1920-x-1080-ud0vb01ovt0eg2r0.jpg" alt="Slide 3: Ofertas de la semana">
+        <div class="reserves-container">
+            <h2 style="color: #8a2be2; margin-bottom: 30px;">
+                <i class="bi bi-calendar-check me-2"></i> Mis Reservas
+            </h2>
+            
+            <div id="reservesContent">
+                <div class="empty-state">
+                    <i class="bi bi-inbox"></i>
+                    <h3>No tienes reservas</h3>
+                    <p>Aún no has reservado ningún juego. Revisa los próximos lanzamientos.</p>
+                    <a href="juegos.html#proximos">Ver Próximos Lanzamientos →</a>
                 </div>
             </div>
-            <button class="carousel-arrow" id="nextBtn">❯</button>
-        </section>
-        
-        <div class="container">
-            <section class="game-listings">
-                <h2>🎮 Juegos Populares</h2>
-                <div class="game-grid">
-                    <div class="game-card" data-id="cod_mw" data-name="Call of Duty Modern Warfare" data-price="45000">
-                        <img src="img/Store_GamesPDP_Hero01.png" alt="Juego 1">
-                        <h3>Call of Duty Modern Warfare</h3>
-                        <p>COP 45,000</p>
-                        <p class="rating">4.4 (6 K)</p>
-                    </div>
-                    
-                    <div class="game-card" data-id="valorant" data-name="Valorant" data-price="0">
-                        <img src="img/ps-f2p-val-console-launch-16x9.jpg" alt="Juego Gratis">
-                        <h3>Valorant</h3>
-                        <p>Gratis</p>
-                        <p class="rating">4.8 (9.1 K)</p>
-                    </div>
-                    
-                    <div class="game-card" data-id="mk11" data-name="Mortal Kombat 11" data-price="19999">
-                        <img src="img/mortal-kombat-x-1920-x-1080-wallpaper-ui3p8y221sohg42z.jpg" alt="Juego 3">
-                        <h3>Mortal Kombat 11</h3>
-                        <p>COP 19,999</p>
-                        <p class="rating">4.8 (3.1 K)</p>
-                    </div>
-                    
-                    <div class="game-card" data-id="fc3" data-name="Far Cry 3" data-price="43738">
-                        <img src="img/far-cry-3-background-h18r9jqm76voyl4t.jpg" alt="Juego 4">
-                        <h3>Far Cry 3</h3>
-                        <p>COP 43,738</p>
-                        <p class="rating">4.7 (2.1 K)</p>
-                    </div>
-                </div>
-            </section>
         </div>
     </main>
 
@@ -142,7 +207,8 @@
         </div>
     </footer>
 
-    <div id="authModal" class="modal">
+    <!-- Modal de autenticación (reutilizado) -->
+    <div id="authModal" class="modal" style="display:none;">
         <div class="modal-content">
             <span class="close-button">&times;</span>
             <div class="auth-tabs">
@@ -183,19 +249,15 @@
                     </h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                
                 <div class="modal-body text-center" style="padding: 30px 20px;">
                     <div class="profile-avatar-container mx-auto mb-3" style="position: relative; width: 120px; height: 120px;">
                         <div style="position: absolute; top: -5px; left: -5px; right: -5px; bottom: -5px; background: linear-gradient(45deg, #8a2be2, #4b0082, #8a2be2); border-radius: 50%; animation: glow 2s ease-in-out infinite;"></div>
                         <img id="modalProfileImage" src="img/perfil.jpg" alt="Avatar" class="profile-avatar" style="position: relative; width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid #1a1a1a; z-index: 2;">
                     </div>
-                    
                     <input type="file" id="imageUpload" accept="image/*" style="display: none;">
-                    
                     <button class="btn w-75 mb-4" id="changeImageBtn" style="background: linear-gradient(90deg, #8a2be2, #a049ff); color: white; border: none; padding: 10px 20px; border-radius: 25px; font-weight: 600; transition: all 0.3s; box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);">
                         <i class="bi bi-upload me-2"></i> Cambiar Foto de Perfil
                     </button>
-                    
                     <div style="background-color: rgba(138, 43, 226, 0.1); padding: 20px; border-radius: 10px; margin-bottom: 10px;">
                         <h4 class="text-white mb-2" style="font-size: 1.5em; font-weight: bold;">
                             <span id="profileUsername" style="color: #8a2be2;">Invitado</span>
@@ -205,7 +267,6 @@
                         </p>
                     </div>
                 </div>
-                
                 <div class="modal-footer" style="border-top: 2px solid rgba(138, 43, 226, 0.3); padding: 20px; display: flex; justify-content: space-between;">
                     <button type="button" class="btn" data-bs-dismiss="modal" style="background-color: #4b0082; color: white; padding: 10px 25px; border-radius: 8px; font-weight: 600; flex-grow: 1; margin-right: 10px; transition: all 0.3s;">
                         <i class="bi bi-x-circle me-1"></i> Cerrar
@@ -217,35 +278,11 @@
             </div>
         </div>
     </div>
-    
-    <div id="addToCartModal" class="modal">
-        <div class="modal-content cart-modal-style">
-            <span class="close-button">&times;</span>
-            <h2>Agregar al Carrito</h2>
-            <p>¿Deseas agregar el siguiente juego a tu carrito de compras?</p>
-            
-            <div style="background-color: #1a1a1a; padding: 15px; border-radius: 5px; margin-bottom: 20px; text-align: center;">
-                <h4 id="modalGameName" style="color: #ffffff; margin-bottom: 5px;">[Nombre del Juego]</h4>
-                <p style="color: #cccccc;">Precio: <strong id="modalGamePrice" style="color: #8a2be2;">[Precio]</strong></p>
-            </div>
-
-            <div style="display: flex; justify-content: space-around;">
-                <button id="cancelAddToCartBtn">Cancelar</button>
-                <button id="confirmAddToCartBtn">Confirmar</button>
-            </div>
-        </div>
-    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- 1. Cargamos login.js primero para tener las funciones de usuario -->
     <script src="js/games-data.js"></script>
     <script src="js/login.js"></script>
-    <!-- 2. Cargamos script.js para funcionalidad general -->
-    <script src="js/tienda-cards.js"></script>
     <script src="js/script.js"></script>
-    <!-- 3. Cargamos reservas.js para contador de reservas -->
     <script src="js/reservas.js"></script>
-    <!-- 4. Cargamos security.js para proteger los enlaces a tienda -->
-    <script src="js/security.js"></script>
 </body>
 </html>

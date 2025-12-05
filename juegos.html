@@ -24,6 +24,12 @@
                 </ul>
             </nav>
             <div class="auth-buttons">
+                <div class="reserve-icon" id="reserveIcon" style="position: relative; cursor: pointer;">
+                    <a href="reservas.html" style="font-size: 30px; line-height: 1; text-decoration: none;">
+                        <i class="bi bi-calendar-check" style="font-size: 24px; color: #8a2be2;"></i>
+                        <span id="reserveCount" style="position: absolute; top: -5px; right: -10px; background: #8a2be2; color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 0.8em; font-weight: bold;">0</span>
+                    </a>
+                </div>
                 <div class="cart-icon" id="cartIcon">
                     <a href="carrito.html">
                         <span style="font-size: 30px; line-height: 1;">🛒</span>
@@ -79,7 +85,7 @@
 
             <h3 id="populares">🏆 Juegos Populares</h3>
             <div class="game-grid">
-                <div class="game-card" data-id="cs2_juegos" data-name="Counter-Strike 2" data-price="0">
+                <div class="game-card" data-id="cs2" data-name="Counter-Strike 2" data-price="0">
                     <img src="img/conter.jpg" alt="Counter-Strike 2">
                     <h3>Counter-Strike 2</h3>
                     <p>Gratis</p>
@@ -165,28 +171,28 @@
 
             <h3 id="proximos">⏳ Próximos Lanzamientos</h3>
             <div class="game-grid">
-                <div class="game-card" data-status="upcoming">
+                <div class="game-card" data-id="gta_vi_new" data-name="Grand Theft Auto VI" data-price="0" data-status="upcoming">
                     <img src="img/grand-theft-auto-vi-1920x1200-22311.jpg" alt="GTA VI">
                     <h3>Grand Theft Auto VI</h3>
-                    <p>¡Próximamente!</p>
+                    <p style="color: #f0ad4e; font-weight: 600;">🔔 Próximamente</p>
                     <p class="rating">5.0 (50 K)</p>
                 </div>
-                <div class="game-card" data-status="upcoming">
+                <div class="game-card" data-id="elliot_new" data-name="The Adventures of Elliot: The Millennium Tales" data-price="0" data-status="upcoming">
                     <img src="img/NAT-Games-The-Adventures-Of-Elliot-The-Millenium-Tales-Titel.jpg" alt="The Adventures of Elliot: The Millennium Tales">
                     <h3>The Adventures of Elliot: The Millennium Tales</h3>
-                    <p>¡Próximamente!</p>
+                    <p style="color: #f0ad4e; font-weight: 600;">🔔 Próximamente</p>
                     <p class="rating">5.0 (50 K)</p>
                 </div>
-                <div class="game-card" data-status="upcoming">
+                <div class="game-card" data-id="aphelion_new" data-name="Aphelion" data-price="0" data-status="upcoming">
                     <img src="img/TLG-Launch-Trailer-Web2-1920x600-1.jpg" alt="Aphelion">
                     <h3>Aphelion</h3>
-                    <p>¡Próximamente!</p>
+                    <p style="color: #f0ad4e; font-weight: 600;">🔔 Próximamente</p>
                     <p class="rating">5.0 (50 K)</p>
                 </div>
-                <div class="game-card" data-status="upcoming">
+                <div class="game-card" data-id="batman_new" data-name="Batman: el Legado del Caballero Oscuro" data-price="0" data-status="upcoming">
                     <img src="img/dinner-2np91.jpg" alt="Batman: el Legado del Caballero Oscuro">
                     <h3>Batman: el Legado del Caballero Oscuro</h3>
-                    <p>¡Próximamente!</p>
+                    <p style="color: #f0ad4e; font-weight: 600;">🔔 Próximamente</p>
                     <p class="rating">5.0 (50 K)</p>
                 </div>
             </div>
@@ -302,7 +308,10 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/games-data.js"></script>
     <script src="js/login.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/tienda-cards.js"></script>
+    <script src="js/reservas.js"></script>
 </body>
 </html>

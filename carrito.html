@@ -239,8 +239,22 @@
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/games-data.js"></script>
     <script src="js/login.js"></script>
+    <script src="js/tienda-cards.js"></script>
     <script src="js/script.js"></script>
     <script src="js/security.js"></script>
+    
+    <script>
+        // Limpiar carrito de entradas inválidas al cargar
+        window.addEventListener('load', () => {
+            // Ejecutar limpieza de entradas inválidas
+            validateAndCleanCart();
+            
+            // Log para confirmar
+            const cart = JSON.parse(localStorage.getItem('gamingUtopiaCart') || '[]');
+            console.log('Carrito después de limpieza:', cart);
+        });
+    </script>
 </body>
 </html>
