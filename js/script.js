@@ -120,11 +120,28 @@ if (searchInput) {
 
 function handleSearch() {
     const query = searchInput.value.trim().toLowerCase();
-    if (query.length < 3) {
-        alert('Por favor, ingrese al menos 3 caracteres para buscar.');
+    if (query.length < 1) {
+        alert('Por favor, ingrese un término para buscar.');
         return;
     }
 
+    // Primero intentar buscar juegos en GAMES_DATA
+    let gameResults = [];
+    if (typeof getAllGames === 'function') {
+        gameResults = getAllGames().filter(game => 
+            game.name.toLowerCase().includes(query) || 
+            game.genre.toLowerCase().includes(query) ||
+            game.description.toLowerCase().includes(query)
+        );
+    }
+
+    if (gameResults.length > 0) {
+        // Mostrar resultados de juegos en un modal
+        showGameSearchResults(gameResults, query);
+        return;
+    }
+
+    // Si no encuentra juegos, buscar por páginas
     const searchMap = [
         { keywords: ['inicio', 'home', 'principal', 'samurai'], destination: 'index.html' },
         { keywords: ['tienda', 'comprar', 'shop', 'arma'], destination: 'tienda.html' },
@@ -158,6 +175,82 @@ function handleSearch() {
     } else {
         alert(`No se encontraron resultados para "${query}". Intente con otra palabra clave.`);
     }
+}
+
+function showGameSearchResults(games, query) {
+    // Crear un modal con los resultados
+    let modal = document.getElementById('searchResultsModal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'searchResultsModal';
+        modal.className = 'modal';
+        document.body.appendChild(modal);
+    }
+
+    let resultsHTML = `
+        <div class="modal-content" style="width: 90%; max-width: 1200px; max-height: 85vh; overflow-y: auto; margin: 5vh auto;">
+            <span class="close-button" onclick="document.getElementById('searchResultsModal').style.display = 'none'; document.getElementById('searchInput').value = '';">&times;</span>
+            <h2 style="color: #fff; margin-bottom: 10px;">Resultados de búsqueda: "${query}"</h2>
+            <p style="color: #ccc; margin-bottom: 20px;">Se encontraron ${games.length} juego(s)</p>
+            <div class="game-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px;">
+    `;
+
+    games.forEach(game => {
+        resultsHTML += `
+            <div class="game-card" data-id="${game.id}" data-name="${game.name}" data-price="${game.price}" style="cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; border-radius: 8px; overflow: hidden;">
+                <img src="${game.image}" alt="${game.name}" onerror="this.src='https://placehold.co/600x400?text=Juego'" style="width: 100%; height: 200px; object-fit: cover;">
+                <div style="padding: 12px; background: #1a1a1a;">
+                    <h4 style="color: #fff; margin: 8px 0; font-size: 0.95em; word-wrap: break-word;">${game.name}</h4>
+                    <p style="color: #8a2be2; font-size: 0.85em; margin: 5px 0;">${game.genre}</p>
+                    <p style="color: #4CAF50; font-weight: bold; margin: 5px 0;">${game.price === 0 ? 'Gratis' : 'COP ' + game.price.toLocaleString('es-CO')}</p>
+                    <p class="rating" style="color: #ffc107; font-size: 0.9em; margin: 5px 0;">⭐ ${game.rating}</p>
+                </div>
+            </div>
+        `;
+    });
+
+    resultsHTML += `
+            </div>
+        </div>
+    `;
+
+    modal.innerHTML = resultsHTML;
+    modal.style.display = 'block';
+
+    // Event listeners para abrir el juego al hacer clic
+    const gameCards = modal.querySelectorAll('.game-card');
+    gameCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const gameId = this.getAttribute('data-id');
+            if (gameId) {
+                // Cerrar el modal de búsqueda
+                modal.style.display = 'none';
+                document.getElementById('searchInput').value = '';
+                
+                // Redirigir a la página de detalle del juego
+                window.location.href = `juego-detalle.html?id=${gameId}`;
+            }
+        });
+
+        // Efecto hover
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-8px)';
+            this.style.boxShadow = '0 8px 25px rgba(138, 43, 226, 0.4)';
+        });
+
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = 'none';
+        });
+    });
+
+    // Cerrar modal al hacer clic fuera de él
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+            document.getElementById('searchInput').value = '';
+        }
+    });
 }
 
 
