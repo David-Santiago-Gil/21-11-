@@ -104,6 +104,7 @@ if (resetSupportBtn) {
 
 
 // --- LÓGICA DE BÚSQUEDA ---
+// El buscador está disponible en cualquier página que tenga los elementos de búsqueda en el encabezado
 const searchInput = document.getElementById('searchInput');
 const searchBtn = document.getElementById('searchBtn');
 
@@ -319,23 +320,42 @@ function updateCartCount() {
 }
 
 function addGameToCart(game) {
+    // Asegurarnos de tener el objeto completo del juego
+    let gameObj = game;
+    if (game && !game.minAge && typeof getGameById === 'function') {
+        gameObj = getGameById(game.id) || game;
+    }
+
     // Usamos window.getCurrentUser que definimos en login.js
     if (!window.getCurrentUser()) {
         console.error("Error de lógica: Intento de agregar al carrito sin sesión.");
         alert('🚨 Error: No tienes permiso para comprar. Debes iniciar sesión.');
         return;
     }
-    
+    // Validación por edad mínima del juego
+    if (gameObj && gameObj.minAge && typeof gameObj.minAge === 'number') {
+        const user = window.getCurrentUser();
+        const age = user && user.dob ? window.calculateAge(user.dob) : 0;
+        if (!user || !user.dob) {
+            alert('Por favor verifica tu edad en tu perfil antes de comprar este juego.');
+            return;
+        }
+        if (age < gameObj.minAge) {
+            alert(`No cumples la edad mínima requerida (${gameObj.minAge} años) para comprar este juego.`);
+            return;
+        }
+    }
+
     const cart = loadCart();
-    const existingItem = cart.find(item => item.id === game.id);
+    const existingItem = cart.find(item => item.id === gameObj.id);
 
     if (existingItem) {
         existingItem.quantity = (existingItem.quantity || 1) + 1;
     } else {
-        cart.push({ ...game, quantity: 1 });
+        cart.push({ ...gameObj, quantity: 1 });
     }
     saveCart(cart);
-    alert(`"${game.name}" ha sido agregado al carrito.`);
+    alert(`"${gameObj.name}" ha sido agregado al carrito.`);
     
     if (window.location.pathname.endsWith('carrito.html')) {
         renderCartItems();
@@ -378,13 +398,34 @@ if (document.querySelector('.game-listings')) {
             const id = card.getAttribute('data-id');
             const name = card.getAttribute('data-name');
             const priceAttr = card.getAttribute('data-price');
-            const price = parseFloat(priceAttr); 
-            
+            const price = parseFloat(priceAttr);
+
+            // validar edad mínima del juego antes de mostrar modal
+            const gameObj = (typeof getGameById === 'function') ? getGameById(id) : null;
+            const minAge = gameObj && gameObj.minAge ? gameObj.minAge : 0;
+
+            // Si requiere edad, validar contra DOB guardado
+            if (minAge > 0) {
+                const user = window.getCurrentUser();
+                if (!user) {
+                    alert('🔒 Debes iniciar sesión para comprar este juego.');
+                    const authModal = document.getElementById('authModal');
+                    if (authModal) authModal.style.display = 'block';
+                    return;
+                }
+                // Validar edad calculada desde DOB
+                const userAge = user.dob ? window.calculateAge(user.dob) : 0;
+                if (!user.dob || userAge < minAge) {
+                    alert(`❌ "${name}"\n\nEdad mínima requerida: ${minAge} años\nTu edad: ${userAge} años\n\nNo cumples los requisitos de edad para comprar este juego.`);
+                    return;
+                }
+            }
+
             currentProduct = { id, name, price };
 
             if (modalGameName) modalGameName.textContent = name;
             if (modalGamePrice) modalGamePrice.textContent = formatPrice(price);
-            
+
             addToCartModal.style.display = 'block';
         }
     });
@@ -479,6 +520,36 @@ window.onload = function() {
     if (typeof updateAuthUI === 'function') updateAuthUI();
     updateCartCount();
 
+    // Página Nosotros: abrir modal con información del perfil al hacer clic en la tarjeta
+    if (window.location.pathname.endsWith('nosotros.html')) {
+        const teamCards = document.querySelectorAll('.game-grid .game-card');
+        const profileModal = document.getElementById('profileInfoModal');
+        const nameEl = document.getElementById('profileInfoName');
+        const roleEl = document.getElementById('profileInfoRole');
+        const emailEl = document.getElementById('profileInfoEmail');
+        const phoneEl = document.getElementById('profileInfoPhone');
+        const bioEl = document.getElementById('profileInfoBio');
+
+        teamCards.forEach(card => {
+            card.style.cursor = 'pointer';
+            card.addEventListener('click', () => {
+                const ds = card.dataset || {};
+                if (nameEl) nameEl.textContent = ds.name || '';
+                if (roleEl) roleEl.textContent = ds.role || '';
+                if (emailEl) emailEl.textContent = ds.email || '';
+                if (phoneEl) phoneEl.textContent = ds.phone || '';
+                if (bioEl) bioEl.textContent = ds.bio || '';
+                if (profileModal) profileModal.style.display = 'block';
+            });
+        });
+
+        if (profileModal) {
+            const closeBtn = profileModal.querySelector('.close-button');
+            if (closeBtn) closeBtn.addEventListener('click', () => profileModal.style.display = 'none');
+            profileModal.addEventListener('click', (e) => { if (e.target === profileModal) profileModal.style.display = 'none'; });
+        }
+    }
+
     function resetSupportForm() {
         const formStatus = document.getElementById('formStatus');
         if (supportForm) {
@@ -508,14 +579,84 @@ window.onload = function() {
                 return;
             }
 
-            const total = loadCart().reduce((sum, item) => sum + item.price * (item.quantity || 1), 0);
+            const cart = loadCart();
+            const total = cart.reduce((sum, item) => sum + item.price * (item.quantity || 1), 0);
+            
             if (total > 0) {
-                alert(`Procesando pago de COP ${total.toLocaleString('es-CO')}. ¡Gracias por tu compra!`);
-                saveCart([]);
-                renderCartItems();
+                // Mostrar modal de pago
+                const paymentModal = document.getElementById('paymentModal');
+                if (paymentModal) {
+                    document.getElementById('paymentTotal').textContent = `COP ${total.toLocaleString('es-CO')}`;
+                    paymentModal.style.display = 'flex';
+                    
+                    // Limpiar formulario
+                    const paymentForm = document.getElementById('paymentForm');
+                    if (paymentForm) paymentForm.reset();
+                }
             } else {
                 alert('El carrito está vacío. ¡Agrega algunos juegos primero!');
             }
+        };
+    }
+    
+    // Procesar pago con tarjeta
+    const paymentForm = document.getElementById('paymentForm');
+    if (paymentForm) {
+        paymentForm.onsubmit = (e) => {
+            e.preventDefault();
+            
+            const cardName = document.getElementById('cardName').value.trim();
+            const cardNumber = document.getElementById('cardNumber').value.trim();
+            const cardExpiry = document.getElementById('cardExpiry').value.trim();
+            const cardCVV = document.getElementById('cardCVV').value.trim();
+            const paymentMessage = document.getElementById('paymentMessage');
+            
+            // Validaciones básicas
+            if (!cardName || cardName.length < 3) {
+                paymentMessage.textContent = '❌ Por favor ingresa un nombre válido en la tarjeta.';
+                paymentMessage.style.display = 'block';
+                paymentMessage.style.color = '#ff6b6b';
+                return;
+            }
+            
+            if (!/^\d{4}\s?\d{4}\s?\d{4}\s?\d{4}$/.test(cardNumber)) {
+                paymentMessage.textContent = '❌ Número de tarjeta inválido.';
+                paymentMessage.style.display = 'block';
+                paymentMessage.style.color = '#ff6b6b';
+                return;
+            }
+            
+            if (!/^\d{2}\/\d{2}$/.test(cardExpiry)) {
+                paymentMessage.textContent = '❌ Vencimiento debe ser MM/YY.';
+                paymentMessage.style.display = 'block';
+                paymentMessage.style.color = '#ff6b6b';
+                return;
+            }
+            
+            if (!/^\d{3}$/.test(cardCVV)) {
+                paymentMessage.textContent = '❌ CVV debe ser 3 dígitos.';
+                paymentMessage.style.display = 'block';
+                paymentMessage.style.color = '#ff6b6b';
+                return;
+            }
+            
+            // Simular procesamiento
+            paymentMessage.textContent = '⏳ Procesando pago...';
+            paymentMessage.style.display = 'block';
+            paymentMessage.style.color = '#ffc107';
+            
+            setTimeout(() => {
+                const total = loadCart().reduce((sum, item) => sum + item.price * (item.quantity || 1), 0);
+                
+                // Compra exitosa
+                alert(`✅ ¡Compra Exitosa!\n\nTotal pagado: COP ${total.toLocaleString('es-CO')}\nTarjeta: ${cardNumber.slice(-4)}\n\n¡Gracias por tu compra en Gaming Utopia!`);
+                
+                // Limpiar carrito y cerrar modal
+                saveCart([]);
+                renderCartItems();
+                document.getElementById('paymentModal').style.display = 'none';
+                
+            }, 1500);
         };
     }
 };

@@ -12,6 +12,7 @@ const GAMES_DATA = {
         developer: 'Infinity Ward',
         releaseDate: '2019',
         genre: 'Acción, Shooter',
+        minAge: 18,
         requirements: {
             os: 'Windows 10/11 64-bit',
             processor: 'Intel Core i5-2500K / AMD Ryzen 5 1600',
@@ -32,6 +33,7 @@ const GAMES_DATA = {
         developer: 'Riot Games',
         releaseDate: '2020',
         genre: 'Acción, Shooter Táctico',
+        minAge: 13,
         requirements: {
             os: 'Windows 7, 8, 10 o 11 64-bit',
             processor: 'Intel 2.4 GHz o AMD FX-8350',
@@ -52,6 +54,7 @@ const GAMES_DATA = {
         developer: 'NetherRealm Studios',
         releaseDate: '2019',
         genre: 'Lucha, Acción',
+        minAge: 18,
         requirements: {
             os: 'Windows 10 64-bit',
             processor: 'Intel Core i5-9600K / AMD Ryzen 5 2600X',
@@ -72,6 +75,7 @@ const GAMES_DATA = {
         developer: 'Ubisoft Montreal',
         releaseDate: '2012',
         genre: 'Acción, Aventura, Shooter',
+        minAge: 18,
         requirements: {
             os: 'Windows XP, Vista, 7, 8 o 10',
             processor: 'Intel Core 2 Duo @ 2 GHz / AMD Athlon 64 X2 2 GHz',
@@ -92,6 +96,7 @@ const GAMES_DATA = {
         developer: 'Team Cherry',
         releaseDate: '2017',
         genre: 'Acción, Aventura, Indie',
+        minAge: 7,
         requirements: {
             os: 'Windows XP SP3, Vista, 7, 8 o 10',
             processor: 'Intel Pentium 4 @ 1.8 GHz',
@@ -112,6 +117,7 @@ const GAMES_DATA = {
         developer: 'EA Sports',
         releaseDate: '2024',
         genre: 'Deportes, Fútbol',
+        minAge: 3,
         requirements: {
             os: 'Windows 10/11 64-bit',
             processor: 'Intel Core i5-6600K / AMD Ryzen 5 1600',
@@ -132,6 +138,7 @@ const GAMES_DATA = {
         developer: 'Rockstar Games',
         releaseDate: '2013',
         genre: 'Acción, Aventura, Mundo Abierto',
+        minAge: 18,
         requirements: {
             os: 'Windows 10/11 64-bit',
             processor: 'Intel Core i7-9700K / AMD Ryzen 5 3600',
@@ -152,6 +159,7 @@ const GAMES_DATA = {
         developer: 'Studio MDHR',
         releaseDate: '2017',
         genre: 'Acción, Aventura, Indie',
+        minAge: 7,
         requirements: {
             os: 'Windows Vista, 7, 8, 10 o 11',
             processor: 'Intel Pentium 4 @ 1.8 GHz',
@@ -172,6 +180,7 @@ const GAMES_DATA = {
         developer: 'Valve',
         releaseDate: '2023',
         genre: 'Acción, Shooter Táctico',
+        minAge: 13,
         requirements: {
             os: 'Windows 10/11 64-bit',
             processor: 'Intel Core 2 Duo E8400',
@@ -192,6 +201,7 @@ const GAMES_DATA = {
         developer: 'Epic Games',
         releaseDate: '2017',
         genre: 'Acción, Aventura, Battle Royale',
+        minAge: 12,
         requirements: {
             os: 'Windows 7/8/10/11 64-bit',
             processor: 'Intel Core i5-7600K / AMD Ryzen 5 1600',
@@ -212,6 +222,7 @@ const GAMES_DATA = {
         developer: 'Ghost Games',
         releaseDate: '2015',
         genre: 'Carreras, Acción',
+        minAge: 12,
         requirements: {
             os: 'Windows Vista, 7, 8, 10 o 11 64-bit',
             processor: 'Intel Core i5-750 / AMD Phenom II X4',
@@ -232,6 +243,7 @@ const GAMES_DATA = {
         developer: 'Riot Games',
         releaseDate: '2009',
         genre: 'Acción, MOBA, Estrategia',
+        minAge: 13,
         requirements: {
             os: 'Windows 7, 8, 10 o 11 32/64-bit',
             processor: 'Intel Pentium 4 @ 1.8 GHz',
@@ -252,6 +264,7 @@ const GAMES_DATA = {
         developer: 'CD Projekt Red',
         releaseDate: '2020',
         genre: 'RPG, Acción, Aventura',
+        minAge: 18,
         requirements: {
             os: 'Windows 10 64-bit',
             processor: 'Intel Core i7-9700 / AMD Ryzen 5 3600',
@@ -272,6 +285,7 @@ const GAMES_DATA = {
         developer: 'FromSoftware',
         releaseDate: '2022',
         genre: 'RPG, Acción, Aventura',
+        minAge: 18,
         requirements: {
             os: 'Windows 10/11 64-bit',
             processor: 'Intel Core i7-10700 / AMD Ryzen 5 3600',
@@ -292,6 +306,7 @@ const GAMES_DATA = {
         developer: 'CD Projekt Red',
         releaseDate: '2015',
         genre: 'RPG, Acción, Aventura',
+        minAge: 18,
         requirements: {
             os: 'Windows 10/11 64-bit',
             processor: 'Intel Core i7-8700 / AMD Ryzen 5 2600',
@@ -332,6 +347,7 @@ const GAMES_DATA = {
         developer: 'Rockstar Games',
         releaseDate: '2018',
         genre: 'Acción, Aventura, Mundo Abierto',
+        minAge: 18,
         requirements: {
             os: 'Windows 10/11 64-bit',
             processor: 'Intel Core i7-9700K / AMD Ryzen 5 3600',
@@ -352,6 +368,7 @@ const GAMES_DATA = {
         developer: 'Mojang Studios',
         releaseDate: '2009',
         genre: 'Sandbox, Construcción, Aventura',
+        minAge: 7,
         requirements: {
             os: 'Windows 7/8/10/11 32/64-bit',
             processor: 'Intel Core i3-8100 / AMD Ryzen 3 1200',
@@ -372,6 +389,7 @@ const GAMES_DATA = {
         developer: 'Ubisoft Montreal',
         releaseDate: '2020',
         genre: 'Acción, Aventura, RPG',
+        minAge: 18,
         requirements: {
             os: 'Windows 10/11 64-bit',
             processor: 'Intel Core i7-9700K / AMD Ryzen 5 3600',
@@ -392,6 +410,7 @@ const GAMES_DATA = {
         developer: 'EA Sports',
         releaseDate: '2022',
         genre: 'Deportes, Fútbol',
+        minAge: 3,
         requirements: {
             os: 'Windows 10/11 64-bit',
             processor: 'Intel Core i5-6600K / AMD Ryzen 5 1600',
@@ -758,6 +777,174 @@ const GAMES_DATA = {
             ram: '12 GB',
             graphics: 'NVIDIA RTX 1080 / AMD RX 5600 XT',
             storage: '85 GB'
+        }
+    },
+    arc_raiders: {
+        id: 'arc_raiders',
+        name: 'Arc Raiders',
+        price: 138045,
+        image: 'img/celeste-arc-raiders-1920x1080-19847.jpg',
+        rating: 4.9,
+        reviews: '10 K',
+        platforms: ['PC', 'PlayStation 5', 'Xbox Series X|S'],
+        description: 'Arc Raiders es un juego de acción y aventura con mecánicas de disparos y estrategia. Únete a un equipo de expertos y lucha contra enemigos formidables en misiones emocionantes.',
+        developer: 'Embark Studios',
+        releaseDate: '2024',
+        genre: 'Acción, Aventura, Shooter',
+        minAge: 16,
+        requirements: {
+            os: 'Windows 10/11 64-bit',
+            processor: 'Intel Core i7-8700K / AMD Ryzen 7 2700X',
+            ram: '16 GB',
+            graphics: 'NVIDIA RTX 2080 / AMD RX 5700 XT',
+            storage: '100 GB'
+        }
+    },
+    battlefield6: {
+        id: 'battlefield6',
+        name: 'Battlefield 6',
+        price: 241157,
+        image: 'img/battlefield-6-key-2880x1800-23275.jpg',
+        rating: 4.4,
+        reviews: '6 K',
+        platforms: ['PC', 'PlayStation 5', 'Xbox Series X|S'],
+        description: 'Battlefield 6 es un juego de disparos de gran escala con mapas destructibles y dinámicos. Experimenta batallas épicas con vehículos, helicópteros y diversas armas de fuego.',
+        developer: 'DICE / EA',
+        releaseDate: '2024',
+        genre: 'Acción, Shooter, Multijugador',
+        minAge: 16,
+        requirements: {
+            os: 'Windows 10/11 64-bit',
+            processor: 'Intel Core i7-9700K / AMD Ryzen 5 3600',
+            ram: '16 GB',
+            graphics: 'NVIDIA RTX 3070 / AMD RX 6800 XT',
+            storage: '130 GB'
+        }
+    },
+    rematch: {
+        id: 'rematch',
+        name: 'REMATCH',
+        price: 70000,
+        image: 'img/thumb-1920-1396986.jpg',
+        rating: 4.3,
+        reviews: '6 K',
+        platforms: ['PC', 'PlayStation 5', 'Xbox Series X|S'],
+        description: 'REMATCH es un juego de lucha dinámico con mecánicas innovadoras. Enfrenta a oponentes en combates intensos y personaliza tu luchador con equipamiento único.',
+        developer: 'Bit Brew Games',
+        releaseDate: '2024',
+        genre: 'Lucha, Acción',
+        minAge: 13,
+        requirements: {
+            os: 'Windows 10/11 64-bit',
+            processor: 'Intel Core i5-9600K / AMD Ryzen 5 3600',
+            ram: '8 GB',
+            graphics: 'NVIDIA GTX 1080 / AMD RX 580',
+            storage: '60 GB'
+        }
+    },
+    dying_light_beast: {
+        id: 'dying_light_beast',
+        name: 'Dying Light: The Beast',
+        price: 199900,
+        image: 'img/dying-light-the-3840x2160-18186.jpg',
+        rating: 4.4,
+        reviews: '6 K',
+        platforms: ['PC', 'PlayStation 5', 'Xbox Series X|S'],
+        description: 'Dying Light: The Beast es la secuela del popular juego de supervivencia y acción. Lucha contra hordas de zombis, explora un mundo post-apocalíptico y descubre la verdad sobre la transformación.',
+        developer: 'Techland',
+        releaseDate: '2024',
+        genre: 'Acción, Aventura, Supervivencia',
+        minAge: 18,
+        requirements: {
+            os: 'Windows 10/11 64-bit',
+            processor: 'Intel Core i7-10700K / AMD Ryzen 7 3700X',
+            ram: '16 GB',
+            graphics: 'NVIDIA RTX 3080 / AMD RX 6800 XT',
+            storage: '130 GB'
+        }
+    },
+    dota2: {
+        id: 'dota2',
+        name: 'Dota 2',
+        price: 119000,
+        image: 'img/dota.jpg',
+        rating: 4.9,
+        reviews: '20 K',
+        platforms: ['PC', 'macOS', 'Linux'],
+        description: 'Dota 2 es un videojuego de estrategia multijugador de arena. Elige entre 120+ héroes únicos, coordina con tu equipo y domina el campo de batalla.',
+        developer: 'Valve',
+        releaseDate: '2013',
+        genre: 'MOBA, Estrategia, Multijugador',
+        minAge: 13,
+        requirements: {
+            os: 'Windows Vista, 7, 8, 10 o 11 64-bit / macOS',
+            processor: 'Intel Core 2 Duo 3.0 GHz / AMD Athlon 64 X2 3.0 GHz',
+            ram: '4 GB',
+            graphics: 'NVIDIA 8600 / ATI Radeon HD 2600',
+            storage: '30 GB'
+        }
+    },
+    pubg: {
+        id: 'pubg',
+        name: 'PUBG: Battlegrounds',
+        price: 0,
+        image: 'img/pubg-battlegrounds-16v1j.jpg',
+        rating: 4.5,
+        reviews: '6 K',
+        platforms: ['PC', 'PlayStation 4', 'Xbox One', 'Mobile'],
+        description: 'PUBG: Battlegrounds es el juego de battle royale original. Paracaídas en una isla, recolecta armas y equipo, y sé el último sobreviviente de 100 jugadores.',
+        developer: 'KRAFTON',
+        releaseDate: '2017',
+        genre: 'Acción, Battle Royale, Aventura',
+        minAge: 16,
+        requirements: {
+            os: 'Windows 7/8/10/11 64-bit',
+            processor: 'Intel Core i5-6600K / AMD Ryzen 5 1600',
+            ram: '8 GB',
+            graphics: 'NVIDIA GTX 960 / AMD Radeon RX 480',
+            storage: '100 GB'
+        }
+    },
+    where_winds: {
+        id: 'where_winds',
+        name: 'Where Winds Meet',
+        price: 0,
+        image: 'img/conter.jpg',
+        rating: 4.7,
+        reviews: '8 K',
+        platforms: ['PC', 'PlayStation 5', 'Xbox Series X|S'],
+        description: 'Where Winds Meet es un juego de aventura y exploración en un mundo vasto y hermoso. Descubre secretos, resuelve misterios y encuentra tu lugar en este mundo mágico.',
+        developer: 'Everlight Studio',
+        releaseDate: '2024',
+        genre: 'Aventura, Exploración, Indie',
+        minAge: 7,
+        requirements: {
+            os: 'Windows 10/11 64-bit',
+            processor: 'Intel Core i5-8400 / AMD Ryzen 5 2600',
+            ram: '8 GB',
+            graphics: 'NVIDIA GTX 1060 / AMD RX 580',
+            storage: '50 GB'
+        }
+    },
+    delta_force: {
+        id: 'delta_force',
+        name: 'Delta Force',
+        price: 0,
+        image: 'img/delta-force-2025-7m.jpg',
+        rating: 4.6,
+        reviews: '12 K',
+        platforms: ['PC'],
+        description: 'Delta Force es el resurgimiento de la legendaria serie. Compite en emocionantes operaciones tácticas en equipo como miembro de una unidad de élite.',
+        developer: 'Quantum Studio / TiMi Studio',
+        releaseDate: '2024',
+        genre: 'Acción, Shooter Táctico, Multijugador',
+        minAge: 16,
+        requirements: {
+            os: 'Windows 10/11 64-bit',
+            processor: 'Intel Core i7-9700K / AMD Ryzen 5 3600',
+            ram: '16 GB',
+            graphics: 'NVIDIA RTX 2080 / AMD RX 5700 XT',
+            storage: '100 GB'
         }
     }
 };

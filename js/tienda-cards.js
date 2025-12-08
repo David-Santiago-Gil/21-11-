@@ -8,8 +8,6 @@ const ID_MAPPING = {
     'game-3': 'mk11',
     'game-4': 'fc3',
     'cs2_juegos': 'cs2',
-    'arc_raiders_new': 'arc_raiders',
-    'battlefield6_new': 'battlefield6',
     'cod_cat': 'cod_mw',
     'insurgency_cat': 'insurgency',
     'nfs_cat': 'nfs',
@@ -91,7 +89,24 @@ document.addEventListener('DOMContentLoaded', () => {
         // Detectar si es lanzamiento próximo (el id original puede contener '_new')
         const originalId = card.getAttribute('data-id') || '';
         const isUpcoming = /_new|proximo|proximos|proximo/i.test(originalId);
-        buyButton.innerHTML = isUpcoming ? '<i class="bi bi-calendar-check"></i><br>Reservar' : '<i class="bi bi-shopping-cart"></i><br>Comprar';
+        const gamePrice_int = parseInt(gamePrice) || 0;
+        const isFree = gamePrice_int === 0;
+        
+        // Texto del botón basado en si es gratis, próximo lanzamiento o compra normal
+        let buttonText = 'Comprar';
+        let buttonIcon = 'shopping-cart';
+        let buttonColor = 'rgba(220, 53, 69, 0.8), rgba(200, 35, 51, 0.8)'; // Rojo
+        
+        if (isUpcoming) {
+            buttonText = 'Reservar';
+            buttonIcon = 'calendar-check';
+        } else if (isFree) {
+            buttonText = 'Descargar';
+            buttonIcon = 'download';
+            buttonColor = 'rgba(76, 175, 80, 0.8), rgba(56, 142, 60, 0.8)'; // Verde
+        }
+        
+        buyButton.innerHTML = `<i class="bi bi-${buttonIcon}"></i><br>${buttonText}`;
 
         // Si ya fue reservado previamente, mostrar estado reservado
         try {
@@ -106,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // ignore
         }
         buyButton.style.cssText = `
-            background: linear-gradient(135deg, rgba(220, 53, 69, 0.8), rgba(200, 35, 51, 0.8));
+            background: linear-gradient(135deg, ${buttonColor});
             color: white;
             border: none;
             padding: 0;
@@ -185,19 +200,32 @@ document.addEventListener('DOMContentLoaded', () => {
 async function handleBuyClick(gameId, gameName, gamePrice, isUpcoming = false, buyButtonEl = null) {
     const user = window.getCurrentUser();
     const gamePrice_num = parseInt(gamePrice);
+    const isFree = gamePrice_num === 0;
 
     // Si no hay sesión, pedir iniciar sesión y abrir modal
     if (!user) {
-        alert('🔒 Debes iniciar sesión para comprar o reservar.');
+        alert('🔒 Debes iniciar sesión para comprar o descargar.');
         const loginBtn = document.getElementById('loginBtn');
         if (loginBtn) loginBtn.click();
         return;
     }
 
-    // Validar edad (requerido para comprar/reservar) usando función global
-    if (!window.checkAgeVerification(user)) {
-        const ok = await window.promptForAgeAndSave(user);
-        if (!ok) return; // menor de edad o cancelado
+    // Validar edad contra el minAge específico del juego
+    const gameObj = (typeof getGameById === 'function') ? getGameById(gameId) : null;
+    const minAge = gameObj && gameObj.minAge ? gameObj.minAge : 0;
+    
+    if (minAge > 0) {
+        const userAge = user.dob ? window.calculateAge(user.dob) : 0;
+        if (!user.dob || userAge < minAge) {
+            alert(`❌ "${gameName}"\n\nEdad mínima requerida: ${minAge} años\nTu edad: ${userAge} años\n\nNo cumples los requisitos de edad para comprar este juego.`);
+            return;
+        }
+    }
+
+    // Si es gratis, mostrar modal de descarga exitosa
+    if (isFree) {
+        showDownloadModal(gameId, gameName, gameObj);
+        return;
     }
 
     // Si es lanzamiento próximo -> SOLO reservar, NO carrito
@@ -222,7 +250,7 @@ async function handleBuyClick(gameId, gameName, gamePrice, isUpcoming = false, b
         return;
     }
 
-    // Para juegos NO próximos -> mostrar modal de carrito
+    // Para juegos NO próximos y NO gratis -> mostrar modal de carrito
     const modalGameName = document.getElementById('modalGameName');
     const modalGamePrice = document.getElementById('modalGamePrice');
     const addToCartModal = document.getElementById('addToCartModal');
@@ -338,6 +366,56 @@ function addToCart(gameId, gameName, gamePrice) {
     }
     
     alert(`✅ ${gameName} ha sido agregado a tu carrito.`);
+}
+
+// Función para mostrar modal de descarga exitosa
+function showDownloadModal(gameId, gameName, gameObj = null) {
+    const downloadModal = document.getElementById('downloadModal');
+    if (!downloadModal) {
+        console.error('Modal de descarga no encontrado');
+        return;
+    }
+
+    // Establecer nombre del juego
+    const downloadGameName = document.getElementById('downloadGameName');
+    if (downloadGameName) {
+        downloadGameName.textContent = gameName;
+    }
+
+    // Establecer imagen del juego
+    const downloadGameImage = document.getElementById('downloadGameImage');
+    if (downloadGameImage) {
+        const gameData = gameObj || (typeof getGameById === 'function' ? getGameById(gameId) : null);
+        const gameImage = gameData && gameData.image ? gameData.image : 'img/default.jpg';
+        downloadGameImage.src = gameImage;
+        downloadGameImage.alt = gameName;
+    }
+
+    // Mostrar el modal
+    downloadModal.style.display = 'flex';
+
+    // Cerrar modal con botón
+    const acceptBtn = downloadModal.querySelector('button');
+    if (acceptBtn) {
+        acceptBtn.onclick = () => {
+            downloadModal.style.display = 'none';
+        };
+    }
+
+    // Cerrar modal al hacer clic en la X
+    const closeBtn = downloadModal.querySelector('.close-button');
+    if (closeBtn) {
+        closeBtn.onclick = () => {
+            downloadModal.style.display = 'none';
+        };
+    }
+
+    // Cerrar modal si se hace clic fuera del contenido
+    downloadModal.addEventListener('click', (e) => {
+        if (e.target === downloadModal) {
+            downloadModal.style.display = 'none';
+        }
+    });
 }
 
 // Función para actualizar contador del carrito

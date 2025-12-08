@@ -31,6 +31,7 @@ const registerUserInput = document.getElementById('registerUser');
 const registerEmailInput = document.getElementById('registerEmail');
 const registerPasswordInput = document.getElementById('registerPassword');
 const registerPhoneInput = document.getElementById('registerPhone');
+const registerDobInput = document.getElementById('registerDob');
 
 
 // --- GESTIÓN DE LOCAL STORAGE ---
@@ -257,6 +258,14 @@ function validateRegistration() {
         isValid = false;
     }
 
+    if (registerDobInput && registerDobInput.value) {
+        const age = window.calculateAge(registerDobInput.value);
+        if (isNaN(age) || age <= 0) {
+            showRegisterError('errorRegisterDob', 'Fecha de nacimiento inválida.');
+            isValid = false;
+        }
+    }
+
     return isValid;
 }
 
@@ -270,6 +279,7 @@ if (submitRegisterBtn && registerUserInput && registerEmailInput && registerPass
                 email: registerEmailInput.value,
                 password: registerPasswordInput.value, 
                 phone: registerPhoneInput ? registerPhoneInput.value : null,
+                dob: registerDobInput && registerDobInput.value ? registerDobInput.value : null,
                 profileImage: null
             };
 
@@ -354,7 +364,7 @@ function ensureAgeModalExists() {
     modal.innerHTML = `
         <div style="background:#0f0f14; padding:20px; border-radius:10px; width:320px; color:#fff; box-shadow:0 10px 30px rgba(0,0,0,0.6);">
             <h3 style="margin-top:0; color:#8a2be2;">Verificación de edad</h3>
-            <p style="color:#ccc; font-size:0.95em;">Debes tener 18 años o más para comprar este juego. Introduce tu fecha de nacimiento:</p>
+            <p id="ageModalMessage" style="color:#ccc; font-size:0.95em;">Introduce tu fecha de nacimiento:</p>
             <input id="ageInput" type="date" style="width:100%; padding:8px; margin-top:8px; border-radius:6px; border:1px solid rgba(138,43,226,0.12); background:#111; color:#fff;">
             <div style="display:flex; gap:8px; justify-content:flex-end; margin-top:12px;">
                 <button id="ageCancelBtn" style="background:transparent; color:#ccc; border:1px solid rgba(255,255,255,0.06); padding:8px 12px; border-radius:6px;">Cancelar</button>
@@ -373,16 +383,16 @@ window.calculateAge = function(dob) {
     return Math.abs(ageDt.getUTCFullYear() - 1970);
 }
 
-window.checkAgeVerification = function(user) {
+window.checkAgeVerification = function(user, minAge = 18) {
     try {
         if (!user) return false;
         if (user.dob) {
-            return window.calculateAge(user.dob) >= 18;
+            return window.calculateAge(user.dob) >= minAge;
         }
-        // Fallback to legacy key
+        // Fallback to legacy key only valid for adult (>=18) confirmations
         if (user.email) {
             const key = `ageConfirmed_${user.email}`;
-            return localStorage.getItem(key) === 'true';
+            if (minAge <= 18) return localStorage.getItem(key) === 'true';
         }
         return false;
     } catch (e) {
@@ -390,18 +400,22 @@ window.checkAgeVerification = function(user) {
     }
 }
 
-window.promptForAgeAndSave = function(user) {
+window.promptForAgeAndSave = function(user, minAge = 18) {
     return new Promise((resolve) => {
         try {
             if (!user) return resolve(false);
-            // Si ya tiene dob y es mayor, ok
-            if (user.dob && window.calculateAge(user.dob) >= 18) return resolve(true);
+            // Si ya tiene dob y cumple la edad requerida, ok
+            if (user.dob && window.calculateAge(user.dob) >= minAge) return resolve(true);
 
             ensureAgeModalExists();
             const modal = document.getElementById('ageVerifyModal');
             const input = document.getElementById('ageInput');
             const confirmBtn = document.getElementById('ageConfirmBtn');
             const cancelBtn = document.getElementById('ageCancelBtn');
+            const msg = document.getElementById('ageModalMessage');
+
+            // Ajustar mensaje dinámicamente según minAge
+            if (msg) msg.textContent = `Debes tener ${minAge} años o más para comprar este juego. Introduce tu fecha de nacimiento:`;
 
             input.value = '';
             modal.style.display = 'flex';
@@ -424,8 +438,8 @@ window.promptForAgeAndSave = function(user) {
                     return;
                 }
                 const age = window.calculateAge(val);
-                if (age < 18) {
-                    alert('Lo siento, debes ser mayor de edad para comprar este juego.');
+                if (age < minAge) {
+                    alert(`Lo siento, debes tener al menos ${minAge} años para comprar este juego.`);
                     cleanup();
                     modal.style.display = 'none';
                     return resolve(false);
@@ -442,9 +456,11 @@ window.promptForAgeAndSave = function(user) {
                         const updated = users[idx];
                         setCurrentUser(updated);
                     } else if (user.email) {
-                        // fallback: guardar llave legacy
-                        const key = `ageConfirmed_${user.email}`;
-                        localStorage.setItem(key, 'true');
+                        // fallback: guardar llave legacy si minAge <= 18
+                        if (minAge <= 18) {
+                            const key = `ageConfirmed_${user.email}`;
+                            localStorage.setItem(key, 'true');
+                        }
                     }
                 } catch (e) {
                     console.error('Error guardando fecha de nacimiento:', e);

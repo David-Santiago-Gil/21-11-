@@ -10,13 +10,6 @@
     <link rel="stylesheet" href="css/style.css">
     
     <style>
-        /* Estilos de animación tomados de un archivo anterior (para el modal de perfil) */
-        @keyframes glow {
-            0%, 100% { opacity: 0.5; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.05); }
-        }
-
-        /* Estilos específicos para el contenido de la compañía */
         .info-content {
             padding: 40px 5%;
             max-width: 1000px;
@@ -112,17 +105,17 @@
             <h2>Nuestros Servicios</h2>
             <p>En Gaming Utopia (anteriormente Gamer's Nexus), ofrecemos una plataforma integral para todos los jugadores:</p>
             <ul>
-                <li>**Distribución Digital:** Acceso instantáneo a miles de juegos.</li>
-                <li>**Soporte 24/7:** Asistencia técnica y al cliente sin interrupciones.</li>
-                <li>**Comunidad:** Foros, grupos y eventos para conectar jugadores.</li>
-                <li>**Programa de Lealtad:** Recompensas exclusivas por jugar y comprar.</li>
+                <li>Distribución Digital: Acceso instantáneo a miles de juegos.</li>
+                <li>Soporte 24/7: Asistencia técnica y al cliente sin interrupciones.</li>
+                <li>Comunidad: Foros, grupos y eventos para conectar jugadores.</li>
+                <li>Programa de Lealtad: Recompensas exclusivas por jugar y comprar.</li>
             </ul>
 
             <h2>Política de Privacidad</h2>
-            <p>La protección de sus datos es nuestra prioridad. Recopilamos la información mínima necesaria para ofrecer nuestros servicios y nunca la compartimos con terceros sin su consentimiento explícito. Puede revisar los detalles completos en la sección de <a href="#">[Link a un documento PDF de políticas]</a>.</p>
+            <p>La protección de sus datos es nuestra prioridad. Recopilamos la información mínima necesaria para ofrecer nuestros servicios y nunca la compartimos con terceros sin su consentimiento explícito.</p>
 
             <h2>Términos y Condiciones</h2>
-            <p>Al utilizar nuestra plataforma, usted acepta nuestros Términos de Servicio. Estos cubren el uso aceptable, las reglas de la comunidad, las políticas de reembolso y la propiedad intelectual de los contenidos. Le pedimos leerlos detenidamente para garantizar una experiencia de juego justa para todos.</p>
+            <p>Al utilizar nuestra plataforma, usted acepta nuestros Términos de Servicio. Estos cubren el uso aceptable, las reglas de la comunidad, las políticas de reembolso y la propiedad intelectual de los contenidos.</p>
         </section>
     </main>
 
@@ -157,4 +150,27 @@
             <div id="registerForm" class="auth-form">
                 <label for="registerUser">Usuario</label>
                 <input type="text" id="registerUser" name="registerUser">
-                <span id="errorRegisterUser" class="error-message">
+                <span id="errorRegisterUser" class="error-message"></span>
+                <label for="registerEmail">Correo</label>
+                <input type="email" id="registerEmail" name="registerEmail">
+                <span id="errorRegisterEmail" class="error-message"></span>
+                <label for="registerPassword">Contraseña</label>
+                <input type="password" id="registerPassword" name="registerPassword">
+                <span id="errorRegisterPassword" class="error-message"></span>
+                <label for="registerPhone">Teléfono (Opcional)</label>
+                <input type="tel" id="registerPhone" name="registerPhone">
+                <span id="errorRegisterPhone" class="error-message"></span>
+                <label for="registerDob">Fecha de Nacimiento</label>
+                <input type="date" id="registerDob" name="registerDob">
+                <span id="errorRegisterDob" class="error-message"></span>
+                <button id="submitRegister">Registrarse</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/games-data.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

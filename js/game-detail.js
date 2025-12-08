@@ -19,6 +19,7 @@ const gameYear = document.getElementById('gameYear');
 const gameDeveloper = document.getElementById('gameDeveloper');
 const gameRelease = document.getElementById('gameRelease');
 const gameRatingCard = document.getElementById('gameRatingCard');
+const gameMinAgeEl = document.getElementById('gameMinAge');
 const buyButton = document.getElementById('buyButton');
 const priceDisplay = document.getElementById('priceDisplay');
 const loginMessage = document.getElementById('loginMessage');
@@ -145,6 +146,14 @@ function loadGameDetails() {
     // Actualizar botón de compra
     modalGameName.textContent = game.name;
     modalGamePrice.textContent = formatPrice(game.price);
+    // Mostrar edad mínima si existe
+    if (gameMinAgeEl) {
+        if (game.minAge && typeof game.minAge === 'number') {
+            gameMinAgeEl.textContent = `${game.minAge} años`;
+        } else {
+            gameMinAgeEl.textContent = 'Sin restricción';
+        }
+    }
 }
 
 // Función para manejar el clic en comprar/reservar
@@ -158,13 +167,17 @@ buyButton.onclick = async () => {
         return;
     }
 
-    // Verificar edad usando la función global (login.js)
-    if (!window.checkAgeVerification(user)) {
-        const ok = await window.promptForAgeAndSave(user);
-        if (!ok) return;
+    // Verificar edad usando DOB guardado
+    const game = getGameById(gameId);
+    const minAge = game && game.minAge ? game.minAge : 0;
+    if (minAge > 0) {
+        const userAge = user.dob ? window.calculateAge(user.dob) : 0;
+        if (!user.dob || userAge < minAge) {
+            alert(`❌ "${game.name}"\n\nEdad mínima requerida: ${minAge} años\nTu edad: ${userAge} años\n\nNo cumples los requisitos de edad para comprar este juego.`);
+            return;
+        }
     }
 
-    const game = getGameById(gameId);
     if (!game) return;
 
     // Si es un próximo lanzamiento, hacer reserva
@@ -186,7 +199,13 @@ buyButton.onclick = async () => {
         return;
     }
 
-    // Si no es próximo lanzamiento, mostrar modal de carrito
+    // Si es gratis, mostrar modal de descarga
+    if (game.price === 0) {
+        showDownloadModal(gameId, game.name, game);
+        return;
+    }
+
+    // Si no es próximo lanzamiento ni gratis, mostrar modal de carrito
     addToCartModal.style.display = 'block';
 };
 

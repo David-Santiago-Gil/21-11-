@@ -160,19 +160,19 @@
             <h3> El Equipo</h3>
             <div class="game-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
                 
-                <div class="game-card" style="text-align: center;">
+                <div class="game-card" style="text-align: center;" data-name="Elena R." data-role="CEO" data-email="elena@gamingutopia.com" data-phone="+57-300-1112222" data-bio="Líder visionaria con 10 años en la industria de videojuegos. Responsable de estrategia y alianzas.">
                     <img src="img/perfil1.jpg" class="perfil-img" alt="CEO">
                     <h3>Elena R. (CEO)</h3>
                     <p>Líder Visionaria</p>
                 </div>
 
-                <div class="game-card" style="text-align: center;">
+                <div class="game-card" style="text-align: center;" data-name="David Gil" data-role="CTO" data-email="david@gamingutopia.com" data-phone="+57-310-3334444" data-bio="Ingeniero de sistemas, experto en infraestructuras de servidores de juegos y arquitecturas distribuidas.">
                     <img src="img/perfil2.jpg" class="perfil-img" alt="CTO">
                     <h3>David Gil. (CTO)</h3>
                     <p>Ingeniero de Sistemas</p>
                 </div>
 
-                <div class="game-card" style="text-align: center;">
+                <div class="game-card" style="text-align: center;" data-name="Sofía L." data-role="Head of Marketing" data-email="sofia@gamingutopia.com" data-phone="+57-320-5556666" data-bio="Jefa de Marketing enfocada en crecimiento orgánico y campañas creativas para comunidades gamer.">
                     <img src="img/perfil3.jpg" class="perfil-img" alt="Marketing">
                     <h3>Sofía L.</h3>
                     <p>Jefa de Marketing</p>
@@ -222,6 +222,9 @@
                 <label for="registerPhone">Teléfono (Opcional)</label>
                 <input type="tel" id="registerPhone" name="registerPhone">
                 <span id="errorRegisterPhone" class="error-message"></span>
+                <label for="registerDob">Fecha de Nacimiento</label>
+                <input type="date" id="registerDob" name="registerDob">
+                <span id="errorRegisterDob" class="error-message"></span>
                 <button id="submitRegister">Registrarse</button>
             </div>
         </div>
@@ -289,7 +292,23 @@
         </div>
     </div>
 
+    <!-- Modal para mostrar información del perfil del equipo -->
+    <div id="profileInfoModal" class="modal" style="display:none;">
+        <div class="modal-content" style="max-width:520px;">
+            <span class="close-button">&times;</span>
+            <h3 id="profileInfoName" style="color:#8a2be2; margin-top:0;"></h3>
+            <p id="profileInfoRole" style="color:#fff; margin:6px 0 12px 0;"></p>
+            <p style="color:#ccc; margin:6px 0;"><strong>Correo:</strong> <span id="profileInfoEmail"></span></p>
+            <p style="color:#ccc; margin:6px 0;"><strong>Teléfono:</strong> <span id="profileInfoPhone"></span></p>
+            <div style="margin-top:12px; color:#ddd;">
+                <strong>Acerca de:</strong>
+                <p id="profileInfoBio" style="margin-top:8px; color:#ccc;"></p>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/games-data.js"></script>
     <script src="js/login.js"></script>
     <script src="js/script.js"></script>
 </body>
