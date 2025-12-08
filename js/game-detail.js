@@ -173,7 +173,8 @@ buyButton.onclick = async () => {
     if (minAge > 0) {
         const userAge = user.dob ? window.calculateAge(user.dob) : 0;
         if (!user.dob || userAge < minAge) {
-            alert(`❌ "${game.name}"\n\nEdad mínima requerida: ${minAge} años\nTu edad: ${userAge} años\n\nNo cumples los requisitos de edad para comprar este juego.`);
+            // Mostrar modal de restricción de edad en lugar de alert
+            showAgeRestrictionModal(gameId, game.name, minAge, userAge, game);
             return;
         }
     }
@@ -265,8 +266,6 @@ function updateCartCount() {
     }
 }
 
-// Age verification handled by `js/login.js` (window.checkAgeVerification / window.promptForAgeAndSave)
-
 // --- Reseñas: almacenamiento y renderizado ---
 function getReviewsForGame(id) {
     try {
@@ -328,6 +327,72 @@ function escapeHtml(str) {
     return str.replace(/[&<>"']/g, function(m) { return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"})[m]; });
 }
 
+// Función para mostrar modal de restricción de edad
+function showAgeRestrictionModal(gameId, gameName, minAge, userAge, gameObj = null) {
+    const ageModal = document.getElementById('ageRestrictionModal');
+    if (!ageModal) {
+        console.error('Modal de restricción de edad no encontrado');
+        return;
+    }
+
+    // Establecer nombre del juego
+    const ageGameName = document.getElementById('ageGameName');
+    if (ageGameName) {
+        ageGameName.textContent = gameName;
+    }
+
+    // Establecer imagen del juego (desenfocada)
+    const ageGameImage = document.getElementById('ageGameImage');
+    if (ageGameImage) {
+        const gameData = gameObj || (typeof getGameById === 'function' ? getGameById(gameId) : null);
+        const gameImage = gameData && gameData.image ? gameData.image : 'img/default.jpg';
+        ageGameImage.src = gameImage;
+        ageGameImage.alt = gameName;
+    }
+
+    // Establecer edad mínima requerida
+    const ageMinRequired = document.getElementById('ageMinRequired');
+    if (ageMinRequired) {
+        ageMinRequired.textContent = minAge;
+    }
+
+    // Establecer edad del usuario
+    const ageUserAgeEl = document.getElementById('ageUserAge');
+    if (ageUserAgeEl) {
+        ageUserAgeEl.textContent = userAge;
+    }
+
+    // Mostrar el modal con display flex para centrarlo
+    ageModal.style.display = 'flex';
+
+    // Cerrar modal con botón Entendido
+    const closeModalFunc = () => {
+        ageModal.style.display = 'none';
+    };
+
+    // Cerrar modal con botón principal
+    const acceptBtn = ageModal.querySelector('button[onclick*="ageRestrictionModal"]');
+    if (acceptBtn) {
+        // Remover el onclick inline y agregar event listener
+        acceptBtn.onclick = closeModalFunc;
+    }
+
+    // Cerrar modal al hacer clic en la X
+    const closeBtns = ageModal.querySelectorAll('.close-button');
+    closeBtns.forEach(btn => {
+        btn.onclick = closeModalFunc;
+    });
+
+    // Cerrar modal si se hace clic fuera del contenido
+    const clickOutside = (e) => {
+        if (e.target === ageModal) {
+            closeModalFunc();
+            ageModal.removeEventListener('click', clickOutside);
+        }
+    };
+    ageModal.addEventListener('click', clickOutside);
+}
+
 // Función para agregar reserva (desde game-detail.html)
 function addReservation(gameId, gameName) {
     const reserved = JSON.parse(localStorage.getItem('gamingUtopiaReservations') || '[]');
@@ -341,6 +406,56 @@ function addReservation(gameId, gameName) {
         releaseDate: gameData.releaseDate || 'Próximamente'
     });
     localStorage.setItem('gamingUtopiaReservations', JSON.stringify(reserved));
+}
+
+// Función para mostrar modal de descarga
+function showDownloadModal(gameId, gameName, gameObj = null) {
+    const downloadModal = document.getElementById('downloadModal');
+    if (!downloadModal) {
+        console.error('Modal de descarga no encontrado');
+        return;
+    }
+
+    // Establecer nombre del juego
+    const downloadGameName = document.getElementById('downloadGameName');
+    if (downloadGameName) {
+        downloadGameName.textContent = gameName;
+    }
+
+    // Establecer imagen del juego
+    const downloadGameImage = document.getElementById('downloadGameImage');
+    if (downloadGameImage) {
+        const gameData = gameObj || (typeof getGameById === 'function' ? getGameById(gameId) : null);
+        const gameImage = gameData && gameData.image ? gameData.image : 'img/default.jpg';
+        downloadGameImage.src = gameImage;
+        downloadGameImage.alt = gameName;
+    }
+
+    // Mostrar el modal
+    downloadModal.style.display = 'flex';
+
+    // Cerrar modal con botón
+    const acceptBtn = downloadModal.querySelector('button');
+    if (acceptBtn) {
+        acceptBtn.onclick = () => {
+            downloadModal.style.display = 'none';
+        };
+    }
+
+    // Cerrar modal al hacer clic en la X
+    const closeBtn = downloadModal.querySelector('.close-button');
+    if (closeBtn) {
+        closeBtn.onclick = () => {
+            downloadModal.style.display = 'none';
+        };
+    }
+
+    // Cerrar modal si se hace clic fuera del contenido
+    downloadModal.addEventListener('click', (e) => {
+        if (e.target === downloadModal) {
+            downloadModal.style.display = 'none';
+        }
+    });
 }
 
 // Cerrar login message cuando el usuario se loguea

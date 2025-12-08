@@ -217,7 +217,8 @@ async function handleBuyClick(gameId, gameName, gamePrice, isUpcoming = false, b
     if (minAge > 0) {
         const userAge = user.dob ? window.calculateAge(user.dob) : 0;
         if (!user.dob || userAge < minAge) {
-            alert(`❌ "${gameName}"\n\nEdad mínima requerida: ${minAge} años\nTu edad: ${userAge} años\n\nNo cumples los requisitos de edad para comprar este juego.`);
+            // Mostrar modal de restricción de edad en lugar de alert
+            showAgeRestrictionModal(gameId, gameName, minAge, userAge, gameObj);
             return;
         }
     }
@@ -278,7 +279,71 @@ async function handleBuyClick(gameId, gameName, gamePrice, isUpcoming = false, b
     }
 }
 
-// Age verification handled by `js/login.js` (window.checkAgeVerification / window.promptForAgeAndSave)
+// Función para mostrar modal de restricción de edad
+function showAgeRestrictionModal(gameId, gameName, minAge, userAge, gameObj = null) {
+    const ageModal = document.getElementById('ageRestrictionModal');
+    if (!ageModal) {
+        console.error('Modal de restricción de edad no encontrado');
+        return;
+    }
+
+    // Establecer nombre del juego
+    const ageGameName = document.getElementById('ageGameName');
+    if (ageGameName) {
+        ageGameName.textContent = gameName;
+    }
+
+    // Establecer imagen del juego (desenfocada)
+    const ageGameImage = document.getElementById('ageGameImage');
+    if (ageGameImage) {
+        const gameData = gameObj || (typeof getGameById === 'function' ? getGameById(gameId) : null);
+        const gameImage = gameData && gameData.image ? gameData.image : 'img/default.jpg';
+        ageGameImage.src = gameImage;
+        ageGameImage.alt = gameName;
+    }
+
+    // Establecer edad mínima requerida
+    const ageMinRequired = document.getElementById('ageMinRequired');
+    if (ageMinRequired) {
+        ageMinRequired.textContent = minAge;
+    }
+
+    // Establecer edad del usuario
+    const ageUserAgeEl = document.getElementById('ageUserAge');
+    if (ageUserAgeEl) {
+        ageUserAgeEl.textContent = userAge;
+    }
+
+    // Mostrar el modal con display flex para centrarlo
+    ageModal.style.display = 'flex';
+
+    // Cerrar modal con botón Entendido
+    const closeModalFunc = () => {
+        ageModal.style.display = 'none';
+    };
+
+    // Cerrar modal con botón principal
+    const acceptBtn = ageModal.querySelector('button[onclick*="ageRestrictionModal"]');
+    if (acceptBtn) {
+        // Remover el onclick inline y agregar event listener
+        acceptBtn.onclick = closeModalFunc;
+    }
+
+    // Cerrar modal al hacer clic en la X
+    const closeBtns = ageModal.querySelectorAll('.close-button');
+    closeBtns.forEach(btn => {
+        btn.onclick = closeModalFunc;
+    });
+
+    // Cerrar modal si se hace clic fuera del contenido
+    const clickOutside = (e) => {
+        if (e.target === ageModal) {
+            closeModalFunc();
+            ageModal.removeEventListener('click', clickOutside);
+        }
+    };
+    ageModal.addEventListener('click', clickOutside);
+}
 
 // Reservas
 function addReservation(gameId, gameName) {
