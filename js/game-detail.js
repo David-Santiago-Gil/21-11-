@@ -332,6 +332,7 @@ function showAgeRestrictionModal(gameId, gameName, minAge, userAge, gameObj = nu
     const ageModal = document.getElementById('ageRestrictionModal');
     if (!ageModal) {
         console.error('Modal de restricción de edad no encontrado');
+        alert(`❌ "${gameName}"\n\nEdad mínima requerida: ${minAge} años\nTu edad: ${userAge} años\n\nNo cumples los requisitos de edad para comprar este juego.`);
         return;
     }
 
@@ -365,22 +366,26 @@ function showAgeRestrictionModal(gameId, gameName, minAge, userAge, gameObj = nu
     // Mostrar el modal con display flex para centrarlo
     ageModal.style.display = 'flex';
 
-    // Cerrar modal con botón Entendido
+    // Función para cerrar modal
     const closeModalFunc = () => {
         ageModal.style.display = 'none';
     };
 
-    // Cerrar modal con botón principal
-    const acceptBtn = ageModal.querySelector('button[onclick*="ageRestrictionModal"]');
-    if (acceptBtn) {
-        // Remover el onclick inline y agregar event listener
-        acceptBtn.onclick = closeModalFunc;
-    }
+    // Cerrar modal con botón Entendido - buscar todos los botones en el modal
+    const modalButtons = ageModal.querySelectorAll('button');
+    modalButtons.forEach(btn => {
+        // Clonar el botón para remover event listeners previos
+        const newBtn = btn.cloneNode(true);
+        btn.parentNode.replaceChild(newBtn, btn);
+        newBtn.onclick = closeModalFunc;
+    });
 
     // Cerrar modal al hacer clic en la X
     const closeBtns = ageModal.querySelectorAll('.close-button');
     closeBtns.forEach(btn => {
-        btn.onclick = closeModalFunc;
+        const newBtn = btn.cloneNode(true);
+        btn.parentNode.replaceChild(newBtn, btn);
+        newBtn.onclick = closeModalFunc;
     });
 
     // Cerrar modal si se hace clic fuera del contenido
@@ -390,7 +395,26 @@ function showAgeRestrictionModal(gameId, gameName, minAge, userAge, gameObj = nu
             ageModal.removeEventListener('click', clickOutside);
         }
     };
-    ageModal.addEventListener('click', clickOutside);
+    
+    // Remover listeners previos y agregar nuevo
+    const newModal = ageModal.cloneNode(true);
+    ageModal.parentNode.replaceChild(newModal, ageModal);
+    newModal.addEventListener('click', clickOutside);
+    
+    // Re-configurar los botones del nuevo modal
+    const newModalButtons = newModal.querySelectorAll('button');
+    newModalButtons.forEach(btn => {
+        btn.onclick = () => {
+            newModal.style.display = 'none';
+        };
+    });
+    
+    const newCloseBtns = newModal.querySelectorAll('.close-button');
+    newCloseBtns.forEach(btn => {
+        btn.onclick = () => {
+            newModal.style.display = 'none';
+        };
+    });
 }
 
 // Función para agregar reserva (desde game-detail.html)
